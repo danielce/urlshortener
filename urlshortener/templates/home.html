@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
+{% block title %}Home{% endblock%}
+
+
+{% block content %}
+<div class="row">
+  <div class="col-xs-12">
+		  <h1 class="text-dark-blue"><strong>URLShortener</strong> <small>Simple url shortening service</small></h1>
+      <form  class="form-inline" method="POST" action="">{% csrf_token %}
+          <div class="form-group">
+  		        {{ form.long_url }}
+          <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+      </form>
+		    <br>
+		    {% if url_id %}
+		    Short URL id: {{ url_id }}<br>
+		    {% endif %}
+  </div>
+
+</div>
+<div class="row">
+ <div class="col-xs-12 text-center top-padded" style="background-color:#ddd;">
+   <div class="col-sm-4 text-white">
+	    <span class="fa-stack fa-4x">
+		  <i class="fa fa-circle fa-stack-2x" style="color:#015965"></i>
+	      <i class="fa fa-tachometer fa-stack-1x text-white"></i>
+		</span>
+		<h4>EXTREMELY FAST</h4>
+	</div>
+   <div class="col-sm-4 text-white">
+     <span class="fa-stack fa-4x">
+		  <i class="fa fa-circle fa-stack-2x" style="color:#015965"></i>
+	      <i class="fa fa-lock fa-stack-1x text-white"></i>
+	 </span>
+	 <h4>SECURE</h4>
+   </div>
+   <div class="col-sm-4 text-white">
+     <span class="fa-stack fa-4x">
+		  <i class="fa fa-circle fa-stack-2x" style="color:#015965"></i>
+	      <i class="fa fa-users fa-stack-1x text-white"></i>
+	 </span>
+	 <h4>USER-FRIENDLY</h4>
+   </div>
+ </div>
+</div> <!-- end of row -->
+<!-- end of features -->
+<div class="row">
+ <div class="col-sm-12 light-blue">
+  <div class="col-sm-6 col-xs-12 light-blue">
+    <h2 class="text-success">Trending:</h2>
+    {% for trend in trends %}
+
+      
+        <div class="row clearfix text-white">
+         <div class="col-md-2 col-xs-2 badge-large">
+         	 <a href="#"><span class="badge badge-large badge-success">{{ trend.hits }}</span></a>
+         </div>
+         <div class="col-md-10 col-xs-10">
+         	<a href="{% url 'visiturl' trend.url_id %}"><strong>{{ request.get_host }}{{ trend.get_absolute_url }}</strong></a>
+           <a href="{% url 'stat' trend.url_id %}"><i class="fa fa-bar-chart pull-right"></i></a><br>
+	    	<p><small>{{ trend.title|truncatechars:50}}</small></p>
+         </div>
+        </div>
+	  
+    {% endfor %}
+  </div>
+  <div class="col-sm-6 col-xs-12 light-blue">
+  	<h2 class="text-success"><i class="fa fa-star"></i> Newest</h2>
+  	
+    {% for item in newest %}
+     <small><span class="label label-success">{{ item.created|date:"l G:i" }}</span></small>
+     <strong><a href="{% url 'visiturl' item.url_id %}">{{ request.get_host }}{% url 'visiturl' item.url_id %}</a></strong>
+      <small><p>{{ item.title}}</p></small>
+    {% endfor %}
+  </div>
+ </div>
+</div> <!-- end of row -->
+<div class="row light-blue">
+  <div class="col-md-12"></div>
+</div>
+{% endblock %}

@@ -1,0 +1,1016 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"seria",
+				"serialized_day	statement"
+			],
+			[
+				"reques",
+				"request	param"
+			],
+			[
+				"ser",
+				"serialized_day	statement"
+			],
+			[
+				"Htt",
+				"HtttpRequest"
+			],
+			[
+				"backgr",
+				"background-color"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"radn",
+				"random_ad	statement"
+			],
+			[
+				"rando",
+				"random_ad"
+			],
+			[
+				"long",
+				"long_url	param"
+			],
+			[
+				"ur",
+				"urllib	module"
+			],
+			[
+				"ge",
+				"genrate_url_id	function"
+			],
+			[
+				"Pag",
+				"PageURLForm	class"
+			],
+			[
+				"P",
+				"PageURLForm	class"
+			],
+			[
+				"Pa",
+				"PageURLAdmin	class"
+			],
+			[
+				"Comment",
+				"CommentSerializer	class"
+			],
+			[
+				"object",
+				"objects	statement"
+			],
+			[
+				"Article",
+				"ArticleSerializer	class"
+			],
+			[
+				"serial",
+				"serializer_class"
+			],
+			[
+				"articl",
+				"article_detail_api"
+			],
+			[
+				"Art",
+				"ArticleUrlField	class"
+			],
+			[
+				"ArticleDetail",
+				"ArticleDetailAPIView	class"
+			],
+			[
+				"max",
+				"max_length"
+			],
+			[
+				"T",
+				"TextField"
+			],
+			[
+				"auto_",
+				"auto_now_add"
+			],
+			[
+				"mx",
+				"max_length"
+			],
+			[
+				"seri",
+				"serializers	import"
+			],
+			[
+				"vie",
+				"view_name	param"
+			],
+			[
+				"Cate",
+				"CategoryUrlField	class"
+			],
+			[
+				"get_",
+				"get_object_or_404	import"
+			],
+			[
+				"permi",
+				"permission_classes	import"
+			],
+			[
+				"Categ",
+				"CategorySerializer	class"
+			],
+			[
+				"categor",
+				"category_list"
+			],
+			[
+				"CategoryLi",
+				"CategoryListAPIView	class"
+			],
+			[
+				"Category",
+				"CategoryViewSet	class"
+			],
+			[
+				"ca",
+				"category_title"
+			],
+			[
+				"cat",
+				"category"
+			],
+			[
+				"Bas",
+				"BasicAuthentication	import"
+			],
+			[
+				"Artic",
+				"ArticleSerializer	class"
+			],
+			[
+				"Articl",
+				"ArticleSerializer"
+			],
+			[
+				"url",
+				"urlpatterns	statement"
+			],
+			[
+				"format",
+				"format_suffix_patterns	import"
+			],
+			[
+				"did",
+				"did_update_sub"
+			],
+			[
+				"trans_",
+				"trans_timestamp"
+			],
+			[
+				"billi",
+				"billing_history"
+			],
+			[
+				"pay",
+				"payment_method_token"
+			],
+			[
+				"curr",
+				"current_subscription"
+			],
+			[
+				"current",
+				"current_sub_id"
+			],
+			[
+				"sub",
+				"sub_new"
+			],
+			[
+				"current_s",
+				"current_sub_id"
+			],
+			[
+				"curre",
+				"current_sub_id"
+			],
+			[
+				"subs",
+				"subscription_result"
+			],
+			[
+				"merch",
+				"merchant_obj"
+			],
+			[
+				"cred",
+				"credit_card"
+			],
+			[
+				"trans",
+				"trans_success"
+			],
+			[
+				"payment",
+				"payment_method_result"
+			],
+			[
+				"tra",
+				"trans_id"
+			],
+			[
+				"is",
+				"is_success"
+			],
+			[
+				"credit_card",
+				"credit_card_token"
+			],
+			[
+				"customer",
+				"customer_update_result"
+			],
+			[
+				"merchant",
+				"merchant_customer_id"
+			],
+			[
+				"cl",
+				"client_token"
+			],
+			[
+				"me",
+				"membership"
+			],
+			[
+				"meme",
+				"membership"
+			],
+			[
+				"mem",
+				"memebership_instance"
+			],
+			[
+				"upda",
+				"memebership_dates_update"
+			],
+			[
+				"random",
+				"random_amount"
+			],
+			[
+				"bili",
+				"billing_history"
+			],
+			[
+				"new",
+				"new_order_id"
+			],
+			[
+				"Tra",
+				"TransactionManager"
+			],
+			[
+				"tran",
+				"transaction_status"
+			],
+			[
+				"transa",
+				"transaction_status"
+			],
+			[
+				"Date",
+				"DateTimeField"
+			],
+			[
+				"u",
+				"update_membership_status"
+			],
+			[
+				"Member",
+				"Membership"
+			],
+			[
+				"use",
+				"user"
+			],
+			[
+				"date_",
+				"date_end"
+			],
+			[
+				"pri",
+				"primary_object_id"
+			],
+			[
+				"po",
+				"popular_videos_list"
+			],
+			[
+				"recent_",
+				"recent_comments"
+			],
+			[
+				"time",
+				"timestamp"
+			],
+			[
+				"get",
+				"get_queryset"
+			],
+			[
+				"primar",
+				"primary_content_type"
+			],
+			[
+				"primary",
+				"primary_object_id"
+			],
+			[
+				"tim",
+				"timestamp"
+			],
+			[
+				"login_",
+				"login_form"
+			],
+			[
+				"nex",
+				"next_vid"
+			],
+			[
+				"video_",
+				"video_set"
+			],
+			[
+				"Ca",
+				"CategoryManager"
+			],
+			[
+				"comme",
+				"comment_cildren"
+			],
+			[
+				"H",
+				"Http404"
+			],
+			[
+				"not",
+				"notification"
+			],
+			[
+				"target",
+				"target_url"
+			],
+			[
+				"ta",
+				"target_url"
+			],
+			[
+				"target_obje",
+				"target_content_object"
+			],
+			[
+				"Not",
+				"NotificationManager"
+			],
+			[
+				"Noti",
+				"NotificationQuerySet"
+			],
+			[
+				"action",
+				"action_object"
+			],
+			[
+				"tar",
+				"target_object_id"
+			],
+			[
+				"ac",
+				"action_object"
+			],
+			[
+				"sende",
+				"sender_object"
+			],
+			[
+				"sender",
+				"sender_content_type"
+			],
+			[
+				"No",
+				"Notification"
+			],
+			[
+				"Generic",
+				"GenericForeignKey"
+			],
+			[
+				"Tagg",
+				"TaggedItemInline"
+			],
+			[
+				"conte",
+				"content_type"
+			],
+			[
+				"ob",
+				"objects"
+			],
+			[
+				"parent",
+				"parent_comment"
+			],
+			[
+				"paren",
+				"parent_comment"
+			],
+			[
+				"pare",
+				"parent_comment"
+			],
+			[
+				"Comm",
+				"CommentAdmin"
+			],
+			[
+				"comm",
+				"comment_form"
+			],
+			[
+				"cleande",
+				"cleaned_data_get"
+			],
+			[
+				"defa",
+				"default"
+			],
+			[
+				"C",
+				"CharField"
+			],
+			[
+				"Video",
+				"VideoQueryset"
+			],
+			[
+				"video",
+				"video_detail"
+			],
+			[
+				"next",
+				"next_url"
+			],
+			[
+				"user",
+				"user_logged_in"
+			],
+			[
+				"Us",
+				"UserStripeAdmin"
+			],
+			[
+				"content",
+				"contentDocument"
+			],
+			[
+				"pa",
+				"padding-bottom"
+			],
+			[
+				"padding",
+				"padding-top"
+			],
+			[
+				"Va",
+				"VariationManager"
+			],
+			[
+				"Produc",
+				"ProductImage"
+			],
+			[
+				"q",
+				"quantity"
+			],
+			[
+				"aut",
+				"auto_now_add"
+			],
+			[
+				"Pr",
+				"Product"
+			],
+			[
+				"scr",
+				"script	Tag"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "urlshortener/templates/base.html",
+			"settings":
+			{
+				"buffer_size": 2482,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "urlshortener/shortener/views.py",
+			"settings":
+			{
+				"buffer_size": 2621,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "urlshortener/shortener/models.py",
+			"settings":
+			{
+				"buffer_size": 1310,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "urlshortener/templates/stat.html",
+			"settings":
+			{
+				"buffer_size": 2241,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "urlshortener/templates/home.html",
+			"settings":
+			{
+				"buffer_size": 2795,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 81.0,
+		"last_filter": "install package",
+		"selected_items":
+		[
+			[
+				"install package",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Django/shortener/urlshortener",
+		"/C/Django/shortener/urlshortener/shortener",
+		"/C/Django/shortener/urlshortener/templates",
+		"/C/Django/shortener/urlshortener/templates/registration",
+		"/C/Django/shortener/urlshortener/urlshortener"
+	],
+	"file_history":
+	[
+		"/C/Django/shortener/urlshortener/urlshortener/urls.py",
+		"/C/Django/shortener/urlshortener/templates/home.html",
+		"/C/Django/shortener/urlshortener/shortener/admin.py",
+		"/C/Django/shortener/urlshortener/templates/doorway.html",
+		"/C/Django/shortener/urlshortener/urlshortener/settings.py",
+		"/C/Django/shortener/urlshortener/templates/navbar.html",
+		"/C/Django/shortener/urlshortener/shortener/utils.py",
+		"/C/Django/shortener/urlshortener/templates/base.html",
+		"/C/Django/shortener/urlshortener/templates/registration/registration_form.html",
+		"/C/Django/shortener/urlshortener/shortener/models.py",
+		"/C/Django/shortener/urlshortener/shortener/views.py",
+		"/C/Django/shortener/urlshortener/shortener/forms.py",
+		"/C/Django/blog/blog/articles/admin.py",
+		"/C/Django/blog/blog/blog/urls.py",
+		"/C/Django/blog/blog/articles/serializers.py",
+		"/C/Django/blog/blog/articles/views.py",
+		"/C/Django/blog/blog/articles/models.py",
+		"/C/Django/blog/blog/blog/utils.py",
+		"/C/Django/blog/blog/blog/settings.py",
+		"/C/Django/blog/blog/articles/urls.py",
+		"/C/Django/blog/blog/templates/base.html",
+		"/C/Django/blog/blog/templates/javascript.html",
+		"/C/Users/Daniel/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Django/blog/blog/templates/home.html",
+		"/C/Users/Daniel/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Django/blog/blog/templates/article.html",
+		"/C/Django/blog/blog/templates/navbar.html",
+		"/C/Django/blog/blog/articles/templatetags/mytags.py",
+		"/C/Django/blog/blog/articles/template_tags/mytags.py",
+		"/C/Django/blog/blog/articles/mytags.py",
+		"/C/Django/blog/Lib/site-packages/django/templatetags/mytags.py",
+		"/C/Django/blog/blog/articles/template_tags/__init__.py",
+		"/C/Django/blog/blog/templates/category_list.html",
+		"/C/Django/srvup/Lib/site-packages/braintree/configuration.py",
+		"/C/Django/srvup/src/srvup/settings.py",
+		"/C/Django/srvup/src/templates/billing/upgrade.html",
+		"/C/Django/srvup/src/srvup/urls.py",
+		"/C/Django/srvup/src/notifications/models.py",
+		"/C/Users/Daniel/AppData/Roaming/Sublime Text 3/Packages/Anaconda/Anaconda.sublime-settings",
+		"/C/Django/srvup/src/templates/billing/history.html",
+		"/C/Django/srvup/src/templates/javascript.html",
+		"/C/Django/srvup/src/billing/signals.py",
+		"/C/Django/srvup/src/billing/admin.py",
+		"/C/Django/srvup/src/billing/models.py",
+		"/C/Django/srvup/src/videos/views.py",
+		"/C/Django/srvup/src/accounts/models.py",
+		"/C/Django/srvup/src/accounts/admin.py",
+		"/C/Django/srvup/src/templates/home_logged_in.html",
+		"/C/Django/srvup/src/templates/home_visitor.html",
+		"/C/Django/srvup/src/srvup/views.py",
+		"/C/Django/srvup/src/comments/models.py",
+		"/C/Django/srvup/src/templates/navbar.html",
+		"/C/Django/srvup/src/analytics/models.py",
+		"/C/Django/srvup/src/analytics/signals.py",
+		"/C/Django/srvup/src/templates/home.html",
+		"/C/Django/srvup/src/analytics/admin.py",
+		"/C/Django/srvup/src/videos/models.py",
+		"/C/Django/srvup/src/templates/videos/video_list.html",
+		"/C/Django/srvup/src/templates/accounts/register_form.html",
+		"/C/Django/srvup/src/accounts/views.py",
+		"/C/Django/srvup/src/templates/base.html",
+		"/C/Django/srvup/src/videos/utils.py",
+		"/C/Django/srvup/src/videos/admin.py",
+		"/C/Django/srvup/src/templates/videos/video_detail.html",
+		"/C/Django/srvup/.gitignore",
+		"/C/Django/srvup/src/templates/videos/category_list.html",
+		"/C/Django/srvup/src/templates/videos/views.py",
+		"/C/Django/srvup/src/comments/views.py",
+		"/C/Django/srvup/src/notifications/signals.py",
+		"/C/Django/srvup/src/notifications/views.py",
+		"/C/Django/srvup/src/templates/notifications/all.html",
+		"/C/Django/srvup/src/notifications/admin.py",
+		"/C/Django/srvup/src/comments/forms.py",
+		"/C/Django/srvup/src/templates/comments/comment_thread.html",
+		"/C/Django/srvup/src/comments/admin.py",
+		"/C/Django/srvup/src/templates/templates/videos/video_list.html",
+		"/C/Django/srvup/src/accounts/forms.py",
+		"/C/Django/srvup/src/srvup/forms.py",
+		"/C/Django/srvup/src/templates/form.html",
+		"/C/Django/srvup/src/templates/videos/category_detail.html",
+		"/C/Django/srvup/src/templates/videos/video_single.html",
+		"/C/Django/srvup/src/templates/login.html",
+		"/C/Django/srvup/src/videos/forms.py",
+		"/C/Django/srvup/static/static_dirs/css/main.css",
+		"/C/Django/seven/static/templates/base.html",
+		"/C/Django/seven/static/templates/profile.html",
+		"/C/Django/seven/seven/seven/urls.py",
+		"/C/Django/seven/seven/profiles/views.py",
+		"/C/Django/seven/static/templates/home.html",
+		"/C/Django/seven/static/templates/navbar.html",
+		"/C/Django/seven/seven/seven/settings.py",
+		"/C/Django/seven/static/templates/contact.html",
+		"/C/Django/seven/static/templates/account/signup.html",
+		"/C/Django/seven/static/templates/account/login.html",
+		"/C/Django/seven/seven/contact/views.py",
+		"/C/Django/seven/seven/profiles/models.py",
+		"/C/Django/seven/seven/contact/forms.py",
+		"/C/Django/seven/static/static/css/main.css",
+		"/C/Django/seven/static/templates/about.html",
+		"/C/Django/seven/static/templates/bootstrap_template.html",
+		"/C/Django/seven/seven/static/static/css/main.css",
+		"/C/Django/seven/static/templates/index.html",
+		"/C/Django/seven/seven/profiles/admin.py",
+		"/C/Django/streamy/index.html",
+		"/C/Django/streamy/index2.html",
+		"/C/Django/streamy/css/moveme.css",
+		"/C/Django/streamy/reklama.html",
+		"/C/Django/streamy/iframe.html",
+		"/C/Django/lwc/lwc/joins/models.py",
+		"/C/Django/lwc/lwc/lwc/settings.py",
+		"/C/Django/lwc/lwc/templates/404.html",
+		"/C/Django/lwc/lwc/lwc/middleware.py",
+		"/C/Django/lwc/lwc/templates/home.html",
+		"/C/Django/lwc/lwc/lwc/urls.py",
+		"/C/Django/lwc/lwc/joins/forms.py",
+		"/C/Django/lwc/lwc/joins/admin.py",
+		"/C/Django/lwc/lwc/templates/base.html",
+		"/C/Django/lwc/lwc/lwc/views.py",
+		"/C/Django/lwc/lwc/templates/navbar.html",
+		"/C/Django/ecommerce/ecommerce/carts/views.py",
+		"/C/Django/ecommerce/ecommerce/ecommerce/urls.py",
+		"/C/Django/ecommerce/ecommerce/templates/products/all.html",
+		"/C/Django/ecommerce/ecommerce/orders/views.py",
+		"/C/Django/ecommerce/ecommerce/templates/cart/view.html",
+		"/C/Django/ecommerce/ecommerce/carts/models.py",
+		"/C/Django/ecommerce/ecommerce/ecommerce/settings.py",
+		"/C/Django/ecommerce/ecommerce/orders/admin.py",
+		"/C/Django/ecommerce/ecommerce/products/models.py"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"date",
+			"testowa",
+			"merchant_id",
+			"merchantid",
+			"login",
+			"Modal3",
+			"modal3",
+			"alert",
+			"728px",
+			"10px",
+			" %}",
+			"ABC"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "urlshortener/templates/base.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2482,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1492,
+								1492
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 560.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "urlshortener/shortener/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2621,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2570,
+								2570
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 560.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "urlshortener/shortener/models.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1310,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1310,
+								1310
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 280.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "urlshortener/templates/stat.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2241,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								828,
+								828
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 280.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "urlshortener/templates/home.html",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 2795,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2046,
+								2002
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 700.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "short.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 153.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
+{% block title %}Home{% endblock%}
+
+
+{% block content %}
+ <h1>Dashboard</h1><hr>
+ <div class="row">
+    <div class="col-xs-12 top-padded"><h4><strong>Your URL's</strong></h4>
+	  <table class="table table-hover">
+	   <thead>
+	     <th>#</th>
+	     <th>Short URL</th>
+	     <th>Long URL</th>
+	     <th>Created</th>
+	     <th>Visits</th>
+	   </thead>
+	   <tbody>
+	   {% for url in urls %}
+	     <tr class="{% cycle 'info' 'default' %}">
+	       <td>{{forloop.counter}}</td>
+	       <td><strong><a href="{% url 'visiturl' url.url_id %}">{{ url.url_id }}</a></strong></td>
+	       <td><a href="{{url.long_url}}">{{url.long_url}}</a></td>
+	       <td>{{ url.created|date:"l G:i" }}</td>
+	       <td>{{ url.hits }}</td>
+	       <td>
+	         <a href="{% url 'stat' url.url_id %}"><i class="fa fa-bar-chart"></i></a> 
+	         <a href="#" data-href="{% url 'visiturl' url.url_id %}" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i>
+	        </td>
+	     </tr>
+	   {% empty %}
+	    <div class="well">
+	     <h2>It seems that you have not created any links :(</h2>
+	     <p> Go to <a href="{% url 'home' %}">main page</a> and create your first short link!</p>
+	    </div>
+	   {% endfor %}
+	   </tbody>
+	  </table>
+	 </div>
+  </div>
+
+
+  <!-- modal -->
+   <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-2x fa-exclamation-triangle yt"></i> Confirm Delete</h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>You are about to delete Your URL, this procedure is irreversible.</p>
+                    <p>Do you want to proceed?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger btn-ok">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <!-- end of modal -->
+
+{% endblock %}
+
+{% block js %}
+  $('#confirm-delete').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            
+            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+        });
+{% endblock %}

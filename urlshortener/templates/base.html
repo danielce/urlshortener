@@ -1,0 +1,62 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}{% endblock %} | URL Shortener</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <style>
+      
+    </style>
+
+  </head>
+
+  <body class="dark-blue">
+  
+  {% block navbar %}
+    {% include 'navbar.html' %}
+  {% endblock %}
+	
+    <div class="container">
+      <div class="col-lg-8 col-lg-offset-2 col-sm-12 white" id="main-container">
+      	{% block content %}
+      	{% endblock %}
+    
+      </div>
+      {% block footer %}
+      <div class="col-lg-8 col-lg-offset-2 col-sm-12 white">
+       <div class="row">
+          <div class="col-sm-12 text-center" style="background-color:#1D7373;">
+            <p class="text-white top-padded"><small>Copyright by URLShortener 2015</small></p>
+          </div>
+       </div>
+  	  </div>
+      {% endblock %}
+   </div>
+  
+  
+  {% include 'javascript.html' %}
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+      {% block js %}
+      {% endblock %}
+    });
+  </script>
+  
+
+  </body>
+  </html>

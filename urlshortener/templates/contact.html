@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
+{% block title %}Contact{% endblock%}
+
+
+{% block content %}
+<h1>Contact us</h1><hr>
+<div class="row">
+  <div class="col-lg-7">
+     <div class="well">
+	 {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+     {% endfor %}
+	 <form method="POST" action="">{% csrf_token %}
+	   {{ form|crispy }}
+	   <button type="submit" class="btn btn-primary">Send</button>
+	 </form>
+	</div>
+  </div>
+  <div class="col-lg-5">
+    <img class="img img-responsive" src="http://idealistka.wolnekonopie.org/wp-content/uploads/2012/11/walesa.jpg" />
+    <address class="top-padded">
+	  <strong>Leszke Śmieszke sp. z o.o.</strong><br>
+	  ul. Bolka i Lolka 89/2<br>
+	  10-111 Sztum<br>
+	  <abbr title="Phone">P:</abbr> (123) 456-7890<br><br>
+	  KRS: 00999111999<br>
+	  REGON: 99999999999<br>
+	</address>
+    <div class="row">
+      <div class="col-xs-3">
+        <a href=="#"><i class="fa fa-4x fa-facebook-square fb"></i></a>
+      </div>
+      <div class="col-xs-3">
+        <a href=="#"><i class="fa fa-4x fa-twitter-square twitter"></i></a>
+      </div>
+      <div class="col-xs-3">
+        <a href=="#"><i class="fa fa-4x fa-google-plus-square gplus"></i></a>
+      </div>
+      <div class="col-xs-3">
+        <a href=="#"><i class="fa fa-4x fa-youtube-square yt"></i></a>
+      </div>
+    </div>
+  </div>
+</div> <!-- end of row -->
+<div class="row">
+	<div class="col-lg-12">
+		<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d4887.560284345252!2d21.001134075928857!3d52.2292120907386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2spl!4v1423427700696" width="100%" height="450" frameborder="0" style="border:0"></iframe>
+	</div>
+</div>
+ {% lorem 3 p %}
+
+{% endblock %}

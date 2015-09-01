@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}Stat{% endblock%}
+
+{% block navbar %}
+  {% include 'navbar.html' %}
+{% endblock %}
+
+{% block content %}
+<h2>Quick stats for <a href="{% url 'visiturl' url.url_id %}">{{url.url_id}}</a></h2>
+<hr>
+<div class="well">
+<p><strong>{{ url.long_url }}</strong></p>
+<p>Created on {{ url.created }}</p>
+<p>{{url.hits }} visits so far</p>
+</div>
+<div class="row">
+    <div class="col-xs-12 top-padded"><h4><strong>Last visits</strong></h4></div>
+	<div class="col-xs-12 col-md-6 col-md-offset-3">
+	  <table class="table table-hover">
+	   {% for visit in last_visits %}
+	     <tr class="{% cycle 'info' 'default' %}">
+	       <td>{{forloop.counter}}</td>
+	       <td>{{visit.date}}</td>
+
+	     </tr>
+	   {% endfor %}
+	  </table>
+	</div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 top-padded"><h4><strong>Daily visits</strong></h4></div>
+  <div class="col-xs-12">
+	<div id="chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+var data = $.getJSON('',function(data){
+  	    console.log(data)
+         $('#chart').highcharts({
+	        title: {
+	            text: 'Daily visits',
+	            x: -20 //center
+	        },
+	        subtitle: {
+	            text: 'daily',
+	            x: -20
+	        },
+	        xAxis: {
+	            categories: data.days
+	        },
+	        yAxis: {
+	            title: {
+	                text: ''
+	            },
+	            plotLines: [{
+	                value: 0,
+	                width: 1,
+	                color: '#808080'
+	            }]
+	        },
+	        tooltip: {
+	            valueSuffix: 'daily visits'
+	        },
+	        legend: {
+	            layout: 'vertical',
+	            align: 'right',
+	            verticalAlign: 'middle',
+	            borderWidth: 0
+	        },
+	        series: [{
+	            name: '{{ url.url_id }}',
+	            data: data.clicks
+	        }]
+	      });
+
+
+  	    });
+
+{% endblock %}

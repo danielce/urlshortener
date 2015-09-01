@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Redirecting...{% endblock%}
+
+{% block navbar %}{% endblock %}
+
+{% block content %}
+<div class="row dark-blue">
+	<div class="col-md-8 col-md-offset-2 dark-blue top-padded">
+	  <h1 class="text-white">Redirecting....</h1>
+	  <div class="panel panel-primary">
+	    <div class="panel-heading"></div>
+	    <div class="panel-body">
+	      <a href="{{ random_ad.aff_url }}"><img src="{{ random_ad.image }}" class="img-responsive" alt="{{ random_ad.title }}" /></a>
+	    </div>
+	  </div>
+	  <div class="img img-responsive" style="margin-top:20px">
+	  </div>
+	  <div style="margin-top:30px;" class="text-center">
+	    <a href="#" id="proceed" class="btn btn-success btn-lg disabled" role="button">Loading...</a>
+	  </div>
+	</div>
+</div>
+
+
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+
+{% block js %}
+
+  	var i = 10;
+  	var myVar = window.setInterval(function(){
+  		$("#proceed").text("Wait " + i + " seconds");
+  		i--;
+  		if (i < 0) {
+  			clearInterval(myVar);
+  			$("#proceed").text("SKIP THIS AD")
+  			.removeClass("disabled")
+  			.attr("href", "{{ long_url }}");
+  		} 
+  	}, 1000);
+
+
+  
+
+{% endblock %}

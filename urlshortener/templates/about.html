@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
+{% block title %}Home{% endblock%}
+
+
+{% block content %}
+ <h1>About us</h1><hr>
+ {% lorem 3 p %}
+
+{% endblock %}
