@@ -5,10 +5,10 @@ from django.contrib import messages
 from django.core import serializers
 from django.core.mail import send_mail, BadHeaderError
 from django.db.models import Count
-from django.views.generic import DeleteView, ListView, TemplateView
+from django.views.generic import DeleteView, FormView, ListView, TemplateView
 from django.http import HttpResponseRedirect, HttpRequest, HttpResponse
 from django.shortcuts import render, get_object_or_404
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 
 from .forms import ContactForm, PageURLForm
 from .models import PageURL, Ad, Visit
@@ -46,11 +46,16 @@ def visiturl(request, url_id):
     url = get_object_or_404(PageURL, url_id=url_id)
     url.hits += 1
     url.save()
-    visit = Visit()
-    visit.url = url
-    visit.ip = request.META.get('REMOTE_ADDR')
-    visit.user_agent = request.META.get('HTTP_USER_AGENT')
-    visit.referer = request.META.get('HTTP_REFERER')
+    visit = Visit(
+        url=url,
+        ip=request.META.get('REMOTE_ADDR'),
+        user_agent=request.META.get('HTTP_USER_AGENT'),
+        referer=request.META.get('HTTP_REFERER'),
+        )
+    # visit.url = url
+    # visit.ip = request.META.get('REMOTE_ADDR')
+    # visit.user_agent = request.META.get('HTTP_USER_AGENT')
+    # visit.referer = request.META.get('HTTP_REFERER')
     visit.save()
     if url.monetize == True:
         random_ad = Ad.objects.order_by('?').first()
@@ -76,23 +81,40 @@ def stat(request, url_id):
 class AboutView(TemplateView):
     template_name = "about.html"
 
+class ContactFormView(FormView):
+    form_class = ContactForm
+    template_name = 'contact.html'
 
-def contact(request):
-    form = ContactForm()
-    context = {"form": form}
-    if request.method == 'POST':
-        form = ContactForm(request.POST or None)
-        if form.is_valid():
-            from_email = form.cleaned_data['from_email']
-            subject = form.cleaned_data['subject']
-            message = form.cleaned_data['message']
-            try:
-                send_mail(subject, message, from_email, ['d.cichowski@gmail.com'])
-            except BadHeaderError:
-                return HttpResponse('Oooops! Invalid header found :(')
-        messages.success(request, "Your message has been sent!")
-        return render(request, 'contact.html', context)
-    return render(request, 'contact.html', context)
+    def form_valid(self, form):
+        from_email = form.cleaned_data['from_email']
+        subject = form.cleaned_data['subject']
+        message = form.cleaned_data['message']
+        try:
+            send_mail(subject, message, from_email, ['admin@trashbox.com'])
+        except BadHeaderError:
+            return HttpResponse('Oooops! Invalid header found :(')
+        return super(ContactFormView, self).form_valid(form)
+
+    def get_success_url(self):
+        messages.success(self.request, "Your message has been sent!")
+        return reverse('contact')
+
+# def contact(request):
+#     form = ContactForm()
+#     context = {"form": form}
+#     if request.method == 'POST':
+#         form = ContactForm(request.POST or None)
+#         if form.is_valid():
+#             from_email = form.cleaned_data['from_email']
+#             subject = form.cleaned_data['subject']
+#             message = form.cleaned_data['message']
+#             try:
+#                 send_mail(subject, message, from_email, ['admin@trashbox.com'])
+#             except BadHeaderError:
+#                 return HttpResponse('Oooops! Invalid header found :(')
+#         messages.success(request, "Your message has been sent!")
+#         return render(request, 'contact.html', context)
+#     return render(request, 'contact.html', context)
 
 
 # def dashboard(request):

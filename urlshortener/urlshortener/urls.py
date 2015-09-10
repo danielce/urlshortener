@@ -17,14 +17,15 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from shortener.views import AboutView, PageURLListView
+from shortener.views import AboutView, ContactFormView, PageURLListView
 
 
 urlpatterns = [
     url(r'^about/$', AboutView.as_view(), name="about"),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^contact/$', 'shortener.views.contact', name="contact"),
+    # url(r'^contact/$', 'shortener.views.contact', name="contact"),
+    url(r'^contact/$', ContactFormView.as_view(), name="contact"),
     url(r'^dashboard/$', PageURLListView.as_view(), name="dashboard"),
     url(r'^$', 'shortener.views.shorten', name="home" ),
     url(r'^(?P<url_id>\w+)/stat$', 'shortener.views.stat', name="stat"),

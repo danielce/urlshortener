@@ -1,48 +1,71 @@
-{% extends 'base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-{% block title %}Redirecting...{% endblock%}
+    <title>Redirecting | URL Shortener</title>
 
-{% block navbar %}{% endblock %}
+    <!-- Bootstrap core CSS -->
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-{% block content %}
-<div class="row dark-blue">
-	<div class="col-md-8 col-md-offset-2 dark-blue top-padded">
-	  <h1 class="text-white">Redirecting....</h1>
-	  <div class="panel panel-primary">
-	    <div class="panel-heading"></div>
-	    <div class="panel-body">
-	      <a href="{{ random_ad.aff_url }}"><img src="{{ random_ad.image }}" class="img-responsive" alt="{{ random_ad.title }}" /></a>
-	    </div>
-	  </div>
-	  <div class="img img-responsive" style="margin-top:20px">
-	  </div>
-	  <div style="margin-top:30px;" class="text-center">
-	    <a href="#" id="proceed" class="btn btn-success btn-lg disabled" role="button">Loading...</a>
+    <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <style>
+      
+    </style>
+
+  </head>
+
+  <body class="dark-blue">
+  
+    <div class="container">
+      <div class="col-lg-8 col-lg-offset-2 col-sm-12" id="main-container">
+		<div class="row dark-blue">
+			<div class="col-md-8 col-md-offset-2 dark-blue top-padded">
+			  <h1 class="text-white">Redirecting....</h1>
+			  <div class="panel panel-primary">
+			    <div class="panel-heading"></div>
+			    <div class="panel-body">
+			      <a href="{{ random_ad.aff_url }}"><img src="{{ random_ad.image }}" class="img-responsive" alt="{{ random_ad.title }}" /></a>
+			    </div>
+			  </div>
+			  <div class="img img-responsive" style="margin-top:20px">
+			  </div>
+			  <div style="margin-top:30px;" class="text-center">
+			    <a href="#" id="proceed" class="btn btn-success btn-lg disabled" role="button">Loading...</a>
+			  </div>
+			</div>
+		</div>
 	  </div>
 	</div>
-</div>
 
 
-{% endblock %}
-
-{% block footer %}{% endblock %}
 
 
-{% block js %}
 
-  	var i = 10;
-  	var myVar = window.setInterval(function(){
-  		$("#proceed").text("Wait " + i + " seconds");
-  		i--;
-  		if (i < 0) {
-  			clearInterval(myVar);
-  			$("#proceed").text("SKIP THIS AD")
-  			.removeClass("disabled")
-  			.attr("href", "{{ long_url }}");
-  		} 
-  	}, 1000);
+	<script type="text/javascript">
+	    $(document).ready(function(){
 
+	  	var i = 10;
+	  	var myVar = window.setInterval(function(){
+	  		$("#proceed").text("Wait " + i + " seconds");
+	  		i--;
+	  		if (i < 0) {
+	  			clearInterval(myVar);
+	  			$("#proceed").text("SKIP THIS AD")
+	  			.removeClass("disabled")
+	  			.attr("href", "{{ long_url }}");
+	  		} 
+	  	}, 1000);
 
-  
-
-{% endblock %}
+	 </script>
+ </body>
+</html>  
