@@ -15,6 +15,8 @@ downloads/
 eggs/
 .eggs/
 lib/
+Scripts/
+Include/
 lib64/
 parts/
 sdist/
@@ -46,6 +48,10 @@ coverage.xml
 # Translations
 *.mo
 *.pot
+
+#Sublime
+.short.sublime-project
+.short.sublime-workspace
 
 # Django stuff:
 *.log
