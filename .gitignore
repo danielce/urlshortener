@@ -63,3 +63,6 @@ docs/_build/
 target/
 
 secret.py
+
+#database
+*.sqlite3
