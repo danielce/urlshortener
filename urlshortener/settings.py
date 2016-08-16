@@ -84,12 +84,7 @@ WSGI_APPLICATION = 'urlshortener.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASES = secret.DATABASES
 
 
 # Internationalization
@@ -112,11 +107,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "media")
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static_root")
+MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media")
+STATIC_ROOT = os.path.join(BASE_DIR, "static", "static_root")
 
 STATICFILES_DIRS = (
-    os.path.join(os.path.dirname(BASE_DIR), "static", "static_files"),
+    os.path.join(BASE_DIR, "static", "static_files"),
     )
 
 

@@ -17,7 +17,15 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from shortener.views import AboutView, ContactFormView, PageURLListView
+from shortener.views import (
+    AboutView, 
+    ContactFormView, 
+    PageURLListView,
+    ShortenView,
+    StatView,  
+    delete_url,
+    visiturl,
+)
 
 
 urlpatterns = [
@@ -27,10 +35,10 @@ urlpatterns = [
     # url(r'^contact/$', 'shortener.views.contact', name="contact"),
     url(r'^contact/$', ContactFormView.as_view(), name="contact"),
     url(r'^dashboard/$', PageURLListView.as_view(), name="dashboard"),
-    url(r'^$', 'shortener.views.shorten', name="home" ),
-    url(r'^(?P<url_id>\w+)/stat$', 'shortener.views.stat', name="stat"),
-    url(r'^(?P<url_id>\w+)/delete$', 'shortener.views.delete_url', name="delete_url"),
-    url(r'^(?P<url_id>\w+)/$', 'shortener.views.visiturl', name="visiturl"),
+    url(r'^$', ShortenView.as_view(), name="home" ),
+    url(r'^(?P<url_id>\w+)/stat$', StatView.as_view(), name="stat"),
+    url(r'^(?P<url_id>\w+)/delete$', delete_url, name="delete_url"),
+    url(r'^(?P<url_id>\w+)/$', visiturl, name="visiturl"),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

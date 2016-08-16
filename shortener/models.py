@@ -17,7 +17,7 @@ class PageURL(models.Model):
 		return self.url_id
 
 	def get_absolute_url(self):
-		return reverse('shortener.views.visiturl', kwargs={"url_id": self.url_id })
+		return reverse('visiturl', kwargs={"url_id": self.url_id })
 
 
 class Ad(models.Model):
