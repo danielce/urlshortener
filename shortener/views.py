@@ -42,7 +42,7 @@ class ShortenView(FormView):
             instance.title = meta['title']
             instance.description = meta['description']
             if self.request.user.is_authenticated():
-                instance.author = request.user
+                instance.author = self.request.user
             instance.save()
             long_url = instance.long_url
 

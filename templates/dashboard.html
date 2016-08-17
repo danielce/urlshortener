@@ -27,7 +27,7 @@
 	       <td>{{ url.hits }}</td>
 	       <td>
 	         <a href="{% url 'stat' url.url_id %}"><i class="fa fa-bar-chart"></i></a> 
-	         <a href="#" data-href="{% url 'visiturl' url.url_id %}" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i>
+	         <a href="#" data-href="{% url 'delete_url' url.url_id %}" data-toggle="modal" data-urlid="{{ url.url_id }}" data-target="#confirm-delete"><i class="fa fa-trash"></i>
 	        </td>
 	     </tr>
 	   {% empty %}
@@ -53,7 +53,7 @@
                 </div>
             
                 <div class="modal-body">
-                    <p>You are about to delete Your URL, this procedure is irreversible.</p>
+                    <p>You are about to delete URL <strong><span id="urlid"></span></strong>, this procedure is irreversible.</p>
                     <p>Do you want to proceed?</p>
                     <p class="debug-url"></p>
                 </div>
@@ -72,8 +72,8 @@
 
 {% block js %}
   $('#confirm-delete').on('show.bs.modal', function(e) {
+  			var urlid = $(e.relatedTarget).data('urlid');
             $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-            
-            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+            $('#urlid').html(urlid);
         });
 {% endblock %}
