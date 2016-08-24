@@ -1,18 +1,16 @@
 import json
-import random
-import string
+from user_agents import parse
+
 from django.contrib import messages
-from django.core import serializers
 from django.core.mail import send_mail, BadHeaderError
 from django.db.models import Count
-from django.views.generic import DeleteView, FormView, ListView, TemplateView, DetailView
-from django.http import HttpResponseRedirect, HttpRequest, HttpResponse
+from django.views.generic import FormView, ListView, TemplateView, DetailView
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse, reverse_lazy
 
 from .forms import ContactForm, PageURLForm
-from .models import PageURL, Ad, Visit
-from .utils import generate_url_id, scrape_data
+from .models import PageURL, Ad, Visit, Token
 
 # Create your views here.
 
@@ -36,11 +34,6 @@ class ShortenView(FormView):
             short = PageURL.objects.get(long_url=long_url)
         except PageURL.DoesNotExist:
             instance = form.save(commit=False)
-            url_id = generate_url_id()
-            instance.url_id = url_id
-            meta = scrape_data(long_url)
-            instance.title = meta['title']
-            instance.description = meta['description']
             if self.request.user.is_authenticated():
                 instance.author = self.request.user
             instance.save()
@@ -49,18 +42,33 @@ class ShortenView(FormView):
         return super(ShortenView, self).form_valid(form, **kwargs)
 
 
+class TokenListView(ListView):
+    template_name = 'tokens.html'
+    queryset = Token.objects.all()
+    context_object_name = 'tokens'
+
+    def get_queryset(self):
+        user = self.request.user
+        qs = Token.objects.filter(user=user)
+        return qs
+
+
 def visiturl(request, url_id):
     url = get_object_or_404(PageURL, url_id=url_id)
+    ua = parse(request.META.get('HTTP_USER_AGENT'))
     url.hits += 1
     url.save()
     visit = Visit(
         url=url,
         ip=request.META.get('REMOTE_ADDR'),
-        user_agent=request.META.get('HTTP_USER_AGENT'),
         referer=request.META.get('HTTP_REFERER'),
+        user_agent=str(ua),
+        browser=ua.browser,
+        system=ua.os,
+        device=ua.device,
     )
     visit.save()
-    if url.monetize == True:
+    if url.monetize:
         random_ad = Ad.objects.order_by('?').first()
         context = {"long_url": url.long_url, "random_ad": random_ad}
         return render(request, 'doorway.html', context)
@@ -81,8 +89,9 @@ class StatView(DetailView):
         context['last_visits'] = Visit.objects.filter(
             url=url).order_by('-date')[:10]
         context['days'] = Visit.objects.filter(url=url).extra(
-            select={'day': 'date( date )'}).values('day').annotate(clicks=Count('date')
-                                                                   )
+            select={'day': 'date( date )'}).values('day').annotate(
+            clicks=Count('date')
+        )
         context['day_list'] = [item['day'] for item in context['days']]
         context['click_list'] = [item['clicks'] for item in context['days']]
 
@@ -97,7 +106,10 @@ class StatView(DetailView):
                 "clicks": context['click_list'],
             }
             serialized_data = json.dumps(lst)
-            return HttpResponse(serialized_data, content_type="application/json")
+            return HttpResponse(
+                serialized_data,
+                content_type="application/json",
+            )
 
         return super(StatView, self).get(request, *args, **kwargs)
 
@@ -137,7 +149,11 @@ class PageURLListView(ListView):
 def delete_url(request, url_id):
     user = request.user
     if user.is_authenticated:
-        obj = PageURL.objects.get(url_id=url_id, author=user)
-        if obj != None:
+        try:
+            obj = PageURL.objects.get(url_id=url_id, author=user)
+        except PageURL.DoesNotExist:
+            pass
+        else:
             obj.delete()
-            return HttpResponseRedirect(reverse('dashboard'))
+
+    return HttpResponseRedirect(reverse('dashboard'))

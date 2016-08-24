@@ -18,27 +18,27 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from shortener.views import (
-    AboutView, 
-    ContactFormView, 
+    AboutView,
+    ContactFormView,
     PageURLListView,
     ShortenView,
-    StatView,  
+    StatView,
+    TokenListView,
     delete_url,
     visiturl,
 )
-
 
 urlpatterns = [
     url(r'^about/$', AboutView.as_view(), name="about"),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    # url(r'^contact/$', 'shortener.views.contact', name="contact"),
+    url(r'^api/1.0/', include('shortener.api.urls')),
     url(r'^contact/$', ContactFormView.as_view(), name="contact"),
     url(r'^dashboard/$', PageURLListView.as_view(), name="dashboard"),
-    url(r'^$', ShortenView.as_view(), name="home" ),
+    url(r'^tokens/$', TokenListView.as_view(), name="tokenlist"),
+    url(r'^$', ShortenView.as_view(), name="home"),
     url(r'^(?P<url_id>\w+)/stat$', StatView.as_view(), name="stat"),
     url(r'^(?P<url_id>\w+)/delete$', delete_url, name="delete_url"),
     url(r'^(?P<url_id>\w+)/$', visiturl, name="visiturl"),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-

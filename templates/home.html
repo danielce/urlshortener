@@ -60,7 +60,7 @@
          	 <a href="#"><span class="badge badge-large badge-success">{{ trend.hits }}</span></a>
          </div>
          <div class="col-md-10 col-xs-10">
-         	<a href="{% url 'visiturl' trend.url_id %}"><strong>{{ request.get_host }}{{ trend.get_absolute_url }}</strong></a>
+         	
            <a href="{% url 'stat' trend.url_id %}"><i class="fa fa-bar-chart pull-right"></i></a><br>
 	    	<p><small>{{ trend.title|truncatechars:50}}</small></p>
          </div>

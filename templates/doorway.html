@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,37 +16,87 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
 
     <!-- Custom styles for this template -->
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <style>
-      
+      body {
+  font-family: 'Lato', sans-serif;
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes example {
+    0%   {left:0px; top:0px;}
+    50%  {left:50px; top:0px;}
+    100% {left:0px; top:0px;}
+}
+
+/* Standard syntax */
+@keyframes example {
+    0%   {left:0px; top:0px;}
+    50%  {left:50px; top:0px;}
+    100% {left:0px; top:0px;}
+}
+.chkdys {
+    -webkit-animation-name: example; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 1s; /* Chrome, Safari, Opera */
+    animation-name: example;
+    animation-duration: 1s;
+    position:relative;
+    animation-iteration-count: infinite;
+}
     </style>
 
   </head>
 
-  <body class="dark-blue">
-  
-    <div class="container">
-      <div class="col-lg-8 col-lg-offset-2 col-sm-12" id="main-container">
-		<div class="row dark-blue">
-			<div class="col-md-8 col-md-offset-2 dark-blue top-padded">
-			  <h1 class="text-white">Redirecting....</h1>
-			  <div class="panel panel-primary">
-			    <div class="panel-heading"></div>
-			    <div class="panel-body">
-			      <a href="{{ random_ad.aff_url }}"><img src="{{ random_ad.image }}" class="img-responsive" alt="{{ random_ad.title }}" /></a>
-			    </div>
-			  </div>
-			  <div class="img img-responsive" style="margin-top:20px">
-			  </div>
-			  <div style="margin-top:30px;" class="text-center">
-			    <a href="#" id="proceed" class="btn btn-success btn-lg disabled" role="button">Loading...</a>
-			  </div>
+  <body class="">
+  	<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="background-color:#3abfd1; height:100vh; padding-top:33vh;">
+  	  <div class="chkdys">
+  		<i class="fa fa-chevron-right fa-5x" aria-hidden="true" style="color: #bbe9f0; font-size:10em;"></i>
+  		<i class="fa fa-chevron-right fa-5x" aria-hidden="true" style="color: #bbe9f0; font-size:10em; margin-left:-5vh;"></i>
+  	  </div>
+  	</div>
+  	<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="background-color:#139bae; height:100vh;">
+  		<div class="container">
+	      <div class="col-lg-8 col-lg-offset-2 col-sm-12" id="main-container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 top-padded">
+				  <h1 class="text-white">{% trans 'redirecting.header' %}</h1>
+				  <div class="panel panel-primary">
+				    <div class="panel-heading"></div>
+				    <div class="panel-body">
+				      <a href="{{ random_ad.aff_url }}"><img src="{{ random_ad.image }}" class="img-responsive" alt="{{ random_ad.title }}" /></a>
+				    </div>
+				  </div>
+				  <div class="img img-responsive" style="margin-top:20px">
+				  </div>
+				  <div style="margin-top:30px;" class="text-center">
+				    
+				  </div>
+				</div>
 			</div>
+		  </div>
 		</div>
-	  </div>
-	</div>
+		<div class="navbar-fixed-bottom" style="margin-bottom:20px;">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				
+			</div>
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+				
+				<div class="progress" style="height:5px;">
+				  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+				  </div>
+				</div>
+				<div class="col-sm-2 col-sm-offset-5 text-center">
+					<a href="#" id="proceed" class="btn btn-success btn-lg disabled" role="button">{% trans 'continue' %}</a>
+				</div>
+
+			</div>
+			
+		</div>
+  	</div>
+  
+    
 
 
 
@@ -54,20 +105,22 @@
 	<script type="text/javascript">
 	    $(document).ready(function(){
 
-	  	var i = 10;
+	  	var i = 1;
 	  	var myVar = window.setInterval(function(){
-	  		$("#proceed").text("Wait " + i + " seconds");
-	  		i--;
-	  		if (i < 0) {
+	  		//$("#proceed").text("Wait " + i + " seconds");
+	  		$(".progress-bar").css("width", i+"%");
+	  		i++;
+	  		if (i > 100) {
 	  			clearInterval(myVar);
-	  			$("#proceed").text("SKIP THIS AD")
+	  			$("#proceed")
 	  			.removeClass("disabled")
 	  			.attr("href", "{{ long_url }}");
 	  		} 
-	  	}, 1000);
+	  	}, 100);
 
 	  });
 
 	 </script>
+
  </body>
 </html>  

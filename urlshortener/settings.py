@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sites',
     'django.contrib.staticfiles',
+    'rest_framework',
     'crispy_forms',
     'registration',
     'shortener',
@@ -127,3 +128,6 @@ EMAIL_PORT = secret.EMAIL_PORT
 EMAIL_HOST_USER = secret.EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = secret.EMAIL_HOST_PASSWORD
 EMAIL_USE_SSL = secret.EMAIL_USE_SSL
+
+#celery
+CELERY_RESULT_BACKEND = "amqp"

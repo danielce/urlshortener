@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% crispy form form.helper %}
 
-{% block title %}Home{% endblock%}
+{% block title %}API{% endblock%}
 
 
 {% block content %}
@@ -10,42 +10,16 @@
  <div class="row">
  	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
  		<ul class="nav nav-tabs">
-		  <li role="presentation" class="active"><a href="{% url 'dashboard' %}">Your URLs</a></li>
-		  <li role="presentation"><a href="{% url 'tokenlist' %}">API Integration</a></li>
+		  <li role="presentation"><a href="{% url 'dashboard' %}">Your URLs</a></li>
+		  <li role="presentation" class="active"><a href="{% url 'tokenlist' %}">API Integration</a></li>
 		</ul>
  	</div>
  </div>
  <div class="row">
-    <div class="col-xs-12 top-padded"><h4><strong>Your URLs</strong></h4>
-	  <table class="table table-hover">
-	   <thead>
-	     <th>#</th>
-	     <th>Short URL</th>
-	     <th>Long URL</th>
-	     <th>Created</th>
-	     <th>Visits</th>
-	   </thead>
-	   <tbody>
-	   {% for url in urls %}
-	     <tr class="{% cycle 'info' 'default' %}">
-	       <td>{{forloop.counter}}</td>
-	       <td><strong><a href="{% url 'visiturl' url.url_id %}">{{ url.url_id }}</a></strong></td>
-	       <td><a href="{{url.long_url}}">{{url.long_url}}</a></td>
-	       <td>{{ url.created|date:"l G:i" }}</td>
-	       <td>{{ url.hits }}</td>
-	       <td>
-	         <a href="{% url 'stat' url.url_id %}"><i class="fa fa-bar-chart"></i></a> 
-	         <a href="#" data-href="{% url 'delete_url' url.url_id %}" data-toggle="modal" data-urlid="{{ url.url_id }}" data-target="#confirm-delete"><i class="fa fa-trash"></i>
-	        </td>
-	     </tr>
-	   {% empty %}
-	    <div class="well">
-	     <h2>It seems that you have not created any links :(</h2>
-	     <p> Go to <a href="{% url 'home' %}">main page</a> and create your first short link!</p>
-	    </div>
-	   {% endfor %}
-	   </tbody>
-	  </table>
+    <div class="col-xs-12 top-padded"><h4><strong>Your API Token</strong></h4>
+    	{% for token in tokens %}
+	  		{{ token.uuid }}
+	  	{% endfor %}
 	 </div>
   </div>
 
