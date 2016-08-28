@@ -61,6 +61,17 @@
 .yt{
   color:#b31217;
 }
+
+/* margins and paddings */
+.mb20 {
+  margin-bottom: 20px;
+}
+
+
+#id_long_url {
+  width:50vh;
+}
+
 	video#bgvid {
 	position: fixed;
 	top: 50%;
@@ -75,3 +86,26 @@
 	background: url(polina.jpg) no-repeat;
 	background-size: cover;
 	}
+
+  /* Doorway */
+  /* Chrome, Safari, Opera */
+@-webkit-keyframes example {
+    0%   {left:0px; top:0px;}
+    50%  {left:50px; top:0px;}
+    100% {left:0px; top:0px;}
+}
+
+/* Standard syntax */
+@keyframes example {
+    0%   {left:0px; top:0px;}
+    50%  {left:50px; top:0px;}
+    100% {left:0px; top:0px;}
+}
+.chkdys {
+    -webkit-animation-name: example; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 1s; /* Chrome, Safari, Opera */
+    animation-name: example;
+    animation-duration: 1s;
+    position:relative;
+    animation-iteration-count: infinite;
+}

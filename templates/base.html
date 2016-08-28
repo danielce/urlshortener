@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{% block title %}{% endblock %} | URL Shortener</title>
+    <title>{% block title %}{% endblock %} | {{ config.name }}</title>
 
     <!-- Bootstrap core CSS -->
     <!-- Latest compiled and minified CSS -->
@@ -40,7 +41,7 @@
       <div class="col-lg-8 col-lg-offset-2 col-sm-12 white">
        <div class="row">
           <div class="col-sm-12 text-center" style="background-color:#1D7373;">
-            <p class="text-white top-padded"><small>Copyright by URLShortener 2015 - {% now "Y" %}</small></p>
+            <p class="text-white top-padded"><small>Copyright by {{ config.name }} 2015 - {% now "Y" %}</small></p>
           </div>
        </div>
   	  </div>

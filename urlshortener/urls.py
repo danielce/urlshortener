@@ -43,3 +43,6 @@ urlpatterns = [
     url(r'^(?P<url_id>\w+)/$', visiturl, name="visiturl"),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

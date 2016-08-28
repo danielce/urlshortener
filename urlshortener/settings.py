@@ -16,6 +16,10 @@ import secret
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -39,10 +43,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sites',
     'django.contrib.staticfiles',
+    'django_nose',
     'rest_framework',
     'crispy_forms',
     'registration',
     'shortener',
+    'control',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -50,6 +56,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -74,6 +81,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'control.views.get_configuration',
             ],
         },
     },
@@ -113,21 +121,30 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static", "static_root")
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static", "static_files"),
-    )
+)
 
 
 # Django Registration Redux Settings
-ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
-REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
+# One-week activation window; you may, of course, use a different value.
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True  # Automatically log the user in.
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 
-#Email setttings
+# Email setttings
 EMAIL_HOST = secret.EMAIL_HOST
 EMAIL_PORT = secret.EMAIL_PORT
 EMAIL_HOST_USER = secret.EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = secret.EMAIL_HOST_PASSWORD
 EMAIL_USE_SSL = secret.EMAIL_USE_SSL
 
-#celery
+# celery
 CELERY_RESULT_BACKEND = "amqp"
+
+# nose
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=shortener',
+]

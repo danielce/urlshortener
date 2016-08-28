@@ -12,3 +12,11 @@ class ProfileFormView(UpdateView):
 
     def get_object(self):
         return Configuration.objects.get(pk=1)
+
+
+# context processor for 
+def get_configuration(request):
+    context = {}
+    obj = Configuration.objects.get(pk=1)
+    context['config'] = obj
+    return context

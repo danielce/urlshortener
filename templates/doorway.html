@@ -24,27 +24,6 @@
       body {
   font-family: 'Lato', sans-serif;
 }
-/* Chrome, Safari, Opera */
-@-webkit-keyframes example {
-    0%   {left:0px; top:0px;}
-    50%  {left:50px; top:0px;}
-    100% {left:0px; top:0px;}
-}
-
-/* Standard syntax */
-@keyframes example {
-    0%   {left:0px; top:0px;}
-    50%  {left:50px; top:0px;}
-    100% {left:0px; top:0px;}
-}
-.chkdys {
-    -webkit-animation-name: example; /* Chrome, Safari, Opera */
-    -webkit-animation-duration: 1s; /* Chrome, Safari, Opera */
-    animation-name: example;
-    animation-duration: 1s;
-    position:relative;
-    animation-iteration-count: infinite;
-}
     </style>
 
   </head>
@@ -61,9 +40,8 @@
 	      <div class="col-lg-8 col-lg-offset-2 col-sm-12" id="main-container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 top-padded">
-				  <h1 class="text-white">{% trans 'redirecting.header' %}</h1>
+				  <h1 class="text-white mb20">{% trans 'redirecting.header' %}</h1>
 				  <div class="panel panel-primary">
-				    <div class="panel-heading"></div>
 				    <div class="panel-body">
 				      <a href="{{ random_ad.aff_url }}"><img src="{{ random_ad.image }}" class="img-responsive" alt="{{ random_ad.title }}" /></a>
 				    </div>

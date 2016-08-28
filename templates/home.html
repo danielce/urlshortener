@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 {% crispy form form.helper %}
 
-{% block title %}Home{% endblock%}
+{% block title %}{% trans 'Home' %}{% endblock%}
 
 
 {% block content %}
 <div class="row">
   <div class="col-xs-12 white">
-		  <h1 class="text-dark-blue"><strong>URLShortener</strong> <small>Simple url shortening service</small></h1>
+		  <h1 class="text-dark-blue"><strong>{{ config.name }}</strong> <small>{{ config.slogan }}</small></h1>
       <form  class="form-inline" method="POST" action="">{% csrf_token %}
           <div class="form-group">
   		        {{ form.long_url }}
-          <button type="submit" class="btn btn-primary">Send</button>
+          <button type="submit" class="btn btn-primary">{% trans 'Shorten' %}</button>
         </div>
       </form>
 		    <br>
@@ -29,21 +30,21 @@
 		  <i class="fa fa-circle fa-stack-2x" style="color:#015965"></i>
 	      <i class="fa fa-tachometer fa-stack-1x text-white"></i>
 		</span>
-		<h4>EXTREMELY FAST</h4>
+		<h4>{% trans 'extremely fast' %}</h4>
 	</div>
    <div class="col-sm-4 text-white">
      <span class="fa-stack fa-4x">
 		  <i class="fa fa-circle fa-stack-2x" style="color:#015965"></i>
 	      <i class="fa fa-lock fa-stack-1x text-white"></i>
 	 </span>
-	 <h4>SECURE</h4>
+	 <h4>{% trans 'secure' %}</h4>
    </div>
    <div class="col-sm-4 text-white">
      <span class="fa-stack fa-4x">
 		  <i class="fa fa-circle fa-stack-2x" style="color:#015965"></i>
 	      <i class="fa fa-users fa-stack-1x text-white"></i>
 	 </span>
-	 <h4>USER-FRIENDLY</h4>
+	 <h4>{% trans 'user-friendly' %}</h4>
    </div>
  </div>
 </div> <!-- end of row -->
@@ -51,7 +52,7 @@
 <div class="row">
  <div class="col-sm-12 light-blue">
   <div class="col-sm-6 col-xs-12 light-blue">
-    <h2 class="text-success">Trending:</h2>
+    <h2 class="text-success">{% trans 'Trending' %}:</h2>
     {% for trend in trends %}
 
       
@@ -69,7 +70,7 @@
     {% endfor %}
   </div>
   <div class="col-sm-6 col-xs-12 light-blue">
-  	<h2 class="text-success"><i class="fa fa-star"></i> Newest</h2>
+  	<h2 class="text-success"><i class="fa fa-star"></i> {% trans 'Newest' %}</h2>
   	
     {% for item in newest %}
      <small><span class="label label-success">{{ item.created|date:"l G:i" }}</span></small>

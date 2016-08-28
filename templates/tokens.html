@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 {% crispy form form.helper %}
 
@@ -6,49 +7,22 @@
 
 
 {% block content %}
- <h1>Dashboard</h1><hr>
+ <h1>{% trans 'Dashboard'%}</h1><hr>
  <div class="row">
  	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
  		<ul class="nav nav-tabs">
-		  <li role="presentation"><a href="{% url 'dashboard' %}">Your URLs</a></li>
-		  <li role="presentation" class="active"><a href="{% url 'tokenlist' %}">API Integration</a></li>
+		  <li role="presentation"><a href="{% url 'dashboard' %}">{% trans 'Your URLs' %}</a></li>
+		  <li role="presentation" class="active"><a href="{% url 'tokenlist' %}">{% trans 'API Integration' %}</a></li>
 		</ul>
  	</div>
  </div>
  <div class="row">
-    <div class="col-xs-12 top-padded"><h4><strong>Your API Token</strong></h4>
+    <div class="col-xs-12 top-padded"><h4><strong>{% trans 'Your API Token' %}</strong></h4>
     	{% for token in tokens %}
 	  		{{ token.uuid }}
 	  	{% endfor %}
 	 </div>
   </div>
-
-
-  <!-- modal -->
-   <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-2x fa-exclamation-triangle yt"></i> Confirm Delete</h4>
-                </div>
-            
-                <div class="modal-body">
-                    <p>You are about to delete URL <strong><span id="urlid"></span></strong>, this procedure is irreversible.</p>
-                    <p>Do you want to proceed?</p>
-                    <p class="debug-url"></p>
-                </div>
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger btn-ok">Delete</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-  <!-- end of modal -->
 
 {% endblock %}
 

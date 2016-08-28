@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-.
 import urllib2
 from bs4 import BeautifulSoup
-
 from celery import shared_task
+
+from django.utils.text import Truncator
 
 
 @shared_task
@@ -11,15 +12,14 @@ def scrape_data(long_url):
     req = urllib2.Request(long_url, headers=hdr)
     response = urllib2.urlopen(req)
     soup = BeautifulSoup(response, 'html.parser')
-    try:
-        title = soup.title.string
-    except:
-        title = "No title"
 
-    # currently not scraping any description
-    # many websites have no meta-description tag
-    # we can replace this with e.g. scraping content of first <p> tag
+    title = soup.title.string
+
+    meta_tags = soup.findAll('meta', {"property": 'og:description'})
+    og_desc = meta_tags[0].get('content', 'No description')
+    description = Truncator(og_desc).chars(200)
+
     return {
         "title": title.encode("utf-8"),
-        "description": "No description",
+        "description": description.encode("utf-8"),
     }

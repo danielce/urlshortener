@@ -9,10 +9,18 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse, reverse_lazy
 
+from control.models import Configuration
 from .forms import ContactForm, PageURLForm
 from .models import PageURL, Ad, Visit, Token
 
 # Create your views here.
+
+
+def date_handler(obj):
+    if hasattr(obj, 'isoformat'):
+        return obj.isoformat()
+    else:
+        raise TypeError
 
 
 class ShortenView(FormView):
@@ -105,7 +113,7 @@ class StatView(DetailView):
                 "days": context['day_list'],
                 "clicks": context['click_list'],
             }
-            serialized_data = json.dumps(lst)
+            serialized_data = json.dumps(lst, default=date_handler)
             return HttpResponse(
                 serialized_data,
                 content_type="application/json",
@@ -121,6 +129,12 @@ class AboutView(TemplateView):
 class ContactFormView(FormView):
     form_class = ContactForm
     template_name = 'contact.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ContactFormView, self).get_context_data(**kwargs)
+        config = Configuration.objects.get(pk=1)
+        context['config'] = config
+        return context
 
     def form_valid(self, form):
         from_email = form.cleaned_data['from_email']
