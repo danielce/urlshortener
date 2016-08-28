@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/1.0/', include('shortener.api.urls')),
     url(r'^contact/$', ContactFormView.as_view(), name="contact"),
+    url(r'^control/', include('control.urls')),
     url(r'^dashboard/$', PageURLListView.as_view(), name="dashboard"),
     url(r'^tokens/$', TokenListView.as_view(), name="tokenlist"),
     url(r'^$', ShortenView.as_view(), name="home"),
