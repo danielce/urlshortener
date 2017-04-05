@@ -29,8 +29,8 @@
   
       <ul class="nav navbar-nav navbar-right">
         {% if request.user.is_authenticated %}
-          <p class="navbar-text">{% trans 'Howdy' %} <strong>{{ request.user.username }}</strong>!</p>
-          <li><a href="{% url 'auth_logout' %}"><i class="fa fa-sign-out"></i>{% trans 'Logout' %}</a></li>
+          <p class="navbar-text">{% trans 'Howdy' %} <strong><a href="{% url 'profile' %}">{{ request.user.username }}</a></strong>!</p>
+          <li><a href="{% url 'auth_logout' %}?next=/"><i class="fa fa-sign-out"></i>{% trans 'Logout' %}</a></li>
         {% else %}
           <li><a href="{% url 'registration_register' %}">{% trans 'Register' %}</a></li>
         {% endif %}

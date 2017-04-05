@@ -21,22 +21,36 @@ from shortener.views import (
     AboutView,
     ContactFormView,
     PageURLListView,
+    DashboardView,
     ShortenView,
+    NewURLFormView,
     StatView,
     TokenListView,
     delete_url,
     visiturl,
+    CampaignListView,
+    CampaignCreateView,
+    CampaignUpdateView,
+    CampaignDetailView
 )
 
 urlpatterns = [
     url(r'^about/$', AboutView.as_view(), name="about"),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api/1.0/', include('shortener.api.urls')),
+    url(r'^ajax/', include('shortener.api.urls')),
     url(r'^contact/$', ContactFormView.as_view(), name="contact"),
     url(r'^control/', include('control.urls')),
-    url(r'^dashboard/$', PageURLListView.as_view(), name="dashboard"),
+    url(r'^campaigns/$', CampaignListView.as_view(), name="campaigns"),
+    url(r'^campaigns/new/$', CampaignCreateView.as_view(), name="campaign-create"),
+    url(r'^campaigns/(?P<pk>\d+)/edit/$',
+        CampaignUpdateView.as_view(), name="campaign-update"),
+    url(r'^campaigns/(?P<pk>\d+)/$',
+        CampaignDetailView.as_view(), name="campaign-detail"),
+    url(r'^dashboard/$', DashboardView.as_view(), name="dashboard"),
     url(r'^tokens/$', TokenListView.as_view(), name="tokenlist"),
+    url(r'^list/$', PageURLListView.as_view(), name="urllist"),
+    url(r'^new/$', NewURLFormView.as_view(), name="newurl"),
     url(r'^$', ShortenView.as_view(), name="home"),
     url(r'^(?P<url_id>\w+)/stat$', StatView.as_view(), name="stat"),
     url(r'^(?P<url_id>\w+)/delete$', delete_url, name="delete_url"),
@@ -45,4 +59,5 @@ urlpatterns = [
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
-urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns = urlpatterns + \
+    static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

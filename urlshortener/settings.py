@@ -148,3 +148,16 @@ NOSE_ARGS = [
     '--with-coverage',
     '--cover-package=shortener',
 ]
+
+# Cookies
+SESSION_COOKIE_AGE = 31536000
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+GEOIP_PATH = os.path.join(BASE_DIR, 'geoip')
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}

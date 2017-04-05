@@ -2,16 +2,21 @@ import json
 from user_agents import parse
 
 from django.contrib import messages
+from django.contrib.gis.geoip2 import GeoIP2
 from django.core.mail import send_mail, BadHeaderError
-from django.db.models import Count
-from django.views.generic import FormView, ListView, TemplateView, DetailView
+from django.db.models import Count, Sum, F
+from django.views.generic import (
+    FormView, ListView, TemplateView, DetailView, CreateView, UpdateView
+)
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.urlresolvers import reverse, reverse_lazy
 
+from braces.views import LoginRequiredMixin
+
 from control.models import Configuration
-from .forms import ContactForm, PageURLForm
-from .models import PageURL, Ad, Visit, Token
+from .forms import ContactForm, PageURLForm, SimplePageURLForm, CampaignForm
+from .models import PageURL, Ad, Visit, Token, Campaign
 
 # Create your views here.
 
@@ -66,15 +71,40 @@ def visiturl(request, url_id):
     ua = parse(request.META.get('HTTP_USER_AGENT'))
     url.hits += 1
     url.save()
+    g = GeoIP2()
+    ip = request.META.get('REMOTE_ADDR')
+    ip = '88.80.113.1'
     visit = Visit(
         url=url,
-        ip=request.META.get('REMOTE_ADDR'),
+        ip=ip,
         referer=request.META.get('HTTP_REFERER'),
         user_agent=str(ua),
-        browser=ua.browser,
-        system=ua.os,
-        device=ua.device,
+        browser=ua.browser.family,
+        browser_version=ua.browser.version_string,
+        system=ua.os.family,
+        system_version=ua.os.version_string,
+        device=ua.device.family,
+        brand=ua.device.brand,
+        model=ua.device.model,
+        session=request.session.session_key,
+        is_mobile=ua.is_mobile,
+        is_tablet=ua.is_tablet,
+        is_pc=ua.is_pc,
+        is_bot=ua.is_bot,
+        is_touch=ua.is_touch_capable,
     )
+    try:
+        geo = g.city(ip)
+    except:
+        pass
+    else:
+        visit.city = geo['city']
+        visit.country = geo['country_name']
+        visit.country_code = geo['country_code']
+        visit.postal_code = geo['postal_code']
+        visit.region = geo['region']
+        visit.longitude = geo['longitude']
+        visit.latitude = geo['latitude']
     visit.save()
     if url.monetize:
         random_ad = Ad.objects.order_by('?').first()
@@ -151,13 +181,36 @@ class ContactFormView(FormView):
         return reverse('contact')
 
 
-class PageURLListView(ListView):
-    template_name = 'dashboard.html'
+class PageURLListView(LoginRequiredMixin, ListView):
+    template_name = 'urllist.html'
     paginate_by = 20
     context_object_name = 'urls'
 
     def get_queryset(self):
-        return PageURL.objects.filter(author=self.request.user)
+        return PageURL.objects.filter(
+            author=self.request.user
+        ).order_by('-hits')
+
+
+class NewURLFormView(LoginRequiredMixin, FormView):
+    form_class = SimplePageURLForm
+    template_name = 'new_url.html'
+
+
+class DashboardView(LoginRequiredMixin, TemplateView):
+    template_name = 'dashboard.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(DashboardView, self).get_context_data(**kwargs)
+        items = PageURL.objects.filter(
+            author=self.request.user
+        ).aggregate(
+            hits=Sum(
+                F('hits')),
+            count=Count(F('id'))
+        )
+        context['items'] = items
+        return context
 
 
 def delete_url(request, url_id):
@@ -171,3 +224,57 @@ def delete_url(request, url_id):
             obj.delete()
 
     return HttpResponseRedirect(reverse('dashboard'))
+
+
+class CampaignListView(LoginRequiredMixin, ListView):
+    template_name = 'campaigns.html'
+    paginate_by = 20
+    context_object_name = 'campaigns'
+
+    def get_queryset(self):
+        return Campaign.objects.filter(
+            owner=self.request.user
+        ).order_by('-created')
+
+
+class CampaignCreateView(LoginRequiredMixin, CreateView):
+    form_class = CampaignForm
+    model = Campaign
+    template_name = 'campaign_create.html'
+
+    def get_success_url(self):
+        return reverse('campaigns')
+
+    def form_valid(self, form):
+        super(CampaignCreateView, self).form_valid(form)
+        self.object.owner = self.request.user
+        self.object.save()
+        return redirect(self.get_success_url())
+
+
+class CampaignUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = CampaignForm
+    model = Campaign
+    template_name = 'campaign_create.html'
+
+    def get_success_url(self):
+        return reverse('campaigns')
+
+
+class CampaignDetailView(LoginRequiredMixin, ListView):
+    context_object_name = 'urls'
+    template_name = 'campaign_detail.html'
+    model = Campaign
+
+    def get_queryset(self):
+        pk = self.kwargs.get('pk')
+        return PageURL.objects.filter(
+            author=self.request.user,
+            campaign__pk=pk
+        ).order_by('-created')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(CampaignDetailView, self).get_context_data(**kwargs)
+        pk = self.kwargs.get('pk')
+        context['obj'] = Campaign.objects.get(pk=pk)
+        return context

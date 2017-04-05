@@ -1,3 +1,14 @@
+/** main **/
+body {
+  font-family: 'Lato', sans-serif;
+}
+.pb10 {
+  padding-bottom: 10px;
+} 
+.mr10 {
+  margin-right: 10px;
+}
+
 .badge-success {
         background-color: #398439;
       }
@@ -40,8 +51,12 @@
 .text-success{
   color:#015965;
 }
-.text-white{
+.text-white {
   color:#fff;
+}
+.text-black{
+  color:#000;
+  text-transform: uppercase;
 }
 .top-padded{
   padding-top:20px;
