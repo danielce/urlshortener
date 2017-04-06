@@ -23,6 +23,10 @@ class Campaign(models.Model):
     def __unicode__(self):
         return self.name
 
+    @property
+    def urls(self):
+        return self.pageurl_set.count()
+
 def generate_url_id(length=6):
     sys_random = random.SystemRandom()
     while True:

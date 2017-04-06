@@ -1,26 +1,26 @@
-{% extends 'base2.html' %}
+{% extends 'page.html' %}
 {% load i18n %}
 {% load crispy_forms_tags %}
 {% crispy form form.helper %}
 
-{% block title %}{% trans 'Home' %}{% endblock%}
+{% block title %}{% trans 'Campaigns' %}{% endblock%}
 
 
-{% block content %}
- <h1>{% trans 'Your URLs' %}</h1><hr>
- <div class="row">
+{% block paneltitle %} <h3>{% trans 'Campaigns' %}</h3>{% endblock %}
+
+ {% block panelcontent %}
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
        <a href="{% url 'campaign-create' %}" class="btn btn-success text-right"><i class="fa fa-plus"></i> {% trans 'Campaign create' %}</a>
     </div>
- </div>
- <div class="row">
       <table class="table table-responsive table-hover jambo_table bulk_action">
        <thead>
          <th>#</th>
-         <th>{% trans 'Short URL' %}</th>
+         <th>{% trans 'Campaign name' %}</th>
          <th>{% trans 'Created' %}</th>
-         <th>{% trans 'Long URL' %}</th>
+         <th>{% trans 'Description' %}</th>
+         <th>{% trans 'Active' %}</th>
          
+         <th>{% trans 'URLs' %}</th>
          <th>{% trans 'Visits' %}</th>
          <th>{% trans 'Actions' %}</th>
        </thead>
@@ -30,7 +30,14 @@
            <td>{{forloop.counter}}</td>
            <td><strong><a href="#">{{ campaign.name }}</a></strong></td>
            <td>{{ campaign.created|date:"Y-m-d" }}</td>
-           <td>{{ campaign.is_active }}</td>
+           <td>{{camapign.description }}</td>
+           <td>{% if campaign.is_active %}
+                <button type="button" class="btn btn-success btn-xs">Active</button>
+                {% else %}
+                <button type="button" class="btn btn-danger btn-xs">Inactive</button>
+                {% endif %}
+           </td>
+           <td>{{campaign.urls }}</td>
            <td>{{ campaign.hits }}</td>
            <td>
             <a href="{% url 'campaign-update' campaign.id %}" class="btn btn-xs btn-primary"><i class="fa fa-bar-chart"></i> Edit</a> 
@@ -47,10 +54,9 @@
        {% endfor %}
        </tbody>
       </table>
-     </div>
-  </div>
+     {% endblock %}
 
-
+{% block scripts %}
   <!-- modal -->
    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
