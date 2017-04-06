@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import PageURL
+from .models import PageURL
 
 
 class PageURLSerializer(serializers.ModelSerializer):

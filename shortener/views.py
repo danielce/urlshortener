@@ -16,7 +16,7 @@ from braces.views import LoginRequiredMixin
 
 from control.models import Configuration
 from .forms import ContactForm, PageURLForm, SimplePageURLForm, CampaignForm
-from .models import PageURL, Ad, Visit, Token, Campaign
+from .models import PageURL, Ad, Visit, Campaign
 
 # Create your views here.
 
@@ -53,17 +53,6 @@ class ShortenView(FormView):
             long_url = instance.long_url
 
         return super(ShortenView, self).form_valid(form, **kwargs)
-
-
-class TokenListView(ListView):
-    template_name = 'tokens.html'
-    queryset = Token.objects.all()
-    context_object_name = 'tokens'
-
-    def get_queryset(self):
-        user = self.request.user
-        qs = Token.objects.filter(user=user)
-        return qs
 
 
 def visiturl(request, url_id):

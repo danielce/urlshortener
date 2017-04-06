@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import PageURL, Ad, Visit, Token, Campaign
+from .models import PageURL, Ad, Visit, Campaign
 
 # Register your models here.
 class PageURLAdmin(admin.ModelAdmin):
@@ -20,7 +20,5 @@ class VisitAdmin(admin.ModelAdmin):
 		model = Visit
 
 admin.site.register(Visit, VisitAdmin)
-
-admin.site.register(Token)
 
 admin.site.register(Campaign)

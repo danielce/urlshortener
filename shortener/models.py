@@ -112,13 +112,3 @@ class Visit(models.Model):
 
     def __unicode__(self):
         return str(self.date)
-
-
-class Token(models.Model):
-    user = models.ForeignKey(User)
-    uuid = models.UUIDField(default=uuid.uuid4)
-    created = models.DateTimeField(auto_now_add=True, auto_now=False)
-    is_active = models.BooleanField(default=True)
-
-    def __unicode__(self):
-        return self.user.username

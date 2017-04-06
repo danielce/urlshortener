@@ -1,33 +1,15 @@
 import datetime
 from dateutil.rrule import rrule, DAILY
 from collections import OrderedDict
-from rest_framework.generics import ListAPIView, CreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
-from django.db.models import Count, Case, When, Value, IntegerField
+from rest_framework.generics import ListAPIView
+from django.db.models import Count
 from django.db.models.functions import TruncDay
 
-from .authentication import TokenAuthentication
-from .serializers import PageURLSerializer, PageURLCreateSerializer
+from ..serializers import PageURLSerializer
 from ..models import PageURL, Visit
-
-
-class PageURLListAPIView(ListAPIView):
-    serializer_class = PageURLSerializer
-    permission_classes = (IsAuthenticated,)
-    authentication_classes = (TokenAuthentication,)
-
-    def get_queryset(self):
-        user = self.request.user
-        qs = PageURL.objects.filter(author=user)
-        return qs
-
-
-class PageURLCreateAPIView(CreateAPIView):
-    serializer_class = PageURLCreateSerializer
-    authentication_classes = (TokenAuthentication,)
 
 
 class CountryAPIView(APIView):
@@ -73,14 +55,14 @@ class DailyHitsAPIView(APIView):
     def get(self, request, format=None):
         startdate = datetime.date.today()
         enddate = startdate - datetime.timedelta(days=7)
-        pages=PageURL.objects.filter(
+        pages = PageURL.objects.filter(
             author=self.request.user,
         ).values_list('pk', flat=True)
-        q=Visit.objects.filter(
+        q = Visit.objects.filter(
             url_id__in=pages,
             date__range=[enddate, startdate]
         ).annotate(day=TruncDay('date')).values('day').annotate(count=Count('day')).values('day', 'count')
-        es={i['day'].strftime("%Y,%-m,%d"): i['count'] for i in q}
+        es = {i['day'].strftime("%Y,%-m,%d"): i['count'] for i in q}
 
         for dt in rrule(DAILY, dtstart=startdate, until=enddate):
             if not es.get(dt.strftime("%Y,%-m,%d")):
@@ -90,8 +72,8 @@ class DailyHitsAPIView(APIView):
 
 
 class BestPerformersAPIView(ListAPIView):
-    authentication_classes=(IsAuthenticated, )
-    serializer_class=PageURLSerializer
+    authentication_classes = (IsAuthenticated, )
+    serializer_class = PageURLSerializer
 
     def get_queryset(self):
         return PageURL.objects.filter(

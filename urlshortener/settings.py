@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'registration',
     'shortener',
     'control',
+    'userapi',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
