@@ -30,7 +30,7 @@ def date_handler(obj):
 
 class ShortenView(FormView):
     form_class = PageURLForm
-    template_name = 'home.html'
+    template_name = 'index.html'
     success_url = reverse_lazy('home')
 
     def get_context_data(self, *args, **kwargs):
