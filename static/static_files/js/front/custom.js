@@ -9,6 +9,10 @@ $(function() {
     	offset: 70
     });
 
+    $('#signin').click(function() {
+        window.location = '/accounts/login/'
+    });
+
     /* Hide mobile menu after clicking on a link
     -----------------------------------------------*/
     $('.navbar-collapse a').click(function(){

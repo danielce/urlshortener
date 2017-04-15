@@ -258,7 +258,6 @@ class CampaignDetailView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         pk = self.kwargs.get('pk')
         return PageURL.objects.filter(
-            author=self.request.user,
             campaign__pk=pk
         ).order_by('-created')
 
@@ -267,3 +266,26 @@ class CampaignDetailView(LoginRequiredMixin, ListView):
         pk = self.kwargs.get('pk')
         context['obj'] = Campaign.objects.get(pk=pk)
         return context
+
+
+class NewCampaignURLFormView(LoginRequiredMixin, CreateView):
+    form_class = SimplePageURLForm
+    template_name = 'new_url.html'
+    model = PageURL
+
+    def get_initial(self):
+        initial = super(NewCampaignURLFormView, self).get_initial()
+        initial['campaign'] = self.kwargs.get('pk')
+
+        return initial
+
+    def get_success_url(self):
+        return reverse('campaigns')
+
+    def form_valid(self, form):
+        super(NewCampaignURLFormView, self).form_valid(form)
+        campaign = Campaign.objects.get(pk=self.kwargs.get('pk'))
+        self.object.campaign = campaign
+        self.object.author = self.request.user
+        self.object.save()
+        return redirect(self.get_success_url())

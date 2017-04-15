@@ -32,8 +32,8 @@
                     <ul class="nav child_menu">
                       <li><a href="{% url 'campaigns' %}">{% trans 'Campaigns' %}</a></li>
                       <li><a href="{% url 'campaign-create' %}">{% trans 'Create campaign' %}</a></li>
-                      <li><a href="form.html">{% trans 'URLs' %}</a></li>
-                      <li><a href="form.html">{% trans 'Create URL' %}</a></li>
+                      <li><a href="{% url 'urllist' %}">{% trans 'URLs' %}</a></li>
+                      <li><a href="{% url 'newurl' %}">{% trans 'Create URL' %}</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i> API <span class="fa fa-chevron-down"></span></a>

@@ -7,6 +7,7 @@ from .models import PageURL, Campaign
 
 
 class PageURLForm(forms.ModelForm):
+    # campaign = forms.IntegerField(required=False)
     class Meta:
         model = PageURL
         fields = ['long_url']
@@ -19,6 +20,7 @@ class PageURLForm(forms.ModelForm):
         self.helper.form_action = ''
         self.helper.form_class = 'form-inline'
         # self.helper.field_class = ''
+        self.fields['campaign'].widget = forms.HiddenInput()
         self.helper.form_show_labels = False
 
         self.helper.layout = Layout(
@@ -34,24 +36,13 @@ class PageURLForm(forms.ModelForm):
 class SimplePageURLForm(forms.ModelForm):
     class Meta:
         model = PageURL
-        fields = ['long_url', 'url_id']
+        fields = ['long_url', 'url_id', 'campaign']
 
     def __init__(self, *args, **kwargs):
         super(SimplePageURLForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.field_template = 'bootstrap3/layout/inline_field.html'
-        self.helper.form_method = 'POST'
-        self.helper.form_action = ''
-        self.helper.form_class = 'form-inline'
+        self.fields['campaign'].widget = forms.HiddenInput()
+        self.fields['campaign'].required = False
         # self.helper.field_class = ''
-        self.helper.form_show_labels = False
-
-        self.helper.layout = Layout(
-            'long_url',
-            ButtonHolder(
-                Submit('submit', 'Shorten', css_class="btn-primary")
-            )
-        )
 
 class ContactForm(forms.Form):
     CHOICES = (
@@ -68,3 +59,4 @@ class CampaignForm(forms.ModelForm):
     class Meta:
         model = Campaign
         fields = ['name', 'description']
+

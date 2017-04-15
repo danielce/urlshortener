@@ -28,7 +28,7 @@
        {% for campaign in campaigns %}
          <tr class="{% cycle 'info' 'default' %}">
            <td>{{forloop.counter}}</td>
-           <td><strong><a href="#">{{ campaign.name }}</a></strong></td>
+           <td><strong><a href="{% url 'campaign-detail' campaign.id %}">{{ campaign.name }}</a></strong></td>
            <td>{{ campaign.created|date:"Y-m-d" }}</td>
            <td>{{camapign.description }}</td>
            <td>{% if campaign.is_active %}

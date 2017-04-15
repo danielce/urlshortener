@@ -10,7 +10,10 @@
     <h3>{{ obj.name }} <small>{% trans 'Campaign detail' %}</small></h3>
    {% endblock %}
   {% block paneltitle %}<h2>{% trans 'Your URLs' %}</h2> {% endblock %}
-        {% block panelcontent %}
+  {% block panelcontent %}
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+       <a href="{% url 'campaign-url' obj.pk %}" class="btn btn-success text-right"><i class="fa fa-plus"></i> {% trans 'URL create' %}</a>
+    </div>
         <table class="table table-responsive table-hover jambo_table bulk_action">
          <thead>
            <th>#</th>
