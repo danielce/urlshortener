@@ -1,0 +1,59 @@
+<div class="col-xs-12 top-padded"><h4><strong>{% trans 'Your URLs' %}</strong></h4>
+      <table class="table table-responsive table-hover jambo_table bulk_action">
+       <thead>
+         <th>#</th>
+         <th>{% trans 'Short URL' %}</th>
+         <th>{% trans 'Long URL' %}</th>
+         <th>{% trans 'Created' %}</th>
+         <th>{% trans 'Visits' %}</th>
+         <th>{% trans 'Actions' %}</th>
+       </thead>
+       <tbody>
+       {% for url in urls %}
+         <tr class="{% cycle 'info' 'default' %}">
+           <td>{{forloop.counter}}</td>
+           <td><strong><a href="{% url 'visiturl' url.url_id %}">{{ url.url_id }}</a></strong></td>
+           <td><a href="{{url.long_url}}">{{url.long_url}}</a></td>
+           <td>{{ url.created|date:"l G:i" }}</td>
+           <td>{{ url.hits }}</td>
+           <td>
+             <a href="{% url 'stat' url.url_id %}" class="btn-xs btn-primary"><i class="fa fa-bar-chart"></i></a> 
+             <a href="#" data-href="{% url 'delete_url' url.url_id %}"  class="btn-xs btn-danger" data-toggle="modal" data-urlid="{{ url.url_id }}" data-target="#confirm-delete"><i class="fa fa-trash"></i>
+            </td>
+         </tr>
+       {% empty %}
+        <div class="well">
+         <h2>{% trans 'It seems that you have not created any links ' %}:(</h2>
+         <p> {% trans 'Go to' %} <a href="{% url 'home' %}">{% trans 'main page' %}</a> {% trans 'and create your first short link' %}!</p>
+        </div>
+       {% endfor %}
+       </tbody>
+      </table>
+     </div>
+    </div>
+
+
+  <!-- modal -->
+   <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-2x fa-exclamation-triangle yt"></i> {% trans 'Confirm Delete' %}</h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>{% trans 'You are about to delete URL' %} <strong><span id="urlid"></span></strong>, {% trans 'this procedure is irreversible' %}.</p>
+                    <p>{% trans 'Do you want to proceed' %}?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Cancel' %}</button>
+                    <a class="btn btn-danger btn-ok">{% trans 'Delete' %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  <!-- end of modal -->

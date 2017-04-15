@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 {% load i18n %}
 {% load crispy_forms_tags %}
 {% crispy form form.helper %}
@@ -7,6 +7,31 @@
 
 
 {% block content %}
+ <div class="row tile_count">
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <span class="count_top"><i class="fa fa-user"></i> Total URLs</span>
+      <div class="count">{{ items.count }}</div>
+    </div>
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <span class="count_top"><i class="fa fa-user"></i> Total Visits</span>
+      <div class="count">{{ items.hits }}</div>
+    </div>
+  </div>
+  <div class="row">
+        <div class="col-md-7 col-sm-7 col-xs-12">
+            {% include 'dashboard/_mainchart.html' %}
+        </div>
+    </div>
+          <br />
+   <div class="row">
+
+            {% include 'dashboard/_bestperformers.html' %}
+
+            {% include 'dashboard/_deviceusage.html' %}
+
+            {% include 'dashboard/_countries.html' %}
+
+          </div>
  <h1>{% trans 'Dashboard' %}</h1><hr>
  <div class="row">
  	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -18,13 +43,14 @@
  </div>
  <div class="row">
     <div class="col-xs-12 top-padded"><h4><strong>{% trans 'Your URLs' %}</strong></h4>
-	  <table class="table table-hover">
+	  <table class="table table-responsive table-hover jambo_table bulk_action">
 	   <thead>
 	     <th>#</th>
 	     <th>{% trans 'Short URL' %}</th>
 	     <th>{% trans 'Long URL' %}</th>
 	     <th>{% trans 'Created' %}</th>
 	     <th>{% trans 'Visits' %}</th>
+         <th>{% trans 'Actions' %}</th>
 	   </thead>
 	   <tbody>
 	   {% for url in urls %}
@@ -35,8 +61,8 @@
 	       <td>{{ url.created|date:"l G:i" }}</td>
 	       <td>{{ url.hits }}</td>
 	       <td>
-	         <a href="{% url 'stat' url.url_id %}"><i class="fa fa-bar-chart"></i></a> 
-	         <a href="#" data-href="{% url 'delete_url' url.url_id %}" data-toggle="modal" data-urlid="{{ url.url_id }}" data-target="#confirm-delete"><i class="fa fa-trash"></i>
+	         <a href="{% url 'stat' url.url_id %}" class="btn-xs btn-primary"><i class="fa fa-bar-chart"></i></a> 
+	         <a href="#" data-href="{% url 'delete_url' url.url_id %}"  class="btn-xs btn-danger" data-toggle="modal" data-urlid="{{ url.url_id }}" data-target="#confirm-delete"><i class="fa fa-trash"></i>
 	        </td>
 	     </tr>
 	   {% empty %}
@@ -85,4 +111,162 @@
             $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
             $('#urlid').html(urlid);
         });
+{% endblock %}
+
+{% block scripts %}
+<script>
+      $(document).ready(function(){
+        $.get('/ajax/countries/', function(data) {
+            $('#world-map-gdp').vectorMap({
+                map: 'world_en',
+                backgroundColor: null,
+                color: '#ffffff',
+                hoverOpacity: 0.7,
+                selectedColor: '#666666',
+                enableZoom: true,
+                showTooltip: true,
+                values: data,
+                scaleColors: ['#E6F2F0', '#149B7E'],
+                normalizeFunction: 'polynomial'
+            });
+        });
+      });
+    </script>
+       <!-- Doughnut Chart -->
+    <script>
+      $(document).ready(function(){
+        var options = {
+          legend: false,
+          responsive: false
+        };
+
+        $.get('/ajax/devices/', function(fetched) {
+            // console.log(Object.keys(fetched));
+            new Chart(document.getElementById("canvas1"), {
+              type: 'doughnut',
+              tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+              data: {
+                labels: Object.keys(fetched),
+                datasets: [{
+                  data: Object.values(fetched),
+                  backgroundColor: [
+                    "#26B99A",
+                    "#3498DB"
+                  ],
+                  hoverBackgroundColor: [
+                    "#36CAAB",
+                    "#49A9EA"
+                  ]
+                }]
+              },
+              options: options
+            });
+        });
+
+
+        $.get('/ajax/best-performers/', function(fetched) {
+            var total_perf = {{ totalvisits.total_visits }};
+            fetched.forEach( function (arrayItem) {
+                var perc = Math.floor((arrayItem.hits / total_perf) * 100);
+                var url_id = arrayItem.url_id;
+                var u = $(".widget_summary:first").clone().attr("id", url_id);
+                u.find(".progress-bar").css("width", (perc +"%"));
+
+                u.find(".w_leftw_25_s").html("<a href='/" + url_id + "/stat'>" + url_id +"</a>");
+                u.find(".w_rightw_20_s").text(arrayItem.hits);
+                u.removeClass('hidden');
+                u.insertAfter(".widget_summary:last");
+                u.find(".w_left w_25_").append("afawegfswegsrgses");
+            });
+        });
+
+        
+      });
+    </script>
+    <!-- /Doughnut Chart -->
+
+    <script>
+      $(document).ready(function() {
+        $.get('/ajax/daily/', function(fetched) {
+            props = []
+            for (var prop in fetched) {
+                days = prop.split(",");
+                console.log(prop);
+                ist = [gd(days[0], days[1], days[2]), fetched[prop]];
+                props.push(ist)
+            }
+            console.log(props);
+            $("#canvas_dahs").length && $.plot($("#canvas_dahs"), [
+              props,
+            ], {
+              series: {
+                lines: {
+                  show: false,
+                  fill: true
+                },
+                splines: {
+                  show: true,
+                  tension: 0.4,
+                  lineWidth: 1,
+                  fill: 0.4
+                },
+                points: {
+                  radius: 0,
+                  show: true
+                },
+                shadowSize: 2
+              },
+              grid: {
+                verticalLines: true,
+                hoverable: true,
+                clickable: true,
+                tickColor: "#d5d5d5",
+                borderWidth: 1,
+                color: '#fff'
+              },
+              colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
+              xaxis: {
+                tickColor: "rgba(51, 51, 51, 0.06)",
+                mode: "time",
+                tickSize: [1, "day"],
+                //tickLength: 10,
+                axisLabel: "Date",
+                axisLabelUseCanvas: true,
+                axisLabelFontSizePixels: 12,
+                axisLabelFontFamily: 'Verdana, Arial',
+                axisLabelPadding: 10
+              },
+              yaxis: {
+                ticks: 8,
+                tickColor: "rgba(51, 51, 51, 0.06)",
+              },
+              tooltip: false
+            });
+            });
+        var data1 = [
+          [gd(2012, 1, 1), 17],
+          [gd(2012, 1, 2), 74],
+          [gd(2012, 1, 3), 6],
+          [gd(2012, 1, 4), 39],
+          [gd(2012, 1, 5), 20],
+          [gd(2012, 1, 6), 85],
+          [gd(2012, 1, 7), 7]
+        ];
+
+        var data2 = [
+          [gd(2012, 1, 1), 82],
+          [gd(2012, 1, 2), 23],
+          [gd(2012, 1, 3), 66],
+          [gd(2012, 1, 4), 9],
+          [gd(2012, 1, 5), 119],
+          [gd(2012, 1, 6), 6],
+          [gd(2012, 1, 7), 9]
+        ];
+        
+
+        function gd(year, month, day) {
+          return new Date(year, month - 1, day).getTime();
+        }
+      });
+    </script>
 {% endblock %}

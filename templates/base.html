@@ -16,11 +16,25 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+  <!-- Bootstrap -->
+    <link href="{% static 'vendors/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{% static 'vendors/nprogress/nprogress.css' %}" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{% static 'vendors/iCheck/skins/flat/green.css' %}" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="{% static 'vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="{% static 'vendors/jqvmap/dist/jqvmap.min.css' %}" rel="stylesheet"/>
 
     <!-- Custom styles for this template -->
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
     <style>
-      
+      {% block style %}{% endblock %}
     </style>
 
   </head>
@@ -28,17 +42,17 @@
   <body class="dark-blue">
   
   {% block navbar %}
-    {% include 'navbar.html' %}
+ {% include 'navbar.html' %}
   {% endblock %}
 	
     <div class="container">
-      <div class="col-lg-8 col-lg-offset-2 col-sm-12 white" id="main-container">
+      <div class="col-lg-4 col-lg-offset-4 col-sm-12 white" style="margin-top:70px;" id="main-container">
       	{% block content %}
       	{% endblock %}
     
       </div>
       {% block footer %}
-      <div class="col-lg-8 col-lg-offset-2 col-sm-12 white">
+      <div class="col-lg-4 col-lg-offset-4 col-sm-12 white">
        <div class="row">
           <div class="col-sm-12 text-center" style="background-color:#1D7373;">
             <p class="text-white top-padded"><small>Copyright by {{ config.name }} 2015 - {% now "Y" %}</small></p>

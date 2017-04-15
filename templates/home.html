@@ -8,43 +8,47 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-xs-12 white">
-		  <h1 class="text-dark-blue"><strong>{{ config.name }}</strong> <small>{{ config.slogan }}</small></h1>
-      <form  class="form-inline" method="POST" action="">{% csrf_token %}
+  <div class="col-xs-12 white pb10">
+		  <h1 class="text-dark-blue pb10"><strong>{{ config.name }}</strong> <small>{{ config.slogan }}</small></h1>
+      <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 text-center pb10">
+        
+        <form  class="form-inline" method="POST" action="">{% csrf_token %}
           <div class="form-group">
-  		        {{ form.long_url }}
+              {{ form.long_url }}
           <button type="submit" class="btn btn-primary">{% trans 'Shorten' %}</button>
         </div>
       </form>
-		    <br>
-		    {% if url_id %}
-		    Short URL id: {{ url_id }}<br>
-		    {% endif %}
+        <br>
+        {% if url_id %}
+        Short URL id: {{ url_id }}<br>
+        {% endif %}
+
+      </div>
   </div>
 
 </div>
 <div class="row">
- <div class="col-xs-12 text-center top-padded" style="background-color:#ddd;">
+ <div class="col-xs-12 text-center top-padded">
    <div class="col-sm-4 text-white">
 	    <span class="fa-stack fa-4x">
 		  <i class="fa fa-circle fa-stack-2x" style="color:#015965"></i>
 	      <i class="fa fa-tachometer fa-stack-1x text-white"></i>
 		</span>
-		<h4>{% trans 'extremely fast' %}</h4>
+		<h4 class="text-black">{% trans 'extremely fast' %}</h4>
 	</div>
    <div class="col-sm-4 text-white">
      <span class="fa-stack fa-4x">
 		  <i class="fa fa-circle fa-stack-2x" style="color:#015965"></i>
 	      <i class="fa fa-lock fa-stack-1x text-white"></i>
 	 </span>
-	 <h4>{% trans 'secure' %}</h4>
+	 <h4 class="text-black">{% trans 'secure' %}</h4>
    </div>
    <div class="col-sm-4 text-white">
      <span class="fa-stack fa-4x">
 		  <i class="fa fa-circle fa-stack-2x" style="color:#015965"></i>
 	      <i class="fa fa-users fa-stack-1x text-white"></i>
 	 </span>
-	 <h4>{% trans 'user-friendly' %}</h4>
+	 <h4 class="text-black">{% trans 'user-friendly' %}</h4>
    </div>
  </div>
 </div> <!-- end of row -->
@@ -52,13 +56,13 @@
 <div class="row">
  <div class="col-sm-12 light-blue">
   <div class="col-sm-6 col-xs-12 light-blue">
-    <h2 class="text-success">{% trans 'Trending' %}:</h2>
+    <h2 class="text-success"><i class="fa fa-rocket mr10"></i>{% trans 'Trending' %}:</h2>
     {% for trend in trends %}
 
       
         <div class="row clearfix text-white">
          <div class="col-md-2 col-xs-2 badge-large">
-         	 <a href="#"><span class="badge badge-large badge-success">{{ trend.hits }}</span></a>
+         	 <a href="{% url 'visiturl' trend.url_id %}"><span class="badge badge-large badge-success">{{ trend.hits }}</span></a>
          </div>
          <div class="col-md-10 col-xs-10">
          	

@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'registration',
     'shortener',
     'control',
+    'userapi',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -129,7 +130,7 @@ STATICFILES_DIRS = (
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True  # Automatically log the user in.
 SITE_ID = 1
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/dashboard/'
 
 # Email setttings
 EMAIL_HOST = secret.EMAIL_HOST
@@ -148,3 +149,16 @@ NOSE_ARGS = [
     '--with-coverage',
     '--cover-package=shortener',
 ]
+
+# Cookies
+SESSION_COOKIE_AGE = 31536000
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+GEOIP_PATH = os.path.join(BASE_DIR, 'geoip')
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}

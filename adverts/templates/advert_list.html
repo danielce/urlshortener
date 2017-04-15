@@ -1,0 +1,21 @@
+{% extends 'config_base.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
+{% block title %}{% trans 'Contact' %}{% endblock%}
+
+
+{% block content %}
+<h3>Your adverts:</h3>
+<div class="row">
+	<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-md-10 col-lg-10 mb20">
+		{% for advert in adverts %}
+			{{ advert }}
+		{% endfor %}
+	</div>
+</div>
+
+
+
+{% endblock %}
