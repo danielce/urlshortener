@@ -1,0 +1,79 @@
+{% extends 'page.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
+{% block title %}{% trans 'Users' %}{% endblock%}
+
+
+{% block paneltitle %} <h3>{% trans 'Users' %}</h3>{% endblock %}
+
+ {% block panelcontent %}
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+       <a href="{% url 'campaign-create' %}" class="btn btn-success text-right"><i class="fa fa-plus"></i> {% trans 'User create' %}</a>
+    </div>
+      <table class="table table-responsive table-hover jambo_table bulk_action">
+       <thead>
+         <th>#</th>
+         <th>{% trans 'Email' %}</th>
+         <th>{% trans 'First name' %}</th>
+         <th>{% trans 'Last Name' %}</th>
+         <th>{% trans 'Created' %}</th>
+         <th></th>
+       </thead>
+       <tbody>
+       {% for user in users %}
+         <tr class="{% cycle 'info' 'default' %}">
+           <td>{{forloop.counter}}</td>
+           <td><strong>{{ user.email }}</strong></td>
+           <td>{{ user.firstname }}</td>
+           <td>{{ user.lastname }}</td>
+           <td>{{ user.created|date:"Y-m-d" }}</td>
+           <td></td>
+         </tr>
+       {% empty %}
+        <div class="well">
+         <h2>{% trans 'It seems that you have not created any links ' %}:(</h2>
+         <p> {% trans 'Go to' %} <a href="{% url 'home' %}">{% trans 'main page' %}</a> {% trans 'and create your first short link' %}!</p>
+        </div>
+       {% endfor %}
+       </tbody>
+      </table>
+     {% endblock %}
+
+{% block scripts %}
+  <!-- modal -->
+   <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-2x fa-exclamation-triangle yt"></i> {% trans 'Confirm Delete' %}</h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>{% trans 'You are about to delete URL' %} <strong><span id="urlid"></span></strong>, {% trans 'this procedure is irreversible' %}.</p>
+                    <p>{% trans 'Do you want to proceed' %}?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Cancel' %}</button>
+                    <a class="btn btn-danger btn-ok">{% trans 'Delete' %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <!-- end of modal -->
+
+{% endblock %}
+
+{% block js %}
+  $('#confirm-delete').on('show.bs.modal', function(e) {
+            var urlid = $(e.relatedTarget).data('urlid');
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            $('#urlid').html(urlid);
+        });
+{% endblock %}

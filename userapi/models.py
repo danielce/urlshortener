@@ -2,7 +2,9 @@
 from __future__ import unicode_literals
 import uuid
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
+
+User = settings.AUTH_USER_MODEL
 
 # Create your models here.
 class Token(models.Model):

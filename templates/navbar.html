@@ -30,12 +30,12 @@
       <ul class="nav navbar-nav navbar-right">
         {% if request.user.is_authenticated %}
           <p class="navbar-text">{% trans 'Howdy' %} <strong><a href="{% url 'profile' %}">{{ request.user.username }}</a></strong>!</p>
-          <li><a href="{% url 'auth_logout' %}?next=/"><i class="fa fa-sign-out"></i>{% trans 'Logout' %}</a></li>
+          <li><a href="{% url 'account_logout' %}"><i class="fa fa-sign-out"></i>{% trans 'Logout' %}</a></li>
         {% else %}
-          <li><a href="{% url 'registration_register' %}">{% trans 'Register' %}</a></li>
+          <li><a href="{% url 'account_signup' %}">{% trans 'Register' %}</a></li>
         {% endif %}
         {% if not request.user.is_authenticated and not '/accounts/login' in request.get_full_path %}
-          <form class="navbar-form navbar-right" method="POST" action="{% url 'auth_login' %}">{% csrf_token %}
+          <form class="navbar-form navbar-right" method="POST" action="{% url 'account_login' %}">{% csrf_token %}
             <div class="form-group">
               <input type="text" class="form-control" name='username' placeholder="{% trans 'Username' %}" />
             </div>

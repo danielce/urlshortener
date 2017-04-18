@@ -28,31 +28,29 @@ def date_handler(obj):
         raise TypeError
 
 
-class ShortenView(FormView):
-    form_class = PageURLForm
+class ShortenView(TemplateView):
     template_name = 'index.html'
-    success_url = reverse_lazy('home')
+    
+    # def get_context_data(self, *args, **kwargs):
+    #     context = super(ShortenView, self).get_context_data(*args, **kwargs)
+    #     url_qs = PageURL.objects.all()
+    #     context['trends'] = url_qs.order_by('-hits')[:5]
+    #     context['newest'] = url_qs.order_by('-created')[:5]
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(ShortenView, self).get_context_data(*args, **kwargs)
-        url_qs = PageURL.objects.all()
-        context['trends'] = url_qs.order_by('-hits')[:5]
-        context['newest'] = url_qs.order_by('-created')[:5]
+    #     return context
 
-        return context
+    # def form_valid(self, form, **kwargs):
+    #     long_url = form.cleaned_data['long_url']
+    #     try:
+    #         short = PageURL.objects.get(long_url=long_url)
+    #     except PageURL.DoesNotExist:
+    #         instance = form.save(commit=False)
+    #         if self.request.user.is_authenticated():
+    #             instance.author = self.request.user
+    #         instance.save()
+    #         long_url = instance.long_url
 
-    def form_valid(self, form, **kwargs):
-        long_url = form.cleaned_data['long_url']
-        try:
-            short = PageURL.objects.get(long_url=long_url)
-        except PageURL.DoesNotExist:
-            instance = form.save(commit=False)
-            if self.request.user.is_authenticated():
-                instance.author = self.request.user
-            instance.save()
-            long_url = instance.long_url
-
-        return super(ShortenView, self).form_valid(form, **kwargs)
+    #     return super(ShortenView, self).form_valid(form, **kwargs)
 
 
 def visiturl(request, url_id):
