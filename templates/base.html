@@ -45,20 +45,20 @@
   {% endblock %}
 	
     <div class="container">
-      <div class="col-lg-4 col-lg-offset-4 col-sm-12 white" style="margin-top:70px;" id="main-container">
-      	{% block content %}
-      	{% endblock %}
-    
-      </div>
-      {% block footer %}
-      <div class="col-lg-4 col-lg-offset-4 col-sm-12 white">
-       <div class="row">
-          <div class="col-sm-12 text-center" style="background-color:#1D7373;">
-            <p class="text-white top-padded"><small>Copyright by {{ config.name }} 2015 - {% now "Y" %}</small></p>
+      <div class="col-lg-4 col-lg-offset-4 col-sm-12" style="margin-top:70px;" id="main-container">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>{% block panel_heading %}{% endblock %}</strong></h3>
+            <div style="float:right; font-size: 80%; position: relative; top:-10px">
+              {% block heading_right %}{% endblock %}
+            </div>
           </div>
-       </div>
-  	  </div>
-      {% endblock %}
+          <div class="panel-body">
+          	{% block content %}
+          	{% endblock %}
+          </div>
+        </div>
+      </div>
    </div>
   
   
