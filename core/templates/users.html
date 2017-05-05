@@ -29,7 +29,11 @@
            <td>{{ user.firstname }}</td>
            <td>{{ user.lastname }}</td>
            <td>{{ user.created|date:"Y-m-d" }}</td>
-           <td></td>
+           <td>
+            {% if request.user.is_supervisor %}
+              <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
+            {% endif %}
+           </td>
          </tr>
        {% empty %}
         <div class="well">

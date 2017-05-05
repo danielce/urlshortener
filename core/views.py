@@ -33,9 +33,11 @@ class OrganizationUsersListView(ListView):
 
     def get_queryset(self, *args, **kwargs):
         organization = self.request.user.organization
-        return self.model.objects.filter(
-            organization=organization
-        )
+        if organization:
+            return self.model.objects.filter(
+                organization=organization
+            )
+        return []
 
 
 class InvitationFormView(FormView):
@@ -54,8 +56,7 @@ class InvitationFormView(FormView):
 
     def dispatch(self, request, *args, **kwargs):
         organization = request.user.organization
-        print request.user.is_authenticated
-        if not organization.can_create_user():
+        if organization and not organization.can_create_user():
             return redirect(reverse('users-list'))
 
         return super(InvitationFormView, self).dispatch(

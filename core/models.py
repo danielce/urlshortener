@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from allauth.account.signals import email_confirmed
+from django.dispatch import receiver
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
@@ -34,7 +36,7 @@ class Organization(models.Model):
     is_active = models.BooleanField(_('active'), default=True)
 
     def __unicode__(self):
-        return self.name
+        return self.name if self.name else str(self.created)
 
     def get_account_limits(self):
         limits = settings.ACCOUNT_TYPE_LIMITS
@@ -46,12 +48,6 @@ class Organization(models.Model):
         limit = limits['users']
         users = User.objects.filter(organization=self).count
         return users < limit
-
-
-def create_simple_organization():
-    return Organization.objects.create(
-        account_type=Organization.FREE
-    )
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -92,3 +88,28 @@ class User(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         '''
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+
+def get_organization(email):
+    from invitations.models import Invitation
+    try:
+        obj = Invitation.objects.get(
+            email=email, accepted=True
+        )
+    except Invitation.DoesNotExist:
+        o = Organization.objects.create(
+            account_type=Organization.FREE
+        )
+        o.save()
+    else:
+        o = obj.inviter.Organization
+
+    return o
+
+
+@receiver(email_confirmed)
+def create_base_organization(sender, email_address, **kwargs):
+    email = email_address.email
+    user = User.objects.get(email=email)
+    user.organization = get_organization(email)
+    user.save()

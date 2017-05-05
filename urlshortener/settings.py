@@ -187,6 +187,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
+INVITATIONS_ADAPTER = 'core.adapters.OrganizationAdapter'
 
 ACCOUNT_TYPE_LIMITS = {
     'fre': {
