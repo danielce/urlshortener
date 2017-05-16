@@ -5,6 +5,7 @@ from .models import Organization
 
 
 def get_organization(email):
+    created = False
     try:
         obj = Invitation.objects.get(
             email=email, accepted=True
@@ -14,14 +15,17 @@ def get_organization(email):
             account_type=Organization.FREE
         )
         o.save()
+        created = True
     else:
         o = obj.inviter.organization
 
-    return o
+    return o, created
 
 
 @receiver(user_signed_up)
 def user_signup(request, user, **kwargs):
     email = user.email
-    user.organization = get_organization(email)
+    created, user.organization = get_organization(email)
+    if created:
+        user.is_supervisor = True
     user.save()
