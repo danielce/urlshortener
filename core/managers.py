@@ -16,7 +16,7 @@ class UserManager(BaseUserManager):
                 account_type=Organization.FREE
             )
         else:
-            o = obj.inviter.Organization
+            o = obj.inviter.organization
 
         return o
 
@@ -47,3 +47,20 @@ class UserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
 
         return self._create_user(email, password, **extra_fields)
+
+
+def get_organization(email):
+        from invitations.models import Invitation
+        from .models import Organization
+        try:
+            obj = Invitation.objects.get(
+                email=email, accepted=True
+            )
+        except Invitation.DoesNotExist:
+            o = Organization.objects.create(
+                account_type=Organization.FREE
+            )
+        else:
+            o = obj.inviter.organization
+
+        return o

@@ -29,7 +29,7 @@
   
       <ul class="nav navbar-nav navbar-right">
         {% if request.user.is_authenticated %}
-          <p class="navbar-text">{% trans 'Howdy' %} <strong><a href="{% url 'profile' %}">{{ request.user.username }}</a></strong>!</p>
+          <p class="navbar-text">{% trans 'Howdy' %} <strong><a href="{% url 'profile' %}">{{ request.user.email }}</a></strong>!</p>
           <li><a href="{% url 'account_logout' %}"><i class="fa fa-sign-out"></i>{% trans 'Logout' %}</a></li>
         {% else %}
           <li><a href="{% url 'account_signup' %}">{% trans 'Register' %}</a></li>

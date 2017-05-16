@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from allauth.account.signals import email_confirmed
-from django.dispatch import receiver
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
@@ -46,7 +44,7 @@ class Organization(models.Model):
     def can_create_user(self):
         limits = self.get_account_limits()
         limit = limits['users']
-        users = User.objects.filter(organization=self).count
+        users = User.objects.filter(organization=self).count()
         return users < limit
 
 
@@ -88,28 +86,3 @@ class User(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         '''
         send_mail(subject, message, from_email, [self.email], **kwargs)
-
-
-def get_organization(email):
-    from invitations.models import Invitation
-    try:
-        obj = Invitation.objects.get(
-            email=email, accepted=True
-        )
-    except Invitation.DoesNotExist:
-        o = Organization.objects.create(
-            account_type=Organization.FREE
-        )
-        o.save()
-    else:
-        o = obj.inviter.Organization
-
-    return o
-
-
-@receiver(email_confirmed)
-def create_base_organization(sender, email_address, **kwargs):
-    email = email_address.email
-    user = User.objects.get(email=email)
-    user.organization = get_organization(email)
-    user.save()
