@@ -36,6 +36,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    # django core apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,13 +44,19 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sites',
     'django.contrib.staticfiles',
+    # third party apps
     'django_nose',
     'rest_framework',
     'crispy_forms',
-    'registration',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'invitations',
+    # internal apps
     'shortener',
     'control',
     'userapi',
+    'core',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -74,6 +81,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'templates', 'allauth'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -161,4 +169,37 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
     )
+}
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
+AUTH_USER_MODEL = 'core.User'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
+#INVITATIONS_ADAPTER = 'core.adapters.OrganizationAdapter'
+INVITATIONS_ADAPTER = ACCOUNT_ADAPTER
+ACCOUNT_TYPE_LIMITS = {
+    'fr': {
+        'users': 1,
+    },
+    'bs': {
+        'users': 3,
+    },
+    'pro': {
+        'users': 5,
+    },
+    'nt': {
+        'users': 10,
+    }
 }

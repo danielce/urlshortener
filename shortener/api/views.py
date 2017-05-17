@@ -19,12 +19,13 @@ class CountryAPIView(APIView):
         pages = PageURL.objects.filter(
             author=self.request.user
         ).values_list('pk', flat=True)
-        visits = Visit.objects.filter(
-            url_id__in=pages
-        ).exclude(country_code__isnull=True).values('country_code').annotate(total=Count('country_code'))
         res = {}
-        for i in visits.values('total', 'country_code'):
-            res[i['country_code'].lower()] = str(i['total'])
+        if pages.exist():
+            visits = Visit.objects.filter(
+                url_id__in=pages
+            ).exclude(country_code__isnull=True).values('country_code').annotate(total=Count('country_code'))
+            for i in visits.values('total', 'country_code'):
+                res[i['country_code'].lower()] = str(i['total'])
 
         return Response(res)
 

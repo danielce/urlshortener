@@ -4,13 +4,13 @@ import string
 import uuid
 
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.core.urlresolvers import reverse
 
 from .tasks import scrape_data
 
 # Create your models here.
-
+User = settings.AUTH_USER_MODEL
 
 class Campaign(models.Model):
     owner = models.ForeignKey(User, blank=True, null=True)

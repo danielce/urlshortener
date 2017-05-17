@@ -36,11 +36,13 @@ from shortener.views import (
 
 urlpatterns = [
     url(r'^about/$', AboutView.as_view(), name="about"),
-    url(r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^accounts/', include('allauth.urls')),
+    url(r'^invitations/', include('invitations.urls', namespace='invitations')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^ajax/', include('shortener.api.urls')),
     url(r'^contact/$', ContactFormView.as_view(), name="contact"),
     url(r'^control/', include('control.urls')),
+    url(r'^settings/', include('core.urls')),
     url(r'^campaigns/$', CampaignListView.as_view(), name="campaigns"),
     url(r'^campaigns/new/$', CampaignCreateView.as_view(), name="campaign-create"),
     url(r'^campaigns/(?P<pk>\d+)/edit/$',
