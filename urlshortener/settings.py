@@ -57,6 +57,7 @@ INSTALLED_APPS = (
     'control',
     'userapi',
     'core',
+    'splittests'
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'

@@ -6,19 +6,32 @@ import uuid
 from django.db import models
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.models import ContentType
+from django.utils.translation import ugettext as _
 
 from .tasks import scrape_data
 
 # Create your models here.
 User = settings.AUTH_USER_MODEL
 
+
 class Campaign(models.Model):
+    LINKGROUP = 'gr'
+    TESTSUITE = 'ts'
+    CAMPAIGN_TYPE_CHOICES = (
+        (LINKGROUP, _("linkgroup")),
+        (TESTSUITE, _("testsuite")),
+    )
     owner = models.ForeignKey(User, blank=True, null=True)
-    name =  models.CharField(max_length=255, null=True, blank=True)
+    name = models.CharField(max_length=255, null=True, blank=True)
     description = models.CharField(max_length=255, null=True, blank=True)
     hits = models.PositiveIntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     is_active = models.BooleanField(default=True)
+    campaign_type = models.CharField(
+        max_length=2, choices=CAMPAIGN_TYPE_CHOICES, default=LINKGROUP
+    )
 
     def __unicode__(self):
         return self.name
@@ -26,6 +39,7 @@ class Campaign(models.Model):
     @property
     def urls(self):
         return self.pageurl_set.count()
+
 
 def generate_url_id(length=6):
     sys_random = random.SystemRandom()
@@ -51,6 +65,11 @@ class PageURL(models.Model):
     monetize = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
     campaign = models.ForeignKey(Campaign, blank=True, null=True)
+
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE,
+                                     null=True, blank=True)
+    object_id = models.PositiveIntegerField(null=True, blank=True)
+    content_object = GenericForeignKey()
 
     def __unicode__(self):
         return self.url_id
@@ -109,6 +128,13 @@ class Visit(models.Model):
     is_bot = models.BooleanField(default=False)
     is_touch = models.BooleanField(default=False)
 
-
     def __unicode__(self):
         return str(self.date)
+
+
+class SimpleRedirection(models.Model):
+    long_url = models.URLField(max_length=200)
+    short_url = GenericRelation(PageURL, related_query_name='simple')
+
+    def dispatch(self):
+        return self.long_url

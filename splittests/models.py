@@ -1,15 +1,71 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import random
+import string
+
+from django.conf import settings
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
-from shortner.models import PageURL
+from django.utils import timezone
+from shortener.models import PageURL, Visit
 
 # Create your models here.
+User = settings.AUTH_USER_MODEL
 
-class BalancedURL(models.Model):
-    owner = models.ForeignKey(User, blank=True, null=True)
-    name =  models.CharField(max_length=255, null=True, blank=True)
-    description = models.CharField(max_length=255, null=True, blank=True)
-    hits = models.PositiveIntegerField(default=0)
-    created = models.DateTimeField(auto_now_add=True, auto_now=False)
-    is_active = models.BooleanField(default=True)
+
+class BalancedRedirection(models.Model):
+    a_rule = models.IntegerField()
+    b_rule = models.IntegerField()
+    a_url = models.URLField(max_length=255)
+    b_url = models.URLField(max_length=255)
+    a_hits = models.PositiveIntegerField(default=0)
+    b_hits = models.PositiveIntegerField(default=0)
+    short_url = GenericRelation(PageURL, related_query_name='balanced')
+
+    def __unicode__(self):
+        return self.name
+
+    def dispatch(self):
+        total = self.short_url.hits
+        if (self.a_hits / total) * 100 < self.a_rule:
+            self.a_hits += 1
+            return self.a_url
+
+        self.b_hits += 1
+        return self.b_url
+
+
+class FirstTimeRedirection(models.Model):
+    first_url = models.URLField(max_length=255)
+    long_url = models.URLField(max_length=255)
+    pageurl = GenericRelation(PageURL, related_query_name='firsttime')
+
+    def __unicode__(self):
+        return self.name
+
+    def dispatch(self, visit):
+        session = visit.session
+        visits = Visit.objects.filter(session=session).count()
+        if visits < 2:
+            return self.first_url
+
+        return self.long_url
+
+
+class DateRangeRedirection(models.Model):
+    active_url = models.URLField(max_length=255)
+    inactive_url = models.URLField(max_length=255)
+    start = models.DateTimeField()
+    end = models.DateTimeField()
+    pageurl = GenericRelation(PageURL, related_query_name='daterange')
+
+    def __unicode__(self):
+        return self.name
+
+    def dispatch(self, visit):
+        now = timezone.now()
+        if (self.start < now) and (now < self.end):
+            return self.active_url
+
+        return self.inactvive_url
