@@ -56,7 +56,7 @@ def generate_url_id(length=6):
 
 class PageURL(models.Model):
     url_id = models.SlugField(max_length=6, default=generate_url_id)
-    long_url = models.URLField(max_length=200)
+    long_url = models.URLField(max_length=200, blank=True, null=True)
     author = models.ForeignKey(User, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     hits = models.PositiveIntegerField(default=0)
@@ -69,7 +69,7 @@ class PageURL(models.Model):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE,
                                      null=True, blank=True)
     object_id = models.PositiveIntegerField(null=True, blank=True)
-    content_object = GenericForeignKey()
+    content_object = GenericForeignKey('content_type', 'object_id')
 
     def __unicode__(self):
         return self.url_id
@@ -78,6 +78,9 @@ class PageURL(models.Model):
         return reverse('visiturl', kwargs={"url_id": self.url_id})
 
     def get_meta_content(self):
+        if not self.long_url:
+            return
+
         data = scrape_data.delay(self.long_url)
         meta = data.get()
         self.title = meta['title']

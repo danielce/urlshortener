@@ -12,7 +12,18 @@
   {% block paneltitle %}<h2>{% trans 'Your test URLs' %}</h2> {% endblock %}
   {% block panelcontent %}
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
-       <a href="#" class="btn btn-success text-right"><i class="fa fa-plus"></i> {% trans 'Test URL create' %}</a>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-success text-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-plus"></i> {% trans 'Test URL create' %} <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'balanced-create' obj.pk %}">{% trans 'New Balanced Redirection' %}</a></li>
+          <li><a href="#">One Time</a></li>
+          <li><a href="#">Date Range</a></li>
+        </ul>
+      </div>
+
     </div>
         <table class="table table-responsive table-hover jambo_table bulk_action">
          <thead>

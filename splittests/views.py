@@ -10,6 +10,7 @@ from .forms import (
     TestSuiteForm, BalancedRedirectionForm, FirstTimeRedirectionForm,
     DateRangeRedirectionForm
 )
+from .models import BalancedRedirection
 # Create your views here.
 
 
@@ -68,3 +69,26 @@ class TestSuiteDetailView(LoginRequiredMixin, ListView):
         pk = self.kwargs.get('pk')
         context['obj'] = Campaign.objects.get(pk=pk)
         return context
+
+
+class BalancedRedirectionCreateView(LoginRequiredMixin, CreateView):
+    form_class = BalancedRedirectionForm
+    model = BalancedRedirection
+    template_name = 'balanced_create.html'
+
+    def get_success_url(self):
+        return reverse('test-list')
+
+    def form_valid(self, form, *args, **kwargs):
+        super(BalancedRedirectionCreateView, self).form_valid(form)
+        campagin_id = self.kwargs['pk']
+        campaign = Campaign.objects.get(pk=campagin_id)
+
+        self.object.owner = self.request.user
+        self.object.campaign_type = Campaign.TESTSUITE
+        self.object.save()
+        PageURL.objects.create(
+            campaign=campaign,
+            content_object=self.object
+        )
+        return redirect('test-list')

@@ -93,12 +93,16 @@ def visiturl(request, url_id):
         visit.longitude = geo['longitude']
         visit.latitude = geo['latitude']
     visit.save()
+    if url.content_object:
+            long_url = url.content_object.dispatch(visit)
+    else:
+        long_url = url.long_url
     if url.monetize:
         random_ad = Ad.objects.order_by('?').first()
-        context = {"long_url": url.long_url, "random_ad": random_ad}
+        context = {"long_url": long_url, "random_ad": random_ad}
         return render(request, 'doorway.html', context)
     else:
-        return HttpResponseRedirect(url.long_url)
+        return HttpResponseRedirect(long_url)
 
 
 class StatView(DetailView):

@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 from shortener.models import Campaign
 from .models import (
     BalancedRedirection, FirstTimeRedirection,
@@ -16,6 +17,12 @@ class BalancedRedirectionForm(forms.ModelForm):
     class Meta:
         model = BalancedRedirection
         fields = ['a_rule', 'a_url', 'b_rule', 'b_url']
+        labels = {
+            'a_rule': _('1st URL weight'),
+            'b_rule': _('2nd URL wieght'),
+            'a_url': _('first URL'),
+            'b_url': _('second URL'),
+        }
 
 
 class FirstTimeRedirectionForm(forms.ModelForm):

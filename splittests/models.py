@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+from __future__ import unicode_literals, division
 
 import random
 import string
@@ -24,15 +24,22 @@ class BalancedRedirection(models.Model):
     short_url = GenericRelation(PageURL, related_query_name='balanced')
 
     def __unicode__(self):
-        return self.name
+        return self.a_url
 
-    def dispatch(self):
-        total = self.short_url.hits
-        if (self.a_hits / total) * 100 < self.a_rule:
+    def dispatch(self, *args, **kwargs):
+        total = self.short_url.all()[0].hits
+        if total < 2:
             self.a_hits += 1
+            self.save()
+            return self.a_url
+        d = (self.a_hits / total) * 100
+        if d < self.a_rule:
+            self.a_hits += 1
+            self.save()
             return self.a_url
 
         self.b_hits += 1
+        self.save()
         return self.b_url
 
 
