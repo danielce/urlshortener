@@ -5,6 +5,7 @@ import random
 import string
 
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.utils import timezone
@@ -42,6 +43,15 @@ class BalancedRedirection(models.Model):
         self.save()
         return self.b_url
 
+    def get_edit_url(self):
+        return reverse(
+            'balanced-edit',
+            kwargs={
+                'pk': self.short_url.all()[0].campaign.pk,
+                'b_id': self.pk,
+            }
+        )
+
 
 class FirstTimeRedirection(models.Model):
     first_url = models.URLField(max_length=255)
@@ -51,13 +61,27 @@ class FirstTimeRedirection(models.Model):
     def __unicode__(self):
         return self.name
 
-    def dispatch(self, visit):
-        session = visit.session
-        visits = Visit.objects.filter(session=session).count()
+    def dispatch(self, visit, *args, **kwargs):
+        pageurl = self.pageurl.all()[0]
+        gid = kwargs.get('gid', None)
+        if not gid:
+            return self.first_url
+
+        visits = Visit.objects.filter(
+            url=pageurl, session=gid).count()
         if visits < 2:
             return self.first_url
 
         return self.long_url
+
+    def get_edit_url(self):
+        return reverse(
+            'firsttime-edit',
+            kwargs={
+                'pk': self.pageurl.all()[0].campaign.pk,
+                'r_id': self.pk,
+            }
+        )
 
 
 class DateRangeRedirection(models.Model):

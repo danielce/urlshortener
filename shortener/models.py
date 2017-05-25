@@ -55,6 +55,16 @@ def generate_url_id(length=6):
 
 
 class PageURL(models.Model):
+    SIMPLE = 'simple'
+    BALANCED = 'balanced'
+    DATE_RANGE = 'daterange'
+    FIRST_TIME = 'firsttime'
+    TYPE_CHOICES = (
+        (SIMPLE, _('simple')),
+        (BALANCED, _('balanced')),
+        (DATE_RANGE, _('daterange')),
+        (FIRST_TIME, _('firsttime'))
+    )
     url_id = models.SlugField(max_length=6, default=generate_url_id)
     long_url = models.URLField(max_length=200, blank=True, null=True)
     author = models.ForeignKey(User, blank=True, null=True)
@@ -62,9 +72,12 @@ class PageURL(models.Model):
     hits = models.PositiveIntegerField(default=0)
     title = models.CharField(max_length=200, null=True, blank=True)
     description = models.CharField(max_length=200, null=True, blank=True)
-    monetize = models.BooleanField(default=True)
+    monetize = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     campaign = models.ForeignKey(Campaign, blank=True, null=True)
+    # url_type = models.CharField(max_length=50, choices=TYPE_CHOICES,
+    #                             default=SIMPLE
+    #                             )
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE,
                                      null=True, blank=True)
@@ -117,7 +130,7 @@ class Visit(models.Model):
     brand = models.CharField(max_length=255, null=True, blank=True)
     model = models.CharField(max_length=255, null=True, blank=True)
     referer = models.CharField(max_length=200, null=True, blank=True)
-    session = models.CharField(max_length=50, null=True, blank=True)
+    session = models.CharField(max_length=250, null=True, blank=True)
     city = models.CharField(max_length=255, null=True, blank=True)
     postal_code = models.CharField(max_length=255, null=True, blank=True)
     country_code = models.CharField(max_length=3, null=True, blank=True)
@@ -139,5 +152,5 @@ class SimpleRedirection(models.Model):
     long_url = models.URLField(max_length=200)
     short_url = GenericRelation(PageURL, related_query_name='simple')
 
-    def dispatch(self):
+    def dispatch(self, *args, **kwargs):
         return self.long_url

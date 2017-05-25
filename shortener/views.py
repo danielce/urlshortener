@@ -1,4 +1,5 @@
 import json
+import hashlib
 from user_agents import parse
 
 from django.contrib import messages
@@ -61,6 +62,14 @@ def visiturl(request, url_id):
     g = GeoIP2()
     ip = request.META.get('REMOTE_ADDR')
     ip = '88.80.113.1'
+    gid = request.COOKIES.get('gid', None) 
+    if not gid:
+        hsh = "{0}:{1}:{2}:{3}".format(
+            ip, ua.browser.version_string,
+            ua.os.version_string, ua.device.family
+        )
+        gid = hashlib.sha256(hsh).hexdigest()
+        print gid
     visit = Visit(
         url=url,
         ip=ip,
@@ -73,7 +82,7 @@ def visiturl(request, url_id):
         device=ua.device.family,
         brand=ua.device.brand,
         model=ua.device.model,
-        session=request.session.session_key,
+        session=gid,
         is_mobile=ua.is_mobile,
         is_tablet=ua.is_tablet,
         is_pc=ua.is_pc,
@@ -94,7 +103,7 @@ def visiturl(request, url_id):
         visit.latitude = geo['latitude']
     visit.save()
     if url.content_object:
-            long_url = url.content_object.dispatch(visit)
+            long_url = url.content_object.dispatch(visit, gid=gid)
     else:
         long_url = url.long_url
     if url.monetize:
@@ -102,7 +111,9 @@ def visiturl(request, url_id):
         context = {"long_url": long_url, "random_ad": random_ad}
         return render(request, 'doorway.html', context)
     else:
-        return HttpResponseRedirect(long_url)
+        response = HttpResponseRedirect(long_url)
+        response.set_cookie('gid', gid)
+        return response
 
 
 class StatView(DetailView):

@@ -19,7 +19,7 @@
         </button>
         <ul class="dropdown-menu">
           <li><a href="{% url 'balanced-create' obj.pk %}">{% trans 'New Balanced Redirection' %}</a></li>
-          <li><a href="#">One Time</a></li>
+          <li><a href="{% url 'firsttime-create' obj.pk %}">{% trans 'New First Time Redirection' %}</a></li>
           <li><a href="#">Date Range</a></li>
         </ul>
       </div>
@@ -36,7 +36,7 @@
            <th>{% trans 'Actions' %}</th>
          </thead>
          <tbody>
-          {% for url in urls %}
+          {% for url in tests %}
            <tr class="{% cycle 'info' 'default' %}">
              <td>{{forloop.counter}}</td>
              <td><strong><a href="{% url 'visiturl' url.url_id %}">{{ url.url_id }}</a></strong></td>
@@ -44,7 +44,7 @@
              <td><a href="{{url.long_url}}">{{url.long_url}}</a></td>
              <td>{{ url.hits }}</td>
              <td>
-              <a href="#" class="btn btn-xs btn-primary"><i class="fa fa-bar-chart"></i> Edit</a> 
+              <a href="{{ url.content_object.get_edit_url }}" class="btn btn-xs btn-primary"><i class="fa fa-bar-chart"></i> Edit</a> 
               <a href="{% url 'stat' url.url_id %}" class="btn btn-xs btn-info"><i class="fa fa-bar-chart"></i> Stats</a> 
               <a href="#" data-href="{% url 'delete_url' url.url_id %}"  class="btn btn-xs btn-danger" data-toggle="modal" data-urlid="{{ url.url_id }}" data-target="#confirm-delete"><i class="fa fa-trash"></i> Delete
               </td>

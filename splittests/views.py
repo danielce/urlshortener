@@ -10,7 +10,7 @@ from .forms import (
     TestSuiteForm, BalancedRedirectionForm, FirstTimeRedirectionForm,
     DateRangeRedirectionForm
 )
-from .models import BalancedRedirection
+from .models import BalancedRedirection, FirstTimeRedirection
 # Create your views here.
 
 
@@ -61,7 +61,6 @@ class TestSuiteDetailView(LoginRequiredMixin, ListView):
         pk = self.kwargs.get('pk')
         return PageURL.objects.filter(
             campaign__pk=pk,
-            campaign__campaign_type=Campaign.TESTSUITE
         ).order_by('-created')
 
     def get_context_data(self, *args, **kwargs):
@@ -92,3 +91,48 @@ class BalancedRedirectionCreateView(LoginRequiredMixin, CreateView):
             content_object=self.object
         )
         return redirect('test-list')
+
+
+class BalancedRedirectionUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = BalancedRedirectionForm
+    model = BalancedRedirection
+    template_name = 'balanced_create.html'
+    pk_url_kwarg = 'b_id'
+
+    def get_success_url(self):
+        pk = self.kwargs.get('pk')
+        return reverse('testsuite-detail', kwargs={'pk': pk})
+
+
+class FirstTimeCreateView(LoginRequiredMixin, CreateView):
+    form_class = FirstTimeRedirectionForm
+    model = FirstTimeRedirection
+    template_name = 'firsttime_create.html'
+
+    def get_success_url(self):
+        return reverse('test-list')
+
+    def form_valid(self, form, *args, **kwargs):
+        super(FirstTimeCreateView, self).form_valid(form)
+        campagin_id = self.kwargs['pk']
+        campaign = Campaign.objects.get(pk=campagin_id)
+
+        self.object.owner = self.request.user
+        self.object.campaign_type = Campaign.TESTSUITE
+        self.object.save()
+        PageURL.objects.create(
+            campaign=campaign,
+            content_object=self.object
+        )
+        return redirect('test-list')
+
+
+class FirstTimeUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = FirstTimeRedirectionForm
+    model = FirstTimeRedirection
+    template_name = 'firsttime_create.html'
+    pk_url_kwarg = 'r_id'
+
+    def get_success_url(self):
+        pk = self.kwargs.get('pk')
+        return reverse('testsuite-detail', kwargs={'pk': pk})

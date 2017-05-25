@@ -204,3 +204,5 @@ ACCOUNT_TYPE_LIMITS = {
         'users': 10,
     }
 }
+
+SESSION_SAVE_EVERY_REQUEST = True
