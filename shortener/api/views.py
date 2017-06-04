@@ -20,7 +20,7 @@ class CountryAPIView(APIView):
             author=self.request.user
         ).values_list('pk', flat=True)
         res = {}
-        if pages.exist():
+        if pages:
             visits = Visit.objects.filter(
                 url_id__in=pages
             ).exclude(country_code__isnull=True).values('country_code').annotate(total=Count('country_code'))
@@ -61,7 +61,7 @@ class DailyHitsAPIView(APIView):
         ).values_list('pk', flat=True)
         q = Visit.objects.filter(
             url_id__in=pages,
-            date__range=[enddate, startdate]
+            date__range=[enddate, datetime.datetime.now()]
         ).annotate(day=TruncDay('date')).values('day').annotate(count=Count('day')).values('day', 'count')
         es = {i['day'].strftime("%Y,%-m,%d"): i['count'] for i in q}
 

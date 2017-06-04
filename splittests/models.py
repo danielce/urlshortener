@@ -94,9 +94,18 @@ class DateRangeRedirection(models.Model):
     def __unicode__(self):
         return self.name
 
-    def dispatch(self, visit):
+    def dispatch(self, visit, *args, **kwargs):
         now = timezone.now()
         if (self.start < now) and (now < self.end):
             return self.active_url
 
-        return self.inactvive_url
+        return self.inactive_url
+
+    def get_edit_url(self):
+        return reverse(
+            'daterange-edit',
+            kwargs={
+                'pk': self.pageurl.all()[0].campaign.pk,
+                'r_id': self.pk,
+            }
+        )

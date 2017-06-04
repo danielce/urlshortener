@@ -28,7 +28,7 @@
        {% for campaign in tests %}
          <tr class="{% cycle 'info' 'default' %}">
            <td>{{forloop.counter}}</td>
-           <td><strong><a href="{% url 'campaign-detail' campaign.id %}">{{ campaign.name }}</a></strong></td>
+           <td><strong><a href="{% url 'testsuite-detail' campaign.id %}">{{ campaign.name }}</a></strong></td>
            <td>{{ campaign.created|date:"Y-m-d" }}</td>
            <td>{{camapign.description }}</td>
            <td>{% if campaign.is_active %}
@@ -41,7 +41,7 @@
            <td>{{ campaign.hits }}</td>
            <td>
             <a href="{% url 'testsuite-edit' campaign.id %}" class="btn btn-xs btn-primary"><i class="fa fa-bar-chart"></i> Edit</a> 
-            <a href="{% url 'campaign-detail' campaign.id %}" class="btn btn-xs btn-info"><i class="fa fa-bar-chart"></i> Detail</a> 
+            <a href="{% url 'testsuite-detail' campaign.id %}" class="btn btn-xs btn-info"><i class="fa fa-bar-chart"></i> Detail</a> 
             <a href="#" class="btn btn-xs btn-info"><i class="fa fa-bar-chart"></i> Stats</a> 
             <a href="#" data-href="#"  class="btn btn-xs btn-danger" data-toggle="modal" data-urlid="#" data-target="#confirm-delete"><i class="fa fa-trash"></i> Delete
             </td>

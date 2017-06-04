@@ -25,57 +25,14 @@
           <br />
    <div class="row">
 
-            {% include 'dashboard/_bestperformers.html' %}
+      {% include 'dashboard/_bestperformers.html' %}
 
-            {% include 'dashboard/_deviceusage.html' %}
+      {% include 'dashboard/_deviceusage.html' %}
 
-            {% include 'dashboard/_countries.html' %}
+      {% include 'dashboard/_countries.html' %}
 
-          </div>
- <h1>{% trans 'Dashboard' %}</h1><hr>
- <div class="row">
- 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
- 		<ul class="nav nav-tabs">
-		  <li role="presentation" class="active"><a href="{% url 'dashboard' %}">{% trans 'Your URLs' %}</a></li>
-		  <li role="presentation"><a href="{% url 'tokenlist' %}">{% trans 'API Integration' %}</a></li>
-		</ul>
- 	</div>
- </div>
- <div class="row">
-    <div class="col-xs-12 top-padded"><h4><strong>{% trans 'Your URLs' %}</strong></h4>
-	  <table class="table table-responsive table-hover jambo_table bulk_action">
-	   <thead>
-	     <th>#</th>
-	     <th>{% trans 'Short URL' %}</th>
-	     <th>{% trans 'Long URL' %}</th>
-	     <th>{% trans 'Created' %}</th>
-	     <th>{% trans 'Visits' %}</th>
-         <th>{% trans 'Actions' %}</th>
-	   </thead>
-	   <tbody>
-	   {% for url in urls %}
-	     <tr class="{% cycle 'info' 'default' %}">
-	       <td>{{forloop.counter}}</td>
-	       <td><strong><a href="{% url 'visiturl' url.url_id %}">{{ url.url_id }}</a></strong></td>
-	       <td><a href="{{url.long_url}}">{{url.long_url}}</a></td>
-	       <td>{{ url.created|date:"l G:i" }}</td>
-	       <td>{{ url.hits }}</td>
-	       <td>
-	         <a href="{% url 'stat' url.url_id %}" class="btn-xs btn-primary"><i class="fa fa-bar-chart"></i></a> 
-	         <a href="#" data-href="{% url 'delete_url' url.url_id %}"  class="btn-xs btn-danger" data-toggle="modal" data-urlid="{{ url.url_id }}" data-target="#confirm-delete"><i class="fa fa-trash"></i>
-	        </td>
-	     </tr>
-	   {% empty %}
-	    <div class="well">
-	     <h2>{% trans 'It seems that you have not created any links ' %}:(</h2>
-	     <p> {% trans 'Go to' %} <a href="{% url 'home' %}">{% trans 'main page' %}</a> {% trans 'and create your first short link' %}!</p>
-	    </div>
-	   {% endfor %}
-	   </tbody>
-	  </table>
-	 </div>
   </div>
-
+ 
 
   <!-- modal -->
    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -165,13 +122,12 @@
 
 
         $.get('/ajax/best-performers/', function(fetched) {
-            var total_perf = {{ totalvisits.total_visits }};
+            var total_perf = {{ items.hits }};
             fetched.forEach( function (arrayItem) {
                 var perc = Math.floor((arrayItem.hits / total_perf) * 100);
                 var url_id = arrayItem.url_id;
                 var u = $(".widget_summary:first").clone().attr("id", url_id);
                 u.find(".progress-bar").css("width", (perc +"%"));
-
                 u.find(".w_leftw_25_s").html("<a href='/" + url_id + "/stat'>" + url_id +"</a>");
                 u.find(".w_rightw_20_s").text(arrayItem.hits);
                 u.removeClass('hidden');
@@ -191,11 +147,9 @@
             props = []
             for (var prop in fetched) {
                 days = prop.split(",");
-                console.log(prop);
                 ist = [gd(days[0], days[1], days[2]), fetched[prop]];
                 props.push(ist)
             }
-            console.log(props);
             $("#canvas_dahs").length && $.plot($("#canvas_dahs"), [
               props,
             ], {

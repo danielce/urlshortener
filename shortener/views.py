@@ -62,7 +62,7 @@ def visiturl(request, url_id):
     g = GeoIP2()
     ip = request.META.get('REMOTE_ADDR')
     ip = '88.80.113.1'
-    gid = request.COOKIES.get('gid', None) 
+    gid = request.COOKIES.get('gid', None)
     if not gid:
         hsh = "{0}:{1}:{2}:{3}".format(
             ip, ua.browser.version_string,
@@ -212,6 +212,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             count=Count(F('id'))
         )
         context['items'] = items
+        print items
         return context
 
 

@@ -10,7 +10,9 @@ from .forms import (
     TestSuiteForm, BalancedRedirectionForm, FirstTimeRedirectionForm,
     DateRangeRedirectionForm
 )
-from .models import BalancedRedirection, FirstTimeRedirection
+from .models import (
+    BalancedRedirection, FirstTimeRedirection, DateRangeRedirection
+)
 # Create your views here.
 
 
@@ -131,6 +133,44 @@ class FirstTimeUpdateView(LoginRequiredMixin, UpdateView):
     form_class = FirstTimeRedirectionForm
     model = FirstTimeRedirection
     template_name = 'firsttime_create.html'
+    pk_url_kwarg = 'r_id'
+
+    def get_success_url(self):
+        pk = self.kwargs.get('pk')
+        return reverse('testsuite-detail', kwargs={'pk': pk})
+
+
+class DateRangeCreateView(LoginRequiredMixin, CreateView):
+    form_class = DateRangeRedirectionForm
+    model = DateRangeRedirection
+    template_name = 'daterange_create.html'
+
+    def get_success_url(self):
+        return reverse('test-list')
+
+    def form_invalid(self, form):
+        print form
+        super(DateRangeCreateView, self).form_invalid(form)
+
+    def form_valid(self, form, *args, **kwargs):
+        super(DateRangeCreateView, self).form_valid(form)
+        campagin_id = self.kwargs['pk']
+        campaign = Campaign.objects.get(pk=campagin_id)
+
+        self.object.owner = self.request.user
+        self.object.campaign_type = Campaign.TESTSUITE
+        self.object.save()
+        PageURL.objects.create(
+            campaign=campaign,
+            content_object=self.object
+        )
+        return redirect('test-list')
+
+
+class DateRangeUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = DateRangeRedirectionForm
+    model = DateRangeRedirection
+    template_name = 'daterange_create.html'
     pk_url_kwarg = 'r_id'
 
     def get_success_url(self):
