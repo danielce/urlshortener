@@ -92,7 +92,7 @@ class DateRangeRedirection(models.Model):
     pageurl = GenericRelation(PageURL, related_query_name='daterange')
 
     def __unicode__(self):
-        return self.name
+        return "DateRange {}".format(self.active_url)
 
     def dispatch(self, visit, *args, **kwargs):
         now = timezone.now()
@@ -107,5 +107,61 @@ class DateRangeRedirection(models.Model):
             kwargs={
                 'pk': self.pageurl.all()[0].campaign.pk,
                 'r_id': self.pk,
+            }
+        )
+
+
+class MobileRedirection(models.Model):
+    mobile_url = models.URLField(max_length=255)
+    standard_url = models.URLField(max_length=255)
+    pageurl = GenericRelation(PageURL, related_query_name='mobile')
+
+    def __unicode__(self):
+        return "Mobile {}".format(self.mobile_url)
+
+    def dispatch(self, visit, *args, **kwargs):
+        if visit.is_mobile:
+            return self.mobile_url
+
+        return self.standard_url
+
+    def get_edit_url(self):
+        return reverse(
+            'mobile-edit',
+            kwargs={
+                'pk': self.pageurl.all()[0].campaign.pk,
+                'r_id': self.pk
+            }
+        )
+
+
+class MaxClickRedirection(models.Model):
+    exceed_url = models.URLField(max_length=255)
+    standard_url = models.URLField(max_length=255)
+    limit = models.PositiveIntegerField(default=1)
+    pageurl = GenericRelation(PageURL, related_query_name='maxclick')
+
+    def __unicode__(self):
+        return "MaxClick {}".format(self.standard_url)
+
+    def dispatch(self, visit, *args, **kwargs):
+        pageurl = self.pageurl.all()[0]
+        gid = kwargs.get('gid', None)
+        if not gid:
+            return self.standard_url
+
+        visits = Visit.objects.filter(
+            url=pageurl, session=gid).count()
+        if visits > self.limit:
+            return self.exceed_url
+
+        return self.standard_url
+
+    def get_edit_url(self):
+        return reverse(
+            'maxclick-edit',
+            kwargs={
+                'pk': self.pageurl.all()[0].campaign.pk,
+                'r_id': self.pk
             }
         )

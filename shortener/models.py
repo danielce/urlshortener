@@ -59,11 +59,13 @@ class PageURL(models.Model):
     BALANCED = 'balanced'
     DATE_RANGE = 'daterange'
     FIRST_TIME = 'firsttime'
+    MOBILE = 'mobile'
     TYPE_CHOICES = (
         (SIMPLE, _('simple')),
         (BALANCED, _('balanced')),
         (DATE_RANGE, _('daterange')),
-        (FIRST_TIME, _('firsttime'))
+        (FIRST_TIME, _('firsttime')),
+        (MOBILE, _('mobile'))
     )
     url_id = models.SlugField(max_length=6, default=generate_url_id)
     long_url = models.URLField(max_length=200, blank=True, null=True)

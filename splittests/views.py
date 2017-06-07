@@ -8,10 +8,12 @@ from django.views.generic import CreateView, ListView, UpdateView
 from shortener.models import Campaign, PageURL
 from .forms import (
     TestSuiteForm, BalancedRedirectionForm, FirstTimeRedirectionForm,
-    DateRangeRedirectionForm
+    DateRangeRedirectionForm, MobileRedirectionForm,
+    MaxClickRedirectionForm,
 )
 from .models import (
-    BalancedRedirection, FirstTimeRedirection, DateRangeRedirection
+    BalancedRedirection, FirstTimeRedirection, DateRangeRedirection,
+    MobileRedirection, MaxClickRedirection
 )
 # Create your views here.
 
@@ -171,6 +173,76 @@ class DateRangeUpdateView(LoginRequiredMixin, UpdateView):
     form_class = DateRangeRedirectionForm
     model = DateRangeRedirection
     template_name = 'daterange_create.html'
+    pk_url_kwarg = 'r_id'
+
+    def get_success_url(self):
+        pk = self.kwargs.get('pk')
+        return reverse('testsuite-detail', kwargs={'pk': pk})
+
+
+class MobileCreateView(LoginRequiredMixin, CreateView):
+    form_class = MobileRedirectionForm
+    model = MobileRedirection
+    template_name = 'mobile_create.html'
+
+    def get_success_url(self):
+        pk = self.kwargs.get('pk')
+        return reverse('testsuite-detail', kwargs={'pk': pk})
+
+    def form_valid(self, form, *args, **kwargs):
+        super(MobileCreateView, self).form_valid(form)
+        campagin_id = self.kwargs['pk']
+        campaign = Campaign.objects.get(pk=campagin_id)
+
+        self.object.owner = self.request.user
+        self.object.campaign_type = Campaign.TESTSUITE
+        self.object.save()
+        PageURL.objects.create(
+            campaign=campaign,
+            content_object=self.object
+        )
+        return redirect('test-list')
+
+
+class MobileUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = MobileRedirectionForm
+    model = MobileRedirection
+    template_name = 'mobile_create.html'
+    pk_url_kwarg = 'r_id'
+
+    def get_success_url(self):
+        pk = self.kwargs.get('pk')
+        return reverse('testsuite-detail', kwargs={'pk': pk})
+
+
+class MaxClickCreateView(LoginRequiredMixin, CreateView):
+    form_class = MaxClickRedirectionForm
+    model = MaxClickRedirection
+    template_name = 'maxclick_create.html'
+
+    def get_success_url(self):
+        pk = self.kwargs.get('pk')
+        return reverse('testsuite-detail', kwargs={'pk': pk})
+
+    def form_valid(self, form, *args, **kwargs):
+        super(MaxClickCreateView, self).form_valid(form)
+        campagin_id = self.kwargs['pk']
+        campaign = Campaign.objects.get(pk=campagin_id)
+
+        self.object.owner = self.request.user
+        self.object.campaign_type = Campaign.TESTSUITE
+        self.object.save()
+        PageURL.objects.create(
+            campaign=campaign,
+            content_object=self.object
+        )
+        return redirect('test-list')
+
+
+class MaxClickUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = MaxClickRedirectionForm
+    model = MaxClickRedirection
+    template_name = 'maxclick_create.html'
     pk_url_kwarg = 'r_id'
 
     def get_success_url(self):

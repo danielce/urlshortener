@@ -212,7 +212,6 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             count=Count(F('id'))
         )
         context['items'] = items
-        print items
         return context
 
 

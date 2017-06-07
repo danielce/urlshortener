@@ -3,7 +3,8 @@ from django.utils.translation import gettext_lazy as _
 from shortener.models import Campaign
 from .models import (
     BalancedRedirection, FirstTimeRedirection,
-    DateRangeRedirection
+    DateRangeRedirection, MobileRedirection,
+    MaxClickRedirection
 )
 
 
@@ -35,3 +36,15 @@ class DateRangeRedirectionForm(forms.ModelForm):
     class Meta:
         model = DateRangeRedirection
         fields = ['active_url', 'inactive_url', 'start', 'end']
+
+
+class MobileRedirectionForm(forms.ModelForm):
+    class Meta:
+        model = MobileRedirection
+        fields = ['mobile_url', 'standard_url']
+
+
+class MaxClickRedirectionForm(forms.ModelForm):
+    class Meta:
+        model = MaxClickRedirection
+        fields = ['standard_url', 'limit', 'exceed_url']

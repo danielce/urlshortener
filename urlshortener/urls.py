@@ -53,7 +53,7 @@ urlpatterns = [
     url(r'^campaigns/(?P<pk>\d+)/newurl$',
         NewCampaignURLFormView.as_view(), name="campaign-url"),
     url(r'^dashboard/$', DashboardView.as_view(), name="dashboard"),
-    url(r'^dashboard/api/', include('userapi.urls')),
+    url(r'^api/', include('userapi.urls')),
     url(r'^list/$', PageURLListView.as_view(), name="urllist"),
     url(r'^new/$', NewURLFormView.as_view(), name="newurl"),
     url(r'^$', ShortenView.as_view(), name="home"),
