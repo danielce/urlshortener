@@ -3,7 +3,11 @@ import urllib2
 from bs4 import BeautifulSoup
 from celery import shared_task
 
+from django.core.validators import URLValidator
+from django.core.exceptions import ValidationError
 from django.utils.text import Truncator
+
+from .models import SimpleRedirection, PageURL
 
 
 @shared_task
@@ -23,3 +27,22 @@ def scrape_data(long_url):
         "title": title.encode("utf-8"),
         "description": description.encode("utf-8"),
     }
+
+
+@shared_task
+def process_bulk(urls, campaign):
+    for url in urls.splitlines():
+        validator = URLValidator()
+        try:
+            val = validator(url)
+        except ValidationError:
+            continue
+        else:
+            s = SimpleRedirection.objects.create(
+                long_url=url
+            )
+            p = PageURL.objects.create(
+                campaign=campaign,
+                author=campaign.owner,
+                content_object=s
+            )

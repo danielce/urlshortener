@@ -16,8 +16,12 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from braces.views import LoginRequiredMixin
 
 from control.models import Configuration
-from .forms import ContactForm, PageURLForm, SimplePageURLForm, CampaignForm
+from .forms import (
+    ContactForm, PageURLForm, SimplePageURLForm, CampaignForm,
+    BulkCampaignForm,
+)
 from .models import PageURL, Ad, Visit, Campaign
+from .tasks import process_bulk
 
 # Create your views here.
 
@@ -301,4 +305,21 @@ class NewCampaignURLFormView(LoginRequiredMixin, CreateView):
         self.object.campaign = campaign
         self.object.author = self.request.user
         self.object.save()
+        return redirect(self.get_success_url())
+
+
+class BulkCampaignCreateView(LoginRequiredMixin, CreateView):
+    form_class = BulkCampaignForm
+    model = Campaign
+    template_name = 'campaign_bulk.html'
+
+    def get_success_url(self):
+        return reverse('campaigns')
+
+    def form_valid(self, form):
+        super(BulkCampaignCreateView, self).form_valid(form)
+        self.object.owner = self.request.user
+        self.object.save()
+        urls = form.cleaned_data['urls']
+        process_bulk.delay(urls, self.object)
         return redirect(self.get_success_url())

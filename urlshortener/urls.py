@@ -31,7 +31,8 @@ from shortener.views import (
     CampaignCreateView,
     CampaignUpdateView,
     CampaignDetailView,
-    NewCampaignURLFormView
+    NewCampaignURLFormView,
+    BulkCampaignCreateView
 )
 
 urlpatterns = [
@@ -46,6 +47,7 @@ urlpatterns = [
     url(r'^tests/', include('splittests.urls')),
     url(r'^campaigns/$', CampaignListView.as_view(), name="campaigns"),
     url(r'^campaigns/new/$', CampaignCreateView.as_view(), name="campaign-create"),
+    url(r'^campaigns/bulk/$', BulkCampaignCreateView.as_view(), name="campaign-bulk"),
     url(r'^campaigns/(?P<pk>\d+)/edit/$',
         CampaignUpdateView.as_view(), name="campaign-update"),
     url(r'^campaigns/(?P<pk>\d+)/$',

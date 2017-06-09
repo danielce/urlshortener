@@ -10,8 +10,6 @@ from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelatio
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext as _
 
-from .tasks import scrape_data
-
 # Create your models here.
 User = settings.AUTH_USER_MODEL
 
@@ -93,6 +91,7 @@ class PageURL(models.Model):
         return reverse('visiturl', kwargs={"url_id": self.url_id})
 
     def get_meta_content(self):
+        from .tasks import scrape_data
         if not self.long_url:
             return
 
