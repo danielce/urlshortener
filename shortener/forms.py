@@ -44,6 +44,7 @@ class SimplePageURLForm(forms.ModelForm):
         self.fields['campaign'].required = False
         # self.helper.field_class = ''
 
+
 class ContactForm(forms.Form):
     CHOICES = (
         ('GENERAL', 'General Enquiry'),
@@ -60,3 +61,10 @@ class CampaignForm(forms.ModelForm):
         model = Campaign
         fields = ['name', 'description']
 
+
+class BulkCampaignForm(forms.ModelForm):
+    urls = forms.CharField(widget=forms.Textarea)
+
+    class Meta:
+        model = Campaign
+        fields = ['name', 'description', 'urls']

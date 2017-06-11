@@ -1,4 +1,5 @@
 import json
+import hashlib
 from user_agents import parse
 
 from django.contrib import messages
@@ -15,8 +16,12 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from braces.views import LoginRequiredMixin
 
 from control.models import Configuration
-from .forms import ContactForm, PageURLForm, SimplePageURLForm, CampaignForm
+from .forms import (
+    ContactForm, PageURLForm, SimplePageURLForm, CampaignForm,
+    BulkCampaignForm,
+)
 from .models import PageURL, Ad, Visit, Campaign
+from .tasks import process_bulk
 
 # Create your views here.
 
@@ -61,6 +66,14 @@ def visiturl(request, url_id):
     g = GeoIP2()
     ip = request.META.get('REMOTE_ADDR')
     ip = '88.80.113.1'
+    gid = request.COOKIES.get('gid', None)
+    if not gid:
+        hsh = "{0}:{1}:{2}:{3}".format(
+            ip, ua.browser.version_string,
+            ua.os.version_string, ua.device.family
+        )
+        gid = hashlib.sha256(hsh).hexdigest()
+        print gid
     visit = Visit(
         url=url,
         ip=ip,
@@ -73,7 +86,7 @@ def visiturl(request, url_id):
         device=ua.device.family,
         brand=ua.device.brand,
         model=ua.device.model,
-        session=request.session.session_key,
+        session=gid,
         is_mobile=ua.is_mobile,
         is_tablet=ua.is_tablet,
         is_pc=ua.is_pc,
@@ -93,12 +106,18 @@ def visiturl(request, url_id):
         visit.longitude = geo['longitude']
         visit.latitude = geo['latitude']
     visit.save()
+    if url.content_object:
+            long_url = url.content_object.dispatch(visit, gid=gid)
+    else:
+        long_url = url.long_url
     if url.monetize:
         random_ad = Ad.objects.order_by('?').first()
-        context = {"long_url": url.long_url, "random_ad": random_ad}
+        context = {"long_url": long_url, "random_ad": random_ad}
         return render(request, 'doorway.html', context)
     else:
-        return HttpResponseRedirect(url.long_url)
+        response = HttpResponseRedirect(long_url)
+        response.set_cookie('gid', gid)
+        return response
 
 
 class StatView(DetailView):
@@ -286,4 +305,21 @@ class NewCampaignURLFormView(LoginRequiredMixin, CreateView):
         self.object.campaign = campaign
         self.object.author = self.request.user
         self.object.save()
+        return redirect(self.get_success_url())
+
+
+class BulkCampaignCreateView(LoginRequiredMixin, CreateView):
+    form_class = BulkCampaignForm
+    model = Campaign
+    template_name = 'campaign_bulk.html'
+
+    def get_success_url(self):
+        return reverse('campaigns')
+
+    def form_valid(self, form):
+        super(BulkCampaignCreateView, self).form_valid(form)
+        self.object.owner = self.request.user
+        self.object.save()
+        urls = form.cleaned_data['urls']
+        process_bulk.delay(urls, self.object)
         return redirect(self.get_success_url())

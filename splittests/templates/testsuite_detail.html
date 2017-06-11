@@ -1,0 +1,71 @@
+{% extends 'page.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
+{% block title %}{% trans 'Test suite detail' %}{% endblock%}
+
+
+   {% block subtitle %}
+    <h3>{{ obj.name }} <small>{% trans 'Test suite detail' %}</small></h3>
+   {% endblock %}
+  {% block paneltitle %}<h2>{% trans 'Your test URLs' %}</h2> {% endblock %}
+  {% block panelcontent %}
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-success text-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-plus"></i> {% trans 'Test URL create' %} <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'balanced-create' obj.pk %}">{% trans 'New Balanced Redirection' %}</a></li>
+          <li><a href="{% url 'firsttime-create' obj.pk %}">{% trans 'New First Time Redirection' %}</a></li>
+          <li><a href="{% url 'daterange-create' obj.pk %}">{% trans 'Date Range Redirection' %}</a></li>
+          <li><a href="{% url 'mobile-create' obj.pk %}">{% trans 'Mobile Redirection' %}</a></li>
+          <li><a href="{% url 'maxclick-create' obj.pk %}">{% trans 'MaxClick Redirection' %}</a></li>
+        </ul>
+      </div>
+
+    </div>
+        <table class="table table-responsive table-hover jambo_table bulk_action">
+         <thead>
+           <th>#</th>
+           <th>{% trans 'Short URL' %}</th>
+           <th>{% trans 'Created' %}</th>
+           <th>{% trans 'Long URL' %}</th>
+           
+           <th>{% trans 'Visits' %}</th>
+           <th>{% trans 'Actions' %}</th>
+         </thead>
+         <tbody>
+          {% for url in tests %}
+           <tr class="{% cycle 'info' 'default' %}">
+             <td>{{forloop.counter}}</td>
+             <td><strong><a href="{% url 'visiturl' url.url_id %}">{{ url.url_id }}</a></strong></td>
+             <td>{{ url.created|date:"Y-m-d" }}</td>
+             <td><a href="{{url.long_url}}">{{url.long_url}}</a></td>
+             <td>{{ url.hits }}</td>
+             <td>
+              <a href="{{ url.content_object.get_edit_url }}" class="btn btn-xs btn-primary"><i class="fa fa-bar-chart"></i> Edit</a> 
+              <a href="{% url 'stat' url.url_id %}" class="btn btn-xs btn-info"><i class="fa fa-bar-chart"></i> Stats</a> 
+              <a href="#" data-href="{% url 'delete_url' url.url_id %}"  class="btn btn-xs btn-danger" data-toggle="modal" data-urlid="{{ url.url_id }}" data-target="#confirm-delete"><i class="fa fa-trash"></i> Delete
+              </td>
+           </tr>
+           {% empty %}
+            <div class="well">
+             <h2>{% trans 'It seems that you have not created any links ' %}:(</h2>
+             <p> {% trans 'Go to' %} <a href="{% url 'home' %}">{% trans 'main page' %}</a> {% trans 'and create your first short link' %}!</p>
+            </div>
+           {% endfor %}
+          </tbody>
+        </table>
+        {% endblock %}
+
+
+{% block js %}
+  $('#confirm-delete').on('show.bs.modal', function(e) {
+            var urlid = $(e.relatedTarget).data('urlid');
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            $('#urlid').html(urlid);
+        });
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'base2.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
+  {% block customstyle %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css">
+  {% endblock %}
+
+{% block title %}{% trans 'New First Time Redirection' %}{% endblock%}
+
+
+{% block content %}
+ <h1>{% trans 'A/B Tests' %}</h1><hr>
+ <div class="row">
+<div class="col-md-8 col-sm-8 col-xs-12">
+    <div class="x_panel tile fixed_height_320">
+      <div class="x_title">
+        <h2>{% trans 'New First Time Redirection' %}</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form method="POST" action="" class="form-horizontal form-label-left">{% csrf_token %}
+          {% for field in form %}
+            {% if field.name == 'start' or field.name == 'end' %}
+              <div class="form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">{{ field.label }} <span class="required">*</span>
+                </label>
+                <div class='col-md-6 col-sm-6 col-xs-12'>
+                  <div class='input-group date datetimepicker'>
+                      <input id="id_{{ field.name }}" name="{{ field.name }}" value="{% if field.value %}{{ field.value|date:'Y-m-d H:i' }}{% else %}{% endif %}" type='text' class="form-control" />
+                      <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                  </div>
+                </div>
+              </div>
+            {% else %}
+             <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">{{ field.label }} <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input id="id_{{ field.name }}" name="{{ field.name }}" value="{% if field.value %}{{ field.value }}{% else %}{% endif %}" required="required" class="form-control col-md-7 col-xs-12" type='text'>
+                </div>
+              </div>
+            {% endif %}
+            {% if field.errors %}
+                {% for error in errors %}
+                  <p>{{ error }}</p>
+                {% endfor %}
+              {% endif %}
+          {% endfor %}
+          {% if form.errors %}
+            {% for error in form.errors %}<p>{{ error }}</p>{% endfor %}
+          {% endif %}
+          <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+            <button type="submit" class="btn btn-success">{% trans 'Save' %}</button>
+          </div>
+        </form>
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}
+
+{% block js %}
+  $('#confirm-delete').on('show.bs.modal', function(e) {
+            var urlid = $(e.relatedTarget).data('urlid');
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            $('#urlid').html(urlid);
+        });
+{% endblock %}
+
+{% block scripts %}
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js'></script>
+<script type="text/javascript">
+            $(function () {
+                $('.datetimepicker').datetimepicker({
+                  format: 'YYYY-MM-DD HH:mm'
+                });
+            });
+        </script>
+{% endblock %}

@@ -7,46 +7,38 @@
 
             <div class="clearfix"></div>
 
-            <!-- menu profile quick info -->
-            <div class="profile">
-              <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>{{ request.user.username }}</h2>
-              </div>
-            </div>
-            <!-- /menu profile quick info -->
-
-            <br />
 
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-home"></i> {% trans 'Home' %} <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.html">Dashboard</a></li>
+                      <li><a href="{% url 'dashboard' %}">{% trans 'Dashboard' %}</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Link Management <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-edit"></i> {% trans "Link Management" %} <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{% url 'campaigns' %}">{% trans 'Campaigns' %}</a></li>
                       <li><a href="{% url 'campaign-create' %}">{% trans 'Create campaign' %}</a></li>
                       <li><a href="{% url 'urllist' %}">{% trans 'URLs' %}</a></li>
                       <li><a href="{% url 'newurl' %}">{% trans 'Create URL' %}</a></li>
+                      <li><a href="{% url 'campaign-bulk' %}">{% trans 'Create Bulk URLs' %}</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-desktop"></i> API <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-desktop"></i> {% trans 'API' %} <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="general_elements.html">General Elements</a></li>
+                      <li><a href="{% url 'tokenlist' %}">{% trans 'Configuration' %}</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-table"></i> A/B Tests <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-table"></i> {% trans 'A/B Tests' %} <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="tables.html">Tables</a></li>
+                      <li><a href="{% url 'test-list' %}">{% trans 'Test Suites' %}</a></li>
+                      <li><a href="{% url 'testsuite-create' %}">{% trans 'Create Test Suite' %}</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-clone"></i>Landing Pages <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-clone"></i>{% trans 'Landing Pages' %} <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
                     </ul>
@@ -56,10 +48,10 @@
               <div class="menu_section">
                 <h3>Live On</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-bug"></i> Settings <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-bug"></i> {% trans 'Settings' %} <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{% url 'organization-info' %}">Company profile</a></li>
-                      <li><a href="{% url 'users-list' %}">Users</a></li>
+                      <li><a href="{% url 'organization-info' %}">{% trans 'Company profile' %}</a></li>
+                      <li><a href="{% url 'users-list' %}">{% trans 'Users' %}</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>

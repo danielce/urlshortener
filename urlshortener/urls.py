@@ -31,7 +31,8 @@ from shortener.views import (
     CampaignCreateView,
     CampaignUpdateView,
     CampaignDetailView,
-    NewCampaignURLFormView
+    NewCampaignURLFormView,
+    BulkCampaignCreateView
 )
 
 urlpatterns = [
@@ -43,8 +44,10 @@ urlpatterns = [
     url(r'^contact/$', ContactFormView.as_view(), name="contact"),
     url(r'^control/', include('control.urls')),
     url(r'^settings/', include('core.urls')),
+    url(r'^tests/', include('splittests.urls')),
     url(r'^campaigns/$', CampaignListView.as_view(), name="campaigns"),
     url(r'^campaigns/new/$', CampaignCreateView.as_view(), name="campaign-create"),
+    url(r'^campaigns/bulk/$', BulkCampaignCreateView.as_view(), name="campaign-bulk"),
     url(r'^campaigns/(?P<pk>\d+)/edit/$',
         CampaignUpdateView.as_view(), name="campaign-update"),
     url(r'^campaigns/(?P<pk>\d+)/$',
@@ -52,7 +55,7 @@ urlpatterns = [
     url(r'^campaigns/(?P<pk>\d+)/newurl$',
         NewCampaignURLFormView.as_view(), name="campaign-url"),
     url(r'^dashboard/$', DashboardView.as_view(), name="dashboard"),
-    url(r'^dashboard/api/', include('userapi.urls')),
+    url(r'^api/', include('userapi.urls')),
     url(r'^list/$', PageURLListView.as_view(), name="urllist"),
     url(r'^new/$', NewURLFormView.as_view(), name="newurl"),
     url(r'^$', ShortenView.as_view(), name="home"),

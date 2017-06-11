@@ -57,6 +57,7 @@ INSTALLED_APPS = (
     'control',
     'userapi',
     'core',
+    'splittests'
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -203,3 +204,5 @@ ACCOUNT_TYPE_LIMITS = {
         'users': 10,
     }
 }
+
+SESSION_SAVE_EVERY_REQUEST = True
