@@ -58,12 +58,14 @@ class PageURL(models.Model):
     DATE_RANGE = 'daterange'
     FIRST_TIME = 'firsttime'
     MOBILE = 'mobile'
+    MAXCLICK = 'maxlick'
     TYPE_CHOICES = (
         (SIMPLE, _('simple')),
         (BALANCED, _('balanced')),
         (DATE_RANGE, _('daterange')),
         (FIRST_TIME, _('firsttime')),
-        (MOBILE, _('mobile'))
+        (MOBILE, _('mobile')),
+        (MAXCLICK, _('maxclick'))
     )
     url_id = models.SlugField(max_length=6, default=generate_url_id)
     long_url = models.URLField(max_length=200, blank=True, null=True)
@@ -75,9 +77,9 @@ class PageURL(models.Model):
     monetize = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     campaign = models.ForeignKey(Campaign, blank=True, null=True)
-    # url_type = models.CharField(max_length=50, choices=TYPE_CHOICES,
-    #                             default=SIMPLE
-    #                             )
+    url_type = models.CharField(max_length=50, choices=TYPE_CHOICES,
+                                default=SIMPLE
+                                )
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE,
                                      null=True, blank=True)
@@ -155,3 +157,6 @@ class SimpleRedirection(models.Model):
 
     def dispatch(self, *args, **kwargs):
         return self.long_url
+
+    def __unicode__(self):
+        return "Simple redirection"

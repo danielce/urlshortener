@@ -92,7 +92,8 @@ class BalancedRedirectionCreateView(LoginRequiredMixin, CreateView):
         self.object.save()
         PageURL.objects.create(
             campaign=campaign,
-            content_object=self.object
+            content_object=self.object,
+            url_type=PageURL.BALANCED
         )
         return redirect('test-list')
 
@@ -126,7 +127,8 @@ class FirstTimeCreateView(LoginRequiredMixin, CreateView):
         self.object.save()
         PageURL.objects.create(
             campaign=campaign,
-            content_object=self.object
+            content_object=self.object,
+            url_type=PageURL.FIRST_TIME
         )
         return redirect('test-list')
 
@@ -164,7 +166,8 @@ class DateRangeCreateView(LoginRequiredMixin, CreateView):
         self.object.save()
         PageURL.objects.create(
             campaign=campaign,
-            content_object=self.object
+            content_object=self.object,
+            url_type=PageURL.DATE_RANGE
         )
         return redirect('test-list')
 
@@ -199,7 +202,8 @@ class MobileCreateView(LoginRequiredMixin, CreateView):
         self.object.save()
         PageURL.objects.create(
             campaign=campaign,
-            content_object=self.object
+            content_object=self.object,
+            url_type=PageURL.MOBILE
         )
         return redirect('test-list')
 
@@ -234,7 +238,8 @@ class MaxClickCreateView(LoginRequiredMixin, CreateView):
         self.object.save()
         PageURL.objects.create(
             campaign=campaign,
-            content_object=self.object
+            content_object=self.object,
+            url_type=PageURL.MAXCLICK
         )
         return redirect('test-list')
 

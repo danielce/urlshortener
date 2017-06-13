@@ -304,6 +304,7 @@ class NewCampaignURLFormView(LoginRequiredMixin, CreateView):
         campaign = Campaign.objects.get(pk=self.kwargs.get('pk'))
         self.object.campaign = campaign
         self.object.author = self.request.user
+        self.object.url_type = PageURL.SIMPLE
         self.object.save()
         return redirect(self.get_success_url())
 
@@ -319,6 +320,7 @@ class BulkCampaignCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         super(BulkCampaignCreateView, self).form_valid(form)
         self.object.owner = self.request.user
+        self.object.url_type = PageURL.SIMPLE
         self.object.save()
         urls = form.cleaned_data['urls']
         process_bulk.delay(urls, self.object)

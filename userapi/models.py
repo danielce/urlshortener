@@ -14,4 +14,4 @@ class Token(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return self.user.username
+        return str(self.uuid)
