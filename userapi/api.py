@@ -1,8 +1,8 @@
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated
 
-from shortener.models import PageURL, SimpleRedirection
-from .serializers import PageURLSerializer, PageURLCreateSerializer, CampaignSerializer
+from shortener.models import PageURL
+from .serializers import PageURLSerializer, CampaignSerializer
 from .authentication import TokenAuthentication
 
 
@@ -27,7 +27,7 @@ class PageURLCreateAPIView(CreateAPIView):
         long_url = self.request.data.get('long_url')
         author = self.request.user
         serializer.save(long_url=long_url, author=author,
-            campaign=campaign)
+                        campaign=campaign)
 
 
 class PageURLDetailAPIView(RetrieveAPIView):
@@ -65,4 +65,4 @@ class CampaignCreateView(CreateAPIView):
 
     def perform_create(self, serializer):
         author = self.request.user
-        print serializer.save(owner=author)
+        serializer.save(owner=author)

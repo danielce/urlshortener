@@ -270,7 +270,8 @@ class CampaignUpdateView(LoginRequiredMixin, UpdateView):
 class CampaignDetailView(LoginRequiredMixin, ListView):
     context_object_name = 'urls'
     template_name = 'campaign_detail.html'
-    model = Campaign
+    model = PageURL
+    paginate_by = 20
 
     def get_queryset(self):
         pk = self.kwargs.get('pk')

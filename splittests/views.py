@@ -60,6 +60,7 @@ class TestSuiteDetailView(LoginRequiredMixin, ListView):
     context_object_name = 'tests'
     template_name = 'testsuite_detail.html'
     model = Campaign
+    paginate_by = 20
 
     def get_queryset(self):
         pk = self.kwargs.get('pk')
