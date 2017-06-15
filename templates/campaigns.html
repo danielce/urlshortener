@@ -54,8 +54,9 @@
        {% endfor %}
        </tbody>
       </table>
-     {% endblock %}
-
+     
+     {% include '_paginate.html' %}
+    {% endblock %}
 {% block scripts %}
   <!-- modal -->
    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

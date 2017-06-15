@@ -6,8 +6,7 @@
 {% block title %}{% trans 'Users' %}{% endblock%}
 
 
-{% block paneltitle %} <h3>{% trans 'Users' %}</h3>{% endblock %}
-
+{% block paneltitle %} <h3>{% trans 'Settings' %}</h3>{% endblock %}
  {% block panelcontent %}
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
       {% if user.is_supervisor %}
@@ -38,13 +37,11 @@
            </td>
          </tr>
        {% empty %}
-        <div class="well">
-         <h2>{% trans 'It seems that you have not created any links ' %}:(</h2>
-         <p> {% trans 'Go to' %} <a href="{% url 'home' %}">{% trans 'main page' %}</a> {% trans 'and create your first short link' %}!</p>
-        </div>
+        
        {% endfor %}
        </tbody>
       </table>
+      {% include '_paginate.html' %}
      {% endblock %}
 
 {% block scripts %}

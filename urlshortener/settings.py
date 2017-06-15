@@ -165,11 +165,19 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 GEOIP_PATH = os.path.join(BASE_DIR, 'geoip')
 
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
-    )
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'user': '1/day'
+    }
 }
 
 AUTHENTICATION_BACKENDS = (

@@ -1,3 +1,4 @@
+import uuid
 from django.contrib.auth import get_user_model
 from rest_framework import authentication
 from rest_framework import exceptions
@@ -10,19 +11,21 @@ User = get_user_model()
 class TokenAuthentication(authentication.BaseAuthentication):
 
     def authenticate(self, request):
-        header = request.META.get('HTTP_AUTHORIZATION')
+        header = request.META.get('HTTP_TOKEN', 'jrfr')
+
         if header:
-            token = header.split(" ")[1]
+            apikey = header
         else:
             if request.method == 'GET':
-                token = request.query_params.get('apikey')
+                apikey = request.query_params.get('apikey')
             elif request.method == 'POST':
-                token = request.data.get('apikey')
+                apikey = request.data.get('apikey')
             else:
                 return None
 
         try:
-            token = Token.objects.get(uuid=token)
+            print apikey
+            token = Token.objects.get(uuid=apikey)
         except Token.DoesNotExist:
             raise exceptions.AuthenticationFailed('Token does not exist')
 

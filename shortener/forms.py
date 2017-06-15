@@ -1,9 +1,10 @@
 from django import forms
+from django.utils.translation import ugettext as _
 from crispy_forms.bootstrap import StrictButton, FieldWithButtons
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import ButtonHolder, Layout, Submit
 
-from .models import PageURL, Campaign
+from .models import PageURL, Campaign, SimpleRedirection
 
 
 class PageURLForm(forms.ModelForm):
@@ -43,6 +44,40 @@ class SimplePageURLForm(forms.ModelForm):
         self.fields['campaign'].widget = forms.HiddenInput()
         self.fields['campaign'].required = False
         # self.helper.field_class = ''
+
+
+class SimpleRedirectionCreateForm(forms.ModelForm):
+    shorturl = forms.CharField(max_length=8, required=False)
+
+    class Meta:
+        model = SimpleRedirection
+        fields = ['long_url', 'shorturl']
+
+    def __init__(self, *args, **kwargs):
+        super(SimpleRedirectionCreateForm, self).__init__(*args, **kwargs)
+        self.fields['long_url'].required = True
+
+    def clean_shorturl(self):
+        data = self.cleaned_data['shorturl']
+        try:
+            url = PageURL.objects.get(url_id=data)
+        except PageURL.DoesNotExist:
+            return data
+
+        raise forms.ValidationError(
+            _("Url with this short id already exists")
+        )
+
+
+class SimpleRedirectionUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = SimpleRedirection
+        fields = ['long_url', ]
+
+    def __init__(self, *args, **kwargs):
+        super(SimpleRedirectionUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['long_url'].required = True
 
 
 class ContactForm(forms.Form):

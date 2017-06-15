@@ -24,6 +24,7 @@ from shortener.views import (
     DashboardView,
     ShortenView,
     NewURLFormView,
+    UpdateURLFormView,
     StatView,
     delete_url,
     visiturl,
@@ -60,6 +61,7 @@ urlpatterns = [
     url(r'^new/$', NewURLFormView.as_view(), name="newurl"),
     url(r'^$', ShortenView.as_view(), name="home"),
     url(r'^(?P<url_id>\w+)/stat$', StatView.as_view(), name="stat"),
+    url(r'^(?P<url_id>\w+)/edit$', UpdateURLFormView.as_view(), name="editurl"),
     url(r'^(?P<url_id>\w+)/delete$', delete_url, name="delete_url"),
     url(r'^(?P<url_id>\w+)/$', visiturl, name="visiturl"),
 
