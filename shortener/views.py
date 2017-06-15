@@ -18,9 +18,10 @@ from braces.views import LoginRequiredMixin
 from control.models import Configuration
 from .forms import (
     ContactForm, PageURLForm, SimplePageURLForm, CampaignForm,
-    BulkCampaignForm,
+    BulkCampaignForm, SimpleRedirectionCreateForm,
+    SimpleRedirectionUpdateForm
 )
-from .models import PageURL, Ad, Visit, Campaign
+from .models import PageURL, Ad, Visit, Campaign, SimpleRedirection
 from .tasks import process_bulk
 
 # Create your views here.
@@ -189,18 +190,52 @@ class ContactFormView(FormView):
 
 class PageURLListView(LoginRequiredMixin, ListView):
     template_name = 'urllist.html'
-    paginate_by = 20
+    paginate_by = 10
     context_object_name = 'urls'
 
     def get_queryset(self):
         return PageURL.objects.filter(
-            author=self.request.user
-        ).order_by('-hits')
+            author=self.request.user,
+            url_type=PageURL.SIMPLE
+        ).order_by('-created')
 
 
-class NewURLFormView(LoginRequiredMixin, FormView):
-    form_class = SimplePageURLForm
+class NewURLFormView(LoginRequiredMixin, CreateView):
+    form_class = SimpleRedirectionCreateForm
     template_name = 'new_url.html'
+
+    def form_valid(self, form, *args, **kwargs):
+        super(NewURLFormView, self).form_valid(form)
+        url_id = form.cleaned_data.get('shorturl')
+        self.object.save()
+        p = PageURL(
+            author=self.request.user,
+            content_object=self.object,
+            url_type=PageURL.SIMPLE
+        )
+        if url_id:
+            p.url_id = url_id
+
+        p.save()
+        return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('urllist')
+
+
+class UpdateURLFormView(LoginRequiredMixin, UpdateView):
+    form_class = SimpleRedirectionUpdateForm
+    template_name = 'new_url.html'
+    model = SimpleRedirection
+    pk_url_kwarg = 'url_id'
+
+    def get_object(self):
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        pageurl = PageURL.objects.get(url_id=pk)
+        return pageurl.content_object
+
+    def get_success_url(self):
+        return reverse('urllist')
 
 
 class DashboardView(LoginRequiredMixin, TemplateView):
@@ -229,7 +264,7 @@ def delete_url(request, url_id):
         else:
             obj.delete()
 
-    return HttpResponseRedirect(reverse('dashboard'))
+    return HttpResponseRedirect(reverse('urllist'))
 
 
 class CampaignListView(LoginRequiredMixin, ListView):

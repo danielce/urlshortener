@@ -67,7 +67,7 @@ class PageURL(models.Model):
         (MOBILE, _('mobile')),
         (MAXCLICK, _('maxclick'))
     )
-    url_id = models.SlugField(max_length=6, default=generate_url_id)
+    url_id = models.SlugField(max_length=6, default=generate_url_id, unique=True)
     long_url = models.URLField(max_length=200, blank=True, null=True)
     author = models.ForeignKey(User, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
