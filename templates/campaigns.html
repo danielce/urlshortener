@@ -32,18 +32,18 @@
            <td>{{ campaign.created|date:"Y-m-d" }}</td>
            <td>{{camapign.description }}</td>
            <td>{% if campaign.is_active %}
-                <button type="button" class="btn btn-success btn-xs">Active</button>
+                <button type="button" class="btn btn-success btn-xs">{% trans 'Active' %}</button>
                 {% else %}
-                <button type="button" class="btn btn-danger btn-xs">Inactive</button>
+                <button type="button" class="btn btn-danger btn-xs">{% trans 'Inactive' %}</button>
                 {% endif %}
            </td>
            <td>{{campaign.urls }}</td>
            <td>{{ campaign.hits }}</td>
            <td>
-            <a href="{% url 'campaign-update' campaign.id %}" class="btn btn-xs btn-primary"><i class="fa fa-bar-chart"></i> Edit</a> 
-            <a href="{% url 'campaign-detail' campaign.id %}" class="btn btn-xs btn-info"><i class="fa fa-bar-chart"></i> Detail</a> 
-            <a href="#" class="btn btn-xs btn-info"><i class="fa fa-bar-chart"></i> Stats</a> 
-            <a href="#" data-href="#"  class="btn btn-xs btn-danger" data-toggle="modal" data-urlid="#" data-target="#confirm-delete"><i class="fa fa-trash"></i> Delete
+            <a href="{% url 'campaign-update' campaign.id %}" class="btn btn-xs btn-primary"><i class="fa fa-bar-chart"></i> {% trans 'Edit' %}</a> 
+            <a href="{% url 'campaign-detail' campaign.id %}" class="btn btn-xs btn-info"><i class="fa fa-bar-chart"></i> {% trans 'Detail' %}</a> 
+            <a href="#" class="btn btn-xs btn-info"><i class="fa fa-bar-chart"></i> {% trans 'Stats' %}</a> 
+            <a href="#" data-href="#"  class="btn btn-xs btn-danger" data-toggle="modal" data-urlid="#" data-target="#confirm-delete"><i class="fa fa-trash"></i> {% trans 'Delete' %}
             </td>
          </tr>
        {% empty %}

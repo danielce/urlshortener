@@ -1,0 +1,1041 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-17 14:02+0000\n"
+"PO-Revision-Date: 2017-06-17 16:08+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.8.4\n"
+
+#: adverts/templates/advert_list.html:6 control/templates/profile.html:6
+#: templates/contact.html:7 templates/index.html:53
+msgid "Contact"
+msgstr "Kontakt"
+
+#: control/models.py:25 templates/sidenav.html:32
+msgid "Configuration"
+msgstr "Konfiguracja"
+
+#: control/models.py:26
+msgid "Configurations"
+msgstr "Konfiguracje"
+
+#: control/templates/config_navbar.html:22
+msgid "Profile"
+msgstr "Profil"
+
+#: control/templates/config_navbar.html:23 templates/navbar.html:23
+msgid "About"
+msgstr "O nas"
+
+#: control/templates/config_navbar.html:28 templates/navbar.html:32
+msgid "Howdy"
+msgstr "Witaj"
+
+#: control/templates/config_navbar.html:29 templates/navbar.html:33
+msgid "Logout"
+msgstr "Wyloguj"
+
+#: control/templates/config_navbar.html:31 templates/navbar.html:35
+msgid "Register"
+msgstr "Rejestracja"
+
+#: control/templates/config_navbar.html:36 templates/navbar.html:40
+msgid "Username"
+msgstr "Login"
+
+#: control/templates/config_navbar.html:39 templates/navbar.html:43
+msgid "Password"
+msgstr "Hasło"
+
+#: control/templates/config_navbar.html:41 templates/navbar.html:45
+msgid "Login"
+msgstr "Zaloguj"
+
+#: control/templates/profile.html:15 templates/contact.html:20
+msgid "Send"
+msgstr "Wyślij"
+
+#: core/models.py:20
+msgid "Free"
+msgstr "Darmowy"
+
+#: core/models.py:21
+msgid "Basic"
+msgstr "Podstawowy"
+
+#: core/models.py:22
+msgid "Pro"
+msgstr "Zaawansowany"
+
+#: core/models.py:23
+msgid "Enterprise"
+msgstr ""
+
+#: core/models.py:33 core/models.py:55
+msgid "date joined"
+msgstr ""
+
+#: core/models.py:34 core/models.py:56
+msgid "active"
+msgstr "aktywny"
+
+#: core/models.py:52
+msgid "email address"
+msgstr "adres email"
+
+#: core/models.py:53
+msgid "first name"
+msgstr "imię"
+
+#: core/models.py:54
+msgid "last name"
+msgstr "nazwisko"
+
+#: core/models.py:57
+msgid "is_staff"
+msgstr ""
+
+#: core/models.py:58
+msgid "is_supervisor"
+msgstr ""
+
+#: core/models.py:68
+msgid "user"
+msgstr "użytkownik"
+
+#: core/models.py:69
+msgid "users"
+msgstr "użytkownicy"
+
+#: core/templates/invitation.html:6 core/templates/organization_update.html:6
+#: templates/campaign_bulk.html:6 templates/campaign_create.html:6
+#: templates/dashboard.html:6 templates/home.html:6 templates/index.html:49
+#: templates/navbar.html:22 templates/sidenav.html:16
+msgid "Home"
+msgstr "Główna"
+
+#: core/templates/invitation.html:10
+#: core/templates/organization_update.html:10
+#: splittests/templates/testsuite_create.html:10
+#: templates/campaign_bulk.html:10 templates/campaign_create.html:10
+#: templates/campaign_detail.html:12 templates/dashboard/_urltable.html:1
+#: templates/new_url.html:10 templates/tokens.html:14
+msgid "Your URLs"
+msgstr "Twoje linki"
+
+#: core/templates/invitation.html:15
+#: core/templates/organization_update.html:15 templates/campaign_bulk.html:15
+#: templates/campaign_create.html:15
+msgid "new campaign"
+msgstr "Nowa kampania"
+
+#: core/templates/invitation.html:30
+#: core/templates/organization_update.html:30
+#: splittests/templates/balanced_create.html:30
+#: splittests/templates/daterange_create.html:57
+#: splittests/templates/firsttime_create.html:30
+#: splittests/templates/maxclick_create.html:30
+#: splittests/templates/mobile_create.html:30
+#: splittests/templates/testsuite_create.html:30
+#: templates/campaign_bulk.html:41 templates/campaign_create.html:30
+#: templates/new_url.html:32
+msgid "Save"
+msgstr "Zapisz"
+
+#: core/templates/login.html:6 core/templates/login.html:11
+#: core/templates/login.html:44 templates/allauth/account/login.html:7
+#: templates/allauth/account/login.html:8
+#: templates/allauth/account/login.html:62 templates/login.html:6
+#: templates/login.html:11 templates/login.html:44
+msgid "Sign In"
+msgstr "Zaloguj się"
+
+#: core/templates/login.html:16 templates/allauth/account/login.html:15
+#: templates/login.html:16
+#, python-format
+msgid ""
+"Please sign in with one\n"
+"  of your existing third party accounts. Or, <a href=\"%(signup_url)s\">sign "
+"up</a>\n"
+"  for a %(site_name)s account and sign in below:"
+msgstr ""
+
+#: core/templates/login.html:26 templates/allauth/account/login.html:25
+#: templates/login.html:26
+msgid "or"
+msgstr ""
+
+#: core/templates/login.html:33 templates/login.html:33
+#, python-format
+msgid ""
+"If you have not created an account yet, then please\n"
+"  <a href=\"%(signup_url)s\">sign up</a> first."
+msgstr ""
+
+#: core/templates/login.html:43 templates/allauth/account/login.html:9
+#: templates/login.html:43
+msgid "Forgot Password?"
+msgstr ""
+
+#: core/templates/users.html:6 templates/sidenav.html:50
+#: templates/topnav.html:18
+msgid "Users"
+msgstr "Użytkownicy"
+
+#: core/templates/users.html:9 templates/sidenav.html:47
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: core/templates/users.html:13
+msgid "User create"
+msgstr ""
+
+#: core/templates/users.html:19
+msgid "Email"
+msgstr "Email"
+
+#: core/templates/users.html:20
+msgid "First name"
+msgstr "Imię"
+
+#: core/templates/users.html:21
+msgid "Last Name"
+msgstr "Nazwisko"
+
+#: core/templates/users.html:22 splittests/templates/tests_list.html:19
+#: splittests/templates/testsuite_detail.html:34
+#: templates/campaign_detail.html:21 templates/campaigns.html:19
+#: templates/dashboard/_urltable.html:7 templates/urllist.html:21
+msgid "Created"
+msgstr "Utworzony"
+
+#: core/templates/users.html:55 splittests/templates/tests_list.html:68
+#: templates/campaigns.html:68 templates/dashboard.html:44
+#: templates/dashboard/_urltable.html:43 templates/urllist.html:61
+msgid "Confirm Delete"
+msgstr "Potwierdź usunięcie"
+
+#: core/templates/users.html:59 splittests/templates/tests_list.html:72
+#: templates/campaigns.html:72 templates/dashboard.html:48
+#: templates/dashboard/_urltable.html:47 templates/urllist.html:65
+msgid "You are about to delete URL"
+msgstr "Zamierzasz usunąć link"
+
+#: core/templates/users.html:59 splittests/templates/tests_list.html:72
+#: templates/campaigns.html:72 templates/dashboard.html:48
+#: templates/dashboard/_urltable.html:47 templates/urllist.html:65
+msgid "this procedure is irreversible"
+msgstr "Ta procedura jest nieodwracalna"
+
+#: core/templates/users.html:60 splittests/templates/tests_list.html:73
+#: templates/campaigns.html:73 templates/dashboard.html:49
+#: templates/dashboard/_urltable.html:48 templates/urllist.html:66
+msgid "Do you want to proceed"
+msgstr "Czy zamierzasz kontynuować?"
+
+#: core/templates/users.html:65 splittests/templates/tests_list.html:78
+#: templates/campaigns.html:78 templates/dashboard.html:54
+#: templates/dashboard/_urltable.html:53 templates/urllist.html:71
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: core/templates/users.html:66 splittests/templates/tests_list.html:79
+#: templates/campaigns.html:46 templates/campaigns.html:79
+#: templates/dashboard.html:55 templates/dashboard/_urltable.html:54
+#: templates/urllist.html:72
+msgid "Delete"
+msgstr "Usuń"
+
+#: shortener/forms.py:68
+msgid "Url with this short id already exists"
+msgstr "Link z takim identyfikatorem już istnieje"
+
+#: shortener/models.py:21
+msgid "linkgroup"
+msgstr ""
+
+#: shortener/models.py:22
+msgid "testsuite"
+msgstr ""
+
+#: shortener/models.py:63
+msgid "simple"
+msgstr ""
+
+#: shortener/models.py:64
+msgid "balanced"
+msgstr ""
+
+#: shortener/models.py:65
+msgid "daterange"
+msgstr ""
+
+#: shortener/models.py:66
+msgid "firsttime"
+msgstr ""
+
+#: shortener/models.py:67
+msgid "mobile"
+msgstr ""
+
+#: shortener/models.py:68
+msgid "maxclick"
+msgstr ""
+
+#: splittests/forms.py:22
+msgid "1st URL weight"
+msgstr "Waga 1 linku"
+
+#: splittests/forms.py:23
+msgid "2nd URL wieght"
+msgstr "Waga 2 linku"
+
+#: splittests/forms.py:24
+msgid "first URL"
+msgstr "Pierwszy link"
+
+#: splittests/forms.py:25
+msgid "second URL"
+msgstr "Drugi link"
+
+#: splittests/templates/balanced_create.html:6
+#: splittests/templates/balanced_create.html:15
+#: splittests/templates/maxclick_create.html:6
+#: splittests/templates/testsuite_detail.html:21
+msgid "New Balanced Redirection"
+msgstr "Przekierowanie ważone"
+
+#: splittests/templates/balanced_create.html:10
+#: splittests/templates/daterange_create.html:14
+#: splittests/templates/firsttime_create.html:10
+#: splittests/templates/maxclick_create.html:10
+#: splittests/templates/mobile_create.html:10 templates/sidenav.html:35
+msgid "A/B Tests"
+msgstr "Testy A/B"
+
+#: splittests/templates/daterange_create.html:10
+#: splittests/templates/daterange_create.html:19
+#: splittests/templates/firsttime_create.html:6
+#: splittests/templates/firsttime_create.html:15
+#: splittests/templates/mobile_create.html:6
+#: splittests/templates/testsuite_detail.html:22
+msgid "New First Time Redirection"
+msgstr "Przekierowanie \"pierwszy raz\""
+
+#: splittests/templates/maxclick_create.html:15
+msgid "New Max Click Redirection"
+msgstr "Przekierowanie \"ilość kliknięć\""
+
+#: splittests/templates/mobile_create.html:15
+#: splittests/templates/testsuite_detail.html:24
+msgid "Mobile Redirection"
+msgstr "Przekierowanie mobilne"
+
+#: splittests/templates/tests_list.html:6
+#: splittests/templates/tests_list.html:9 templates/campaigns.html:6
+#: templates/campaigns.html:9 templates/sidenav.html:23
+msgid "Campaigns"
+msgstr "Kampanie"
+
+#: splittests/templates/tests_list.html:13 templates/campaigns.html:13
+msgid "Campaign create"
+msgstr "Tworzenie kampanii"
+
+#: splittests/templates/tests_list.html:18 templates/campaigns.html:18
+msgid "Campaign name"
+msgstr "Nazwa kampanii"
+
+#: splittests/templates/tests_list.html:20 templates/campaigns.html:20
+msgid "Description"
+msgstr "Opis"
+
+#: splittests/templates/tests_list.html:21 templates/campaigns.html:21
+#: templates/campaigns.html:35
+msgid "Active"
+msgstr "Aktywna"
+
+#: splittests/templates/tests_list.html:23 templates/campaigns.html:23
+#: templates/sidenav.html:25
+msgid "URLs"
+msgstr "Linki"
+
+#: splittests/templates/tests_list.html:24
+#: splittests/templates/testsuite_detail.html:37
+#: templates/campaign_detail.html:24 templates/campaigns.html:24
+#: templates/dashboard/_urltable.html:8 templates/urllist.html:24
+msgid "Visits"
+msgstr "Wizyty"
+
+#: splittests/templates/tests_list.html:25
+#: splittests/templates/testsuite_detail.html:38
+#: templates/campaign_detail.html:25 templates/campaigns.html:25
+#: templates/dashboard/_urltable.html:9 templates/urllist.html:25
+msgid "Actions"
+msgstr "Akcje"
+
+#: splittests/templates/tests_list.html:51
+#: splittests/templates/testsuite_detail.html:56
+#: templates/campaign_detail.html:43 templates/campaigns.html:51
+#: templates/dashboard/_urltable.html:26 templates/urllist.html:43
+msgid "It seems that you have not created any links "
+msgstr "Wygląda na to że nie stworzyłeś jeszcze żadnego linku"
+
+#: splittests/templates/tests_list.html:52
+#: splittests/templates/testsuite_detail.html:57
+#: templates/campaign_detail.html:44 templates/campaigns.html:52
+#: templates/dashboard/_urltable.html:27 templates/urllist.html:44
+msgid "Go to"
+msgstr "Idź do"
+
+#: splittests/templates/tests_list.html:52
+#: splittests/templates/testsuite_detail.html:57
+#: templates/campaign_detail.html:44 templates/campaigns.html:52
+#: templates/dashboard/_urltable.html:27 templates/urllist.html:44
+msgid "main page"
+msgstr "strony głównej"
+
+#: splittests/templates/tests_list.html:52
+#: splittests/templates/testsuite_detail.html:57
+#: templates/campaign_detail.html:44 templates/campaigns.html:52
+#: templates/dashboard/_urltable.html:27 templates/urllist.html:44
+msgid "and create your first short link"
+msgstr "i utwórz swój pierwszy  link"
+
+#: splittests/templates/testsuite_create.html:6
+#: splittests/templates/testsuite_create.html:15
+msgid "New TestSuite"
+msgstr "Nowy zestaw testów"
+
+#: splittests/templates/testsuite_detail.html:6
+#: splittests/templates/testsuite_detail.html:10
+msgid "Test suite detail"
+msgstr "Szczegóły zestawu testów"
+
+#: splittests/templates/testsuite_detail.html:12
+msgid "Your test URLs"
+msgstr "Twoje linki testowe"
+
+#: splittests/templates/testsuite_detail.html:18
+msgid "Test URL create"
+msgstr "Tworzenie linku testowego"
+
+#: splittests/templates/testsuite_detail.html:23
+msgid "Date Range Redirection"
+msgstr "Przekierowanie \"w zakresie dat\""
+
+#: splittests/templates/testsuite_detail.html:25
+msgid "MaxClick Redirection"
+msgstr "Przekierownie \"liczba kliknięć\""
+
+#: splittests/templates/testsuite_detail.html:33
+#: templates/campaign_detail.html:20 templates/dashboard/_urltable.html:5
+#: templates/urllist.html:20
+msgid "Short URL"
+msgstr "Skrócony link"
+
+#: splittests/templates/testsuite_detail.html:35
+#: templates/campaign_detail.html:22 templates/dashboard/_urltable.html:6
+#: templates/urllist.html:22
+msgid "Long URL"
+msgstr "Długi link"
+
+#: templates/allauth/account/account_inactive.html:5
+#: templates/allauth/account/account_inactive.html:6
+msgid "Account Inactive"
+msgstr "Konto nieaktywne"
+
+#: templates/allauth/account/account_inactive.html:9
+msgid "This account is inactive."
+msgstr "To konto jest nieaktywne."
+
+#: templates/allauth/account/email.html:5
+msgid "Account"
+msgstr "Konto"
+
+#: templates/allauth/account/email.html:8
+msgid "E-mail Addresses"
+msgstr "Adres email"
+
+#: templates/allauth/account/email.html:10
+msgid "The following e-mail addresses are associated with your account:"
+msgstr "Następujące adresy email są powiązane z Twoim kontem:"
+
+#: templates/allauth/account/email.html:24
+msgid "Verified"
+msgstr "Zweryfikowany"
+
+#: templates/allauth/account/email.html:26
+msgid "Unverified"
+msgstr "Niezweryfikowany"
+
+#: templates/allauth/account/email.html:28
+msgid "Primary"
+msgstr ""
+
+#: templates/allauth/account/email.html:34
+msgid "Make Primary"
+msgstr ""
+
+#: templates/allauth/account/email.html:35
+msgid "Re-send Verification"
+msgstr "Ponów weryfikację"
+
+#: templates/allauth/account/email.html:36
+msgid "Remove"
+msgstr "Usuń"
+
+#: templates/allauth/account/email.html:43
+msgid "Warning:"
+msgstr "UWAGA!"
+
+#: templates/allauth/account/email.html:43
+msgid ""
+"You currently do not have any e-mail address set up. You should really add "
+"an e-mail address so you can receive notifications, reset your password, etc."
+msgstr ""
+
+#: templates/allauth/account/email.html:48
+msgid "Add E-mail Address"
+msgstr "Dodaj adres email"
+
+#: templates/allauth/account/email.html:53
+msgid "Add E-mail"
+msgstr "Dodaj email"
+
+#: templates/allauth/account/email.html:62
+msgid "Do you really want to remove the selected e-mail address?"
+msgstr ""
+
+#: templates/allauth/account/email_confirm.html:6
+#: templates/allauth/account/email_confirm.html:7
+msgid "Confirm E-mail Address"
+msgstr "Potwierdź adres email"
+
+#: templates/allauth/account/email_confirm.html:15
+#, python-format
+msgid ""
+"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
+"address for user %(user_display)s."
+msgstr ""
+
+#: templates/allauth/account/email_confirm.html:19
+msgid "Confirm"
+msgstr "Zatwierdź"
+
+#: templates/allauth/account/email_confirm.html:26
+#, python-format
+msgid ""
+"This e-mail confirmation link expired or is invalid. Please <a href="
+"\"%(email_url)s\">issue a new e-mail confirmation request</a>."
+msgstr ""
+
+#: templates/allauth/account/logout.html:5
+#: templates/allauth/account/logout.html:6
+#: templates/allauth/account/logout.html:15
+msgid "Sign Out"
+msgstr "Wyloguj"
+
+#: templates/allauth/account/logout.html:8
+msgid "Are you sure you want to sign out?"
+msgstr "Czy na pewno chcesz się wylogować?"
+
+#: templates/allauth/account/password_change.html:5
+#: templates/allauth/account/password_change.html:6
+#: templates/allauth/account/password_change.html:9
+#: templates/allauth/account/password_change.html:14
+#: templates/allauth/account/password_reset_from_key.html:4
+#: templates/allauth/account/password_reset_from_key.html:5
+#: templates/allauth/account/password_reset_from_key_done.html:4
+#: templates/allauth/account/password_reset_from_key_done.html:5
+msgid "Change Password"
+msgstr "Zmień hasło"
+
+#: templates/allauth/account/password_reset.html:6
+#: templates/allauth/account/password_reset.html:7
+#: templates/allauth/account/password_reset_done.html:6
+#: templates/allauth/account/password_reset_done.html:7
+msgid "Password Reset"
+msgstr "reset hasła"
+
+#: templates/allauth/account/password_reset.html:14
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll send you "
+"an e-mail allowing you to reset it."
+msgstr ""
+
+#: templates/allauth/account/password_reset.html:22
+msgid "Reset My Password"
+msgstr "Resetuj hasło"
+
+#: templates/allauth/account/password_reset.html:25
+msgid "Please contact us if you have any trouble resetting your password."
+msgstr ""
+
+#: templates/allauth/account/password_reset_done.html:15
+msgid ""
+"We have sent you an e-mail. Please contact us if you do not receive it "
+"within a few minutes."
+msgstr ""
+
+#: templates/allauth/account/password_reset_from_key.html:4
+#: templates/allauth/account/password_reset_from_key.html:5
+msgid "Bad Token"
+msgstr "Niepoprawny  token"
+
+#: templates/allauth/account/password_reset_from_key.html:10
+#, python-format
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
+"a>."
+msgstr ""
+
+#: templates/allauth/account/password_reset_from_key.html:16
+msgid "change password"
+msgstr "zmień hasło"
+
+#: templates/allauth/account/password_reset_from_key.html:19
+#: templates/allauth/account/password_reset_from_key_done.html:8
+msgid "Your password is now changed."
+msgstr "Twoje hasło zostało zmienione."
+
+#: templates/allauth/account/password_set.html:5
+#: templates/allauth/account/password_set.html:6
+#: templates/allauth/account/password_set.html:10
+#: templates/allauth/account/password_set.html:15
+msgid "Set Password"
+msgstr "Ustaw hasło"
+
+#: templates/allauth/account/signup.html:5
+#: templates/allauth/account/signup.html:6
+msgid "Signup"
+msgstr "Dołącz"
+
+#: templates/allauth/account/signup.html:7
+#, python-format
+msgid "<a href=\"%(login_url)s\">Already have an account?</a>"
+msgstr ""
+
+#: templates/allauth/account/signup.html:28 templates/index.html:80
+#: templates/index.html:212
+msgid "Sign Up"
+msgstr "Dołącz"
+
+#: templates/allauth/account/signup_closed.html:5
+#: templates/allauth/account/signup_closed.html:6
+#: templates/allauth/account/signup_closed.html:9
+msgid "Sign Up Closed"
+msgstr ""
+
+#: templates/allauth/account/signup_closed.html:11
+msgid "We are sorry, but the sign up is currently closed."
+msgstr ""
+
+#: templates/allauth/account/verification_sent.html:5
+#: templates/allauth/account/verification_sent.html:6
+#: templates/allauth/account/verified_email_required.html:5
+#: templates/allauth/account/verified_email_required.html:6
+msgid "Verify Your E-mail Address"
+msgstr ""
+
+#: templates/allauth/account/verification_sent.html:10
+msgid ""
+"We have sent an e-mail to you for verification. Follow the link provided to "
+"finalize the signup process. Please contact us if you do not receive it "
+"within a few minutes."
+msgstr ""
+
+#: templates/allauth/account/verified_email_required.html:11
+msgid ""
+"This part of the site requires us to verify that\n"
+"you are who you claim to be. For this purpose, we require that you\n"
+"verify ownership of your e-mail address. "
+msgstr ""
+
+#: templates/allauth/account/verified_email_required.html:15
+msgid ""
+"We have sent an e-mail to you for\n"
+"verification. Please click on the link inside this e-mail. Please\n"
+"contact us if you do not receive it within a few minutes."
+msgstr ""
+
+#: templates/allauth/account/verified_email_required.html:19
+#, python-format
+msgid ""
+"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
+"mail address</a>."
+msgstr ""
+
+#: templates/campaign_detail.html:6 templates/campaign_detail.html:10
+msgid "Campaign detail"
+msgstr "Szczegóły kampanii"
+
+#: templates/campaign_detail.html:15
+msgid "URL create"
+msgstr "Tworzenie linku"
+
+#: templates/campaigns.html:37
+msgid "Inactive"
+msgstr "nieaktywny"
+
+#: templates/campaigns.html:43
+msgid "Edit"
+msgstr "Edytuj "
+
+#: templates/campaigns.html:44
+msgid "Detail"
+msgstr "Szczegóły"
+
+#: templates/campaigns.html:45
+msgid "Stats"
+msgstr "Statystyki"
+
+#: templates/contact.html:11
+msgid "Contact us"
+msgstr "Kontakt"
+
+#: templates/dashboard.html:12
+msgid "Total URLs"
+msgstr "Liczba linków"
+
+#: templates/dashboard.html:16
+msgid "Total Visits"
+msgstr "Liczba wizyt"
+
+#: templates/dashboard/_bestperformers.html:5
+msgid "Best performers"
+msgstr "Najczęściej odwiedzane"
+
+#: templates/dashboard/_bestperformers.html:24
+msgid "Top performing URLs in last 7 days"
+msgstr "Najlepsze linki w ostatnich 7 dniach"
+
+#: templates/dashboard/_countries.html:5
+msgid "Visits per Country"
+msgstr "Podział na kraje"
+
+#: templates/dashboard/_deviceusage.html:5
+msgid "Device Usage"
+msgstr "Podział na urządznenia"
+
+#: templates/dashboard/_deviceusage.html:31
+msgid "Device"
+msgstr "Urządzenie"
+
+#: templates/dashboard/_deviceusage.html:34
+msgid "Share"
+msgstr "Udział"
+
+#: templates/dashboard/_deviceusage.html:46
+msgid "PC"
+msgstr "Komputery"
+
+#: templates/dashboard/_deviceusage.html:52
+msgid "Mobile"
+msgstr "Mobilne"
+
+#: templates/dashboard/_mainchart.html:7
+msgid "Network Activities"
+msgstr ""
+
+#: templates/dashboard/_mainchart.html:7
+msgid "Performance of your urls in daily scale"
+msgstr ""
+
+#: templates/dashboard/_mainchart.html:12
+msgid "Last 7 days"
+msgstr "Ostatnie 7 dni"
+
+#: templates/doorway.html:43
+msgid "redirecting.header"
+msgstr ""
+
+#: templates/doorway.html:69
+msgid "continue"
+msgstr ""
+
+#: templates/home.html:18
+msgid "Shorten"
+msgstr "Skróć"
+
+#: templates/home.html:37
+msgid "extremely fast"
+msgstr ""
+
+#: templates/home.html:44
+msgid "secure"
+msgstr ""
+
+#: templates/home.html:51
+msgid "user-friendly"
+msgstr ""
+
+#: templates/home.html:59
+msgid "Trending"
+msgstr ""
+
+#: templates/home.html:77
+msgid "Newest"
+msgstr "Najnowsze"
+
+#: templates/index.html:50
+msgid "Why I need this?"
+msgstr "Dlaczego tego potrzebuję?"
+
+#: templates/index.html:51
+msgid "Features"
+msgstr "Funkcje"
+
+#: templates/index.html:52
+msgid "Pricing"
+msgstr "Cennik"
+
+#: templates/index.html:54
+msgid "Sign in"
+msgstr "Zaloguj się"
+
+#: templates/index.html:66
+msgid "Advanced link tracking service."
+msgstr "Zaawansowana analityka linków."
+
+#: templates/index.html:77
+msgid "Learn more"
+msgstr "Więcej"
+
+#: templates/index.html:98
+msgid "advanced redirection"
+msgstr "rozbudowane przekierowania"
+
+#: templates/index.html:103
+msgid "detailed reports"
+msgstr "szczegółowe raporty"
+
+#: templates/index.html:108
+msgid "marketing tools"
+msgstr "narzędzia marketingowe"
+
+#: templates/index.html:114
+msgid "How you can help me with my online business?"
+msgstr "Jak możecie mi pomóc w prowadzeniu biznesu?"
+
+#: templates/index.html:129
+msgid "Features overview"
+msgstr "Przegląd funkcji"
+
+#: templates/index.html:165
+msgid "Our Pricing"
+msgstr "Cennik"
+
+#: templates/index.html:170
+msgid "Basic Plan"
+msgstr "Pakiet startowy"
+
+#: templates/index.html:171
+msgid "FREE"
+msgstr "DARMOWY"
+
+#: templates/index.html:179 templates/index.html:196
+msgid "Sign up"
+msgstr "Wybierz"
+
+#: templates/index.html:185
+msgid "Business Plan"
+msgstr "Pakiet podstawowy"
+
+#: templates/index.html:186
+msgid "$29"
+msgstr "100 ZŁ"
+
+#: templates/index.html:187 templates/index.html:204
+msgid "monthly"
+msgstr "miesięcznie"
+
+#: templates/index.html:202
+msgid "Pro Plan"
+msgstr "Pakiet zaawansowany"
+
+#: templates/index.html:203
+msgid "$100"
+msgstr "300 zł"
+
+#: templates/navbar.html:24
+msgid "Contact Us"
+msgstr "Kontakt"
+
+#: templates/navbar.html:26 templates/sidenav.html:18 templates/tokens.html:10
+msgid "Dashboard"
+msgstr "Panel"
+
+#: templates/new_url.html:6
+msgid "Edit URL"
+msgstr "Edytuj link"
+
+#: templates/new_url.html:6 templates/new_url.html:15
+msgid "New URL"
+msgstr "Nowy link"
+
+#: templates/registration/activate.html:9
+msgid "Account activation failed"
+msgstr ""
+
+#: templates/registration/activation_complete.html:8
+msgid "Your account is now activated."
+msgstr ""
+
+#: templates/registration/activation_email.txt:2
+msgid "Activate account at"
+msgstr ""
+
+#: templates/registration/activation_email.txt:6
+#, python-format
+msgid "Link is valid for %(expiration_days)s days."
+msgstr ""
+
+#: templates/registration/activation_email_subject.txt:1
+msgid "Account activation on"
+msgstr ""
+
+#: templates/registration/logout.html:9
+msgid "Logged out"
+msgstr "Wylogowany"
+
+#: templates/registration/password_change_done.html:9
+msgid "Password changed"
+msgstr ""
+
+#: templates/registration/password_change_form.html:9
+#: templates/registration/password_reset_confirm.html:12
+#: templates/registration/password_reset_form.html:15
+#: templates/registration/registration_form.html:15
+msgid "Submit"
+msgstr "Wyślij"
+
+#: templates/registration/password_reset_complete.html:6
+msgid "Password reset successfully"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:8
+msgid "Log in"
+msgstr "Zaloguj"
+
+#: templates/registration/password_reset_confirm.html:17
+msgid "Password reset failed"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:8
+msgid "Email with password reset instructions has been sent."
+msgstr ""
+
+#: templates/registration/password_reset_email.html:2
+#, python-format
+msgid "Reset password at %(site_name)s"
+msgstr ""
+
+#: templates/registration/registration_closed.html:5
+msgid "Registration is currently closed."
+msgstr ""
+
+#: templates/registration/registration_complete.html:9
+msgid "You are now registered. Activation email sent."
+msgstr ""
+
+#: templates/sidenav.html:21
+msgid "Link Management"
+msgstr "Zarządzanie linkami"
+
+#: templates/sidenav.html:24
+msgid "Create campaign"
+msgstr "Utwórz kampanię"
+
+#: templates/sidenav.html:26
+msgid "Create URL"
+msgstr "Utwórz link"
+
+#: templates/sidenav.html:27
+msgid "Create Bulk URLs"
+msgstr "Masowe tworzenie linków"
+
+#: templates/sidenav.html:30
+msgid "API"
+msgstr ""
+
+#: templates/sidenav.html:37
+msgid "Test Suites"
+msgstr "Zestawy testów"
+
+#: templates/sidenav.html:38
+msgid "Create Test Suite"
+msgstr "Utwórz zestaw testów"
+
+#: templates/sidenav.html:49 templates/topnav.html:16
+msgid "Company profile"
+msgstr "Profil firmy"
+
+#: templates/stat.html:11
+msgid "Quick stats for"
+msgstr "Szybkie statystyki dla"
+
+#: templates/stat.html:15
+msgid "Created on"
+msgstr "Utworzono"
+
+#: templates/stat.html:16
+msgid "visits so far"
+msgstr "wizyt do tej pory"
+
+#: templates/stat.html:19
+msgid "Last visits"
+msgstr "Ostatnie wizyty"
+
+#: templates/stat.html:37
+msgid "Daily visits"
+msgstr "Wizyty dzienne"
+
+#: templates/tokens.html:15
+msgid "API Integration"
+msgstr "Integracje"
+
+#: templates/tokens.html:20
+msgid "Your API Token"
+msgstr "Twój token API"
+
+#: templates/topnav.html:20
+msgid "Help"
+msgstr "Pomoc"
+
+#: templates/topnav.html:21
+msgid "Log Out"
+msgstr "Wyloguj"
+
+#: templates/topnav.html:26
+msgid "language"
+msgstr "Język"
+
+#: templates/topnav.html:35 urlshortener/settings.py:26
+msgid "English"
+msgstr "Angielski"
+
+#: templates/topnav.html:37 urlshortener/settings.py:25
+msgid "Polish"
+msgstr "Polski"
+
+#: templates/urllist.html:6 templates/urllist.html:10
+msgid "URLs List"
+msgstr "Lista linków"
+
+#: templates/urllist.html:13
+msgid "Add new link"
+msgstr "Dodaj nowy link"

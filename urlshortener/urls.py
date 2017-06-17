@@ -40,6 +40,7 @@ urlpatterns = [
     url(r'^about/$', AboutView.as_view(), name="about"),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^invitations/', include('invitations.urls', namespace='invitations')),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^ajax/', include('shortener.api.urls')),
     url(r'^contact/$', ContactFormView.as_view(), name="contact"),

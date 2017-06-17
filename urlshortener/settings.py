@@ -20,6 +20,11 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
 
+ugettext = lambda s: s
+LANGUAGES = (
+    ('pl', ugettext('Polish')),
+    ('en-us', ugettext('English')),
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/

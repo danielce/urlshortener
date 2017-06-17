@@ -9,11 +9,11 @@
 {% block content %}
  <div class="row tile_count">
     <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-      <span class="count_top"><i class="fa fa-user"></i> Total URLs</span>
+      <span class="count_top"><i class="fa fa-user"></i> {%trans 'Total URLs' %}</span>
       <div class="count">{{ items.count }}</div>
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-      <span class="count_top"><i class="fa fa-user"></i> Total Visits</span>
+      <span class="count_top"><i class="fa fa-user"></i> {%trans 'Total Visits' %}</span>
       <div class="count">{% if items.hits %}{{ items.hits }}{% else %}0{% endif %}</div>
     </div>
   </div>
