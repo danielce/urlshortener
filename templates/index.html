@@ -70,14 +70,14 @@
 						<div class="col-md-6 wow fadeIn" data-wow-delay="0.3s">
 							<div style="background-color:rgba(0,0,0,0.5); margin-top:15px; padding:10px;">
 							
-								<p class="tm-white teaser">Bring your business to the next level. With URL Shortener you can brand, shorten and monitor all your links automatically. Discover and understand what your vistors really need and increase your conversion rate to the level never seen before! </p>
+								<p class="tm-white teaser">{% blocktrans %}Bring your business to the next level. With URL Shortener you can brand, shorten and monitor all your links automatically. Discover and understand what your vistors really need and increase your conversion rate to the level never seen before!{% endblocktrans %} </p>
 							</div>
 							<div class="row">
 								<div class="col-md-4 col-md-offset-1">
-									<a class="btn btn-default tbtn">{% trans 'Learn more' %}</a>
+									<a class="btn btn-default tbtn" href="#divider">{% trans 'Learn more' %}</a>
 								</div>
 								<div class="col-md-4 col-md-offset-1">
-									<a class="btn btn-default sbtn" href="/accounts/register/">{% trans 'Sign Up' %}</a>
+									<a class="btn btn-default sbtn" href="{% url 'account_signup' %}">{% trans 'Sign Up' %}</a>
 								</div>
 							</div>
 						</div>

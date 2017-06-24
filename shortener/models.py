@@ -8,6 +8,9 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.postgres.fields import JSONField
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.http import HttpResponse
 from django.utils.translation import ugettext as _
 
 # Create your models here.
@@ -59,13 +62,15 @@ class PageURL(models.Model):
     FIRST_TIME = 'firsttime'
     MOBILE = 'mobile'
     MAXCLICK = 'maxlick'
+    PIXEL = 'pixel'
     TYPE_CHOICES = (
         (SIMPLE, _('simple')),
         (BALANCED, _('balanced')),
         (DATE_RANGE, _('daterange')),
         (FIRST_TIME, _('firsttime')),
         (MOBILE, _('mobile')),
-        (MAXCLICK, _('maxclick'))
+        (MAXCLICK, _('maxclick')),
+        (PIXEL, _('pixel')),
     )
     url_id = models.SlugField(max_length=6, default=generate_url_id, unique=True)
     long_url = models.URLField(max_length=200, blank=True, null=True)
@@ -160,3 +165,14 @@ class SimpleRedirection(models.Model):
 
     def __unicode__(self):
         return "Simple redirection"
+
+
+class PixelRedirection(models.Model):
+    data = JSONField(null=True, blank=True)
+
+    def dispatch(self, visit, *args, **kwargs):
+        with staticfiles_storage.open('img/pixel.jpg') as f:
+            return HttpResponse(f.read(), content_type="image/jpeg")
+
+    def __unicode__(self):
+        return 'Pixel'

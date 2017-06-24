@@ -4,7 +4,7 @@ from crispy_forms.bootstrap import StrictButton, FieldWithButtons
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import ButtonHolder, Layout, Submit
 
-from .models import PageURL, Campaign, SimpleRedirection
+from .models import PageURL, Campaign, SimpleRedirection, PixelRedirection
 
 
 class PageURLForm(forms.ModelForm):
@@ -103,3 +103,10 @@ class BulkCampaignForm(forms.ModelForm):
     class Meta:
         model = Campaign
         fields = ['name', 'description', 'urls']
+
+
+class PixelRedirectionForm(forms.ModelForm):
+
+    class Meta:
+        model = PixelRedirection
+        fields = ['data']

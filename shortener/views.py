@@ -7,7 +7,8 @@ from django.contrib.gis.geoip2 import GeoIP2
 from django.core.mail import send_mail, BadHeaderError
 from django.db.models import Count, Sum, F
 from django.views.generic import (
-    FormView, ListView, TemplateView, DetailView, CreateView, UpdateView
+    FormView, ListView, TemplateView, DetailView, CreateView, UpdateView,
+    RedirectView, View
 )
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
@@ -19,9 +20,9 @@ from control.models import Configuration
 from .forms import (
     ContactForm, PageURLForm, SimplePageURLForm, CampaignForm,
     BulkCampaignForm, SimpleRedirectionCreateForm,
-    SimpleRedirectionUpdateForm
+    SimpleRedirectionUpdateForm, PixelRedirectionForm
 )
-from .models import PageURL, Ad, Visit, Campaign, SimpleRedirection
+from .models import PageURL, Ad, Visit, Campaign, SimpleRedirection, PixelRedirection
 from .tasks import process_bulk
 
 # Create your views here.
@@ -116,7 +117,10 @@ def visiturl(request, url_id):
         context = {"long_url": long_url, "random_ad": random_ad}
         return render(request, 'doorway.html', context)
     else:
-        response = HttpResponseRedirect(long_url)
+        if url.url_type == PageURL.PIXEL:
+            response = long_url
+        else:
+            response = HttpResponseRedirect(long_url)
         response.set_cookie('gid', gid)
         return response
 
@@ -361,3 +365,29 @@ class BulkCampaignCreateView(LoginRequiredMixin, CreateView):
         urls = form.cleaned_data['urls']
         process_bulk.delay(urls, self.object)
         return redirect(self.get_success_url())
+
+
+class PixelCreateView(LoginRequiredMixin, View):
+    def get_succeess_url(self):
+        return reverse('pixels')
+
+    def get(self, request, *args, **kwargs):
+        pixel = PixelRedirection.objects.create()
+        pageurl = PageURL.objects.create(
+            content_object=pixel,
+            url_type=PageURL.PIXEL,
+            author=self.request.user
+        )
+        return redirect(self.get_succeess_url())
+
+
+class PixelListView(LoginRequiredMixin, ListView):
+    template_name = 'pixels/pixel_list.html'
+    paginate_by = 20
+    context_object_name = 'pixels'
+
+    def get_queryset(self):
+        return PageURL.objects.filter(
+            author=self.request.user,
+            url_type=PageURL.PIXEL
+        ).order_by('-created')

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-17 14:02+0000\n"
-"PO-Revision-Date: 2017-06-17 16:08+0200\n"
+"POT-Creation-Date: 2017-06-19 18:29+0000\n"
+"PO-Revision-Date: 2017-06-21 19:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -188,7 +188,7 @@ msgstr ""
 #: core/templates/login.html:43 templates/allauth/account/login.html:9
 #: templates/login.html:43
 msgid "Forgot Password?"
-msgstr ""
+msgstr "Zapomniałeś hasła?"
 
 #: core/templates/users.html:6 templates/sidenav.html:50
 #: templates/topnav.html:18
@@ -649,7 +649,7 @@ msgstr ""
 #: templates/allauth/account/verified_email_required.html:5
 #: templates/allauth/account/verified_email_required.html:6
 msgid "Verify Your E-mail Address"
-msgstr ""
+msgstr "Zweryfikuj swój adres email"
 
 #: templates/allauth/account/verification_sent.html:10
 msgid ""
@@ -657,6 +657,9 @@ msgid ""
 "finalize the signup process. Please contact us if you do not receive it "
 "within a few minutes."
 msgstr ""
+"Wysłałiśmy na Twój adres email wiadmość z linkiem weryfikacyjnym. Otwórz go, "
+"by zakończyć proces rejestracji. Jeżeli nie dostaniesz wiadmości "
+"weryfikacyjnej w ciągu najbliższych kilku minut - skontaktuj się z nami>"
 
 #: templates/allauth/account/verified_email_required.html:11
 msgid ""
@@ -749,11 +752,11 @@ msgstr "Mobilne"
 
 #: templates/dashboard/_mainchart.html:7
 msgid "Network Activities"
-msgstr ""
+msgstr "Aktywność"
 
 #: templates/dashboard/_mainchart.html:7
 msgid "Performance of your urls in daily scale"
-msgstr ""
+msgstr "Wyniki Twoich linków w podziale na dni"
 
 #: templates/dashboard/_mainchart.html:12
 msgid "Last 7 days"
@@ -810,6 +813,18 @@ msgstr "Zaloguj się"
 #: templates/index.html:66
 msgid "Advanced link tracking service."
 msgstr "Zaawansowana analityka linków."
+
+#: templates/index.html:73
+msgid ""
+"Bring your business to the next level. With URL Shortener you can brand, "
+"shorten and monitor all your links automatically. Discover and understand "
+"what your vistors really need and increase your conversion rate to the level "
+"never seen before!"
+msgstr ""
+"Przenieś swój biznes na jeszcze wyższy poziom. Z pomocą Link Guru możesz "
+"ujednolicić, skracać i monitorować swoje linki w zautomatyzowany sposób. "
+"Odkryj i poznaj czego naprawdę potrzebują odwiedzający Cię internauci i "
+"podnieś poziomy konwersji do nieosiągalnych wcześniej poziomów!"
 
 #: templates/index.html:77
 msgid "Learn more"
@@ -893,7 +908,7 @@ msgstr ""
 
 #: templates/registration/activation_complete.html:8
 msgid "Your account is now activated."
-msgstr ""
+msgstr "Twoje konto jest teraz aktywne."
 
 #: templates/registration/activation_email.txt:2
 msgid "Activate account at"
@@ -914,7 +929,7 @@ msgstr "Wylogowany"
 
 #: templates/registration/password_change_done.html:9
 msgid "Password changed"
-msgstr ""
+msgstr "Hasło zostało zmienione"
 
 #: templates/registration/password_change_form.html:9
 #: templates/registration/password_reset_confirm.html:12
@@ -925,7 +940,7 @@ msgstr "Wyślij"
 
 #: templates/registration/password_reset_complete.html:6
 msgid "Password reset successfully"
-msgstr ""
+msgstr "Hasło zostało zresetowane"
 
 #: templates/registration/password_reset_complete.html:8
 msgid "Log in"
@@ -933,7 +948,7 @@ msgstr "Zaloguj"
 
 #: templates/registration/password_reset_confirm.html:17
 msgid "Password reset failed"
-msgstr ""
+msgstr "Resetowanie hasła nie powiodło się"
 
 #: templates/registration/password_reset_done.html:8
 msgid "Email with password reset instructions has been sent."
@@ -951,6 +966,7 @@ msgstr ""
 #: templates/registration/registration_complete.html:9
 msgid "You are now registered. Activation email sent."
 msgstr ""
+"Twoje konto zostało zarejestrowane. Wysłano email z linkiem weryfikacyjnym."
 
 #: templates/sidenav.html:21
 msgid "Link Management"

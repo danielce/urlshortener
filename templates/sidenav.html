@@ -38,6 +38,12 @@
                       <li><a href="{% url 'testsuite-create' %}">{% trans 'Create Test Suite' %}</a></li>
                     </ul>
                   </li>
+                  <li><a><i class="fa fa-desktop"></i> {% trans 'Tracking pixels' %} <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{% url 'pixels' %}">{% trans 'Pixel list' %}</a></li>
+                      <li><a href="{% url 'pixels_create' %}">{% trans 'Pixel create' %}</a></li>
+                    </ul>
+                  </li>
             
                 </ul>
               </div>

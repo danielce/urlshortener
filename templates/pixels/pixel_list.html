@@ -1,0 +1,54 @@
+{% extends 'page.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
+{% block title %}{% trans 'Tracking pixels' %}{% endblock%}
+
+
+   {% block subtitle %}
+    <h3>{% trans 'Tracking pixels' %}</h3>
+   {% endblock %}
+  {% block paneltitle %}<h2>{% trans 'Tracking pixels' %}</h2> {% endblock %}
+  {% block panelcontent %}
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+       <a href="{% url 'pixels_create' %}" class="btn btn-success text-right"><i class="fa fa-plus"></i> {% trans 'Pixel create' %}</a>
+    </div>
+        <table class="table table-responsive table-hover jambo_table bulk_action">
+         <thead>
+           <th>#</th>
+           <th>{% trans 'Html code' %}</th>
+           <th>{% trans 'Created' %}</th>   
+           <th>{% trans 'Visits' %}</th>
+           <th>{% trans 'Actions' %}</th>
+         </thead>
+         <tbody>
+          {% for url in pixels %}
+           <tr class="{% cycle 'info' 'default' %}">
+             <td>{{forloop.counter}}</td>
+             <td><strong><code>&lt;img src="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ url.get_absolute_url }}"&gt;</code></strong></td>
+             <td>{{ url.created|date:"Y-m-d" }}</td>
+             <td>{{ url.hits }}</td>
+             <td>
+              <a href="{% url 'stat' url.url_id %}" class="btn btn-xs btn-info"><i class="fa fa-bar-chart"></i> Stats</a> 
+              <a href="#" data-href="{% url 'delete_url' url.url_id %}"  class="btn btn-xs btn-danger" data-toggle="modal" data-urlid="{{ url.url_id }}" data-target="#confirm-delete"><i class="fa fa-trash"></i> Delete
+              </td>
+           </tr>
+           {% empty %}
+            <div class="well">
+             <h2>{% trans 'It seems that you have not created any pixels ' %}:(</h2>
+            </div>
+           {% endfor %}
+          </tbody>
+        </table>
+        {% include '_paginate.html' %}
+        {% endblock %}
+
+
+{% block js %}
+  $('#confirm-delete').on('show.bs.modal', function(e) {
+            var urlid = $(e.relatedTarget).data('urlid');
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            $('#urlid').html(urlid);
+        });
+{% endblock %}

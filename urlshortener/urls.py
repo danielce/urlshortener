@@ -33,7 +33,8 @@ from shortener.views import (
     CampaignUpdateView,
     CampaignDetailView,
     NewCampaignURLFormView,
-    BulkCampaignCreateView
+    BulkCampaignCreateView,
+    PixelListView, PixelCreateView   
 )
 
 urlpatterns = [
@@ -59,6 +60,8 @@ urlpatterns = [
     url(r'^dashboard/$', DashboardView.as_view(), name="dashboard"),
     url(r'^api/', include('userapi.urls')),
     url(r'^list/$', PageURLListView.as_view(), name="urllist"),
+    url(r'^pixels/$', PixelListView.as_view(), name="pixels"),
+    url(r'^pixels/create/$', PixelCreateView.as_view(), name="pixels_create"),
     url(r'^new/$', NewURLFormView.as_view(), name="newurl"),
     url(r'^$', ShortenView.as_view(), name="home"),
     url(r'^(?P<url_id>\w+)/stat$', StatView.as_view(), name="stat"),
